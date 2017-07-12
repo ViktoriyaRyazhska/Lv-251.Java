@@ -1,14 +1,20 @@
 package com.softserve.edu.lv251.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
 public class Users extends BaseEntity {
 
+    @Column
     private String firstname;
+    @Column
     private String lastname;
+    @Column
     private String middlename;
+    @Column
     private String email;
+    @Column
     private String password;
 
     public Users() {

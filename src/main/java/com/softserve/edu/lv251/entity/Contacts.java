@@ -3,7 +3,7 @@ package com.softserve.edu.lv251.entity;
 import javax.persistence.Entity;
 
 /**
- * Created by ace on 07/11/2017.
+ *
  */
 @Entity
 public class Contacts extends BaseEntity {
