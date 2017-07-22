@@ -1,8 +1,7 @@
 package com.softserve.edu.lv251.dao.impl;
 
 import com.softserve.edu.lv251.dao.BaseDAO;
-import org.springframework.transaction.annotation.Transactional;
-
+import javax.transaction.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -19,7 +18,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
     private Class<T> entityClass;
 
     @PersistenceContext
-    protected EntityManager entityManager;
+    private EntityManager entityManager;
 
 
 //    @Autowired

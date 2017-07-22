@@ -39,11 +39,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Autowired
     Environment env;
 
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/main_theme/");
-        registry.addResourceHandler("/WEB-INF/pages/**").addResourceLocations("/pages/");
     }
 
     @Bean
@@ -66,7 +64,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return dataSource;
     }
 
-
     @Bean
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager manager = new JpaTransactionManager();
@@ -79,6 +76,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
         return entityManagerFactory.createEntityManager();
     }
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -98,7 +96,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     @Scope("prototype")
     public Logger logger(InjectionPoint injectionPoint){
-        Logger logger =  Logger.getLogger(injectionPoint.getMember().getDeclaringClass());
-        return logger;
+        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass());
     }
 }

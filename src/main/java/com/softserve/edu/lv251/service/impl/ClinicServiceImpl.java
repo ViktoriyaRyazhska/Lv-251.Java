@@ -6,6 +6,12 @@ import com.softserve.edu.lv251.entity.Clinics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -16,21 +22,54 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Autowired
     private ClinicsDAO clinicsDAO;
+    @Autowired
+    private EntityManager entityManager;
 
+    @Override
+    @Transactional
+    public List<Clinics> getWithOffsetOrderedByName(int offset, int limit) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Clinics> criteriaQuery = criteriaBuilder.createQuery(Clinics.class);
+        Root<Clinics> from = criteriaQuery.from(Clinics.class);
+        CriteriaQuery<Clinics> select = criteriaQuery.select(from);
+        TypedQuery<Clinics> typedQuery = entityManager.createQuery(select);
+        typedQuery.setFirstResult(offset);
+        typedQuery.setMaxResults(limit);
 
-    public List<Clinics> getAll() {
-        return clinicsDAO.getAllEntities();
+        return typedQuery.getResultList();
     }
 
-    public List<Clinics> getWithOffset(int offset, int limit) {
-        return clinicsDAO.getWithOffsetOrderedByName(offset, limit);
-    }
-
+    @Override
     public void addClinic(Clinics clinic) {
-        clinicsDAO.addEntity(clinic);
+        this.clinicsDAO.addEntity(clinic);
+    }
+
+    @Override
+    public void updateClinic(Clinics clinic) {
+        this.clinicsDAO.updateEntity(clinic);
+    }
+
+    @Override
+    public Clinics getClinicByID(Long clinicId) {
+        return this.clinicsDAO.getEntityByID(clinicId);
+    }
+
+    @Override
+    public List<Clinics> getClinicsByColumnNameAndValue(String columnName, Object value) {
+        return this.clinicsDAO.getEntitiesByColumnNameAndValue(columnName, value);
+    }
+
+    @Override
+    public List<Clinics> getAllClinics() {
+        return this.clinicsDAO.getAllEntities();
+    }
+
+    @Override
+    public void deleteClinic(Clinics clinic) {
+        this.clinicsDAO.deleteEntity(clinic);
     }
 
     public Clinics getFirst() {
-        return clinicsDAO.getEntityByID(40L);
+        return clinicsDAO.getEntityByID(1L);
     }
 }

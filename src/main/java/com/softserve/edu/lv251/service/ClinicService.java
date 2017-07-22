@@ -2,7 +2,6 @@ package com.softserve.edu.lv251.service;
 
 
 import com.softserve.edu.lv251.entity.Clinics;
-
 import java.util.List;
 
 /**
@@ -10,10 +9,19 @@ import java.util.List;
  */
 public interface ClinicService {
 
-    public List<Clinics> getAll();
-    public List<Clinics> getWithOffset(int offset, int limit);
-    public void addClinic(Clinics clinic);
-    public Clinics getFirst();
+    void addClinic(Clinics clinic);
 
+    void updateClinic(Clinics clinic);
 
+    Clinics getClinicByID(Long clinicId);
+
+    List<Clinics> getClinicsByColumnNameAndValue(String columnName, Object value);
+
+    List<Clinics> getAllClinics();
+
+    void deleteClinic(Clinics clinic);
+
+    List<Clinics> getWithOffsetOrderedByName(int offset, int limit);
+
+    Clinics getFirst();
 }

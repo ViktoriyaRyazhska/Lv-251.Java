@@ -3,7 +3,6 @@ package com.softserve.edu.lv251.dao.impl;
 import com.softserve.edu.lv251.dao.TestsDAO;
 import com.softserve.edu.lv251.entity.Tests;
 import org.springframework.stereotype.Repository;
-
 import javax.transaction.Transactional;
 
 /**

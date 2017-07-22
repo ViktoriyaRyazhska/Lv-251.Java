@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -13,9 +14,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Create an account</title>
+    <title>Log in with your account</title>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/main_theme/css/common.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -23,26 +25,27 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
+
 <div class="container">
 
-    <%--<c:if test="${pageContext.request.userPrincipal.name != null}">
-      <form id="logoutForm" method="POST" action="${contextPath}/logout">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-      </form>
+    <form method="POST" action="${contextPath}/login" class="form-signin">
+        <h2 class="form-heading">Log in</h2>
 
-      <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+        <div class="form-group ${error != null ? 'has-error' : ''}">
+            <span>${message}</span>
+            <input name="username" type="email" class="form-control" placeholder="Email"
+                   autofocus=""/>
+            <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <span>${error}</span>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-    </c:if>--%>
+            <button class="btn btn-lg btn-primary btn-block">Log In</button>
+            <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
+        </div>
 
-        <%--<form id="logoutForm" method="POST" action="${contextPath}/logout">
-          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>--%>
-
-        <h2 align="center">Welcome ${pageContext.request.userPrincipal.name} |<button
-                id="begin_button" type="button" class="button" name="back"
-                onclick="location.href='<c:url value="/login"/>'">Login</button></h2>
-
+    </form>
 
 </div>
 <!-- /container -->

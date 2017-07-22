@@ -3,7 +3,6 @@ package com.softserve.edu.lv251.dao.impl;
 import com.softserve.edu.lv251.dao.MedicalCardDAO;
 import com.softserve.edu.lv251.entity.MedicalCard;
 import org.springframework.stereotype.Repository;
-
 import javax.transaction.Transactional;
 
 /**
