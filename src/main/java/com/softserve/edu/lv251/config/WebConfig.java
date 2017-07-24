@@ -13,9 +13,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 
 @Configuration
@@ -41,14 +44,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-
-
     @Bean
     @Scope("prototype")
     public Logger logger(InjectionPoint injectionPoint) {
         return Logger.getLogger(injectionPoint.getMember().getDeclaringClass());
     }
-
 
     /*
     Not implemented yet.
@@ -59,5 +59,27 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         source.setBasename("i18n/messages");
         source.setUseCodeAsDefaultMessage(true);
         return source;
+    }
+
+    /**
+     * Author: Vitaliy Kovalevskyy
+     * Configure TilesConfigurer.
+     */
+    @Bean
+    public TilesConfigurer tilesConfigurer(){
+        TilesConfigurer tilesConfigurer = new TilesConfigurer();
+        tilesConfigurer.setDefinitions(new String[] {"/WEB-INF/tiles/tiles.xml"});
+        tilesConfigurer.setCheckRefresh(true);
+        return tilesConfigurer;
+    }
+
+    /**
+     * Author: Vitaliy Kovalevskyy
+     * Configure ViewResolvers to deliver preferred views.
+     */
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        TilesViewResolver viewResolver = new TilesViewResolver();
+        registry.viewResolver(viewResolver);
     }
 }
