@@ -29,7 +29,7 @@
                 <li class="active"><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-home"></span> <spring:message code="messages.home" />
                 </a></li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/clinics/all">
+                    <a href="${pageContext.request.contextPath}/clinics/1">
                         <span class="glyphicon glyphicon-plus-sign"></span><spring:message code="messages.clinics" />
                     </a>
                 </li>

@@ -72,4 +72,15 @@ public class ClinicServiceImpl implements ClinicService {
     public Clinics getFirst() {
         return clinicsDAO.getEntityByID(1L);
     }
+
+    @Override
+    public int numberOfPaging() {
+        int n = clinicsDAO.getAllEntities().size();
+        return ((int) Math.ceil((double) n/10));
+    }
+
+    @Override
+    public List<Clinics> getTenClinics(Integer i) {
+        return clinicsDAO.getTenClinics(i);
+    }
 }

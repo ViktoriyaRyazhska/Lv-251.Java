@@ -24,4 +24,8 @@ public interface ClinicService {
     List<Clinics> getWithOffsetOrderedByName(int offset, int limit);
 
     Clinics getFirst();
+
+    int numberOfPaging();
+
+    List<Clinics> getTenClinics(Integer i);
 }
