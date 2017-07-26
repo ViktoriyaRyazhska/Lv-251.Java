@@ -1,5 +1,7 @@
 package com.softserve.edu.lv251.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,11 +15,11 @@ public class Doctors extends Users {
 
     @ManyToOne(cascade = {CascadeType.ALL})
     private Clinics clinics;
-
+@JsonIgnore
     @OneToMany(mappedBy = "doctors", cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     private List<Appointments> docAppointments;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Specialization specialization;
 
     public Doctors() {

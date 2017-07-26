@@ -1,5 +1,7 @@
 package com.softserve.edu.lv251.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,19 +17,19 @@ public class Users extends BaseEntity {
 
     @Column(name = "photo", nullable = false, length = 65535, columnDefinition="TEXT")
     private String photo;
-
+@JsonIgnore
     @OneToMany(mappedBy = "users")
     private List<Appointments> appointments;
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private List<Roles> roles;
 
     @OneToOne
     private Contacts contact;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<MedicalCard> medicalCards;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<TestsResults> testsResults;
 

@@ -41,4 +41,9 @@ public class DoctorServiceImpl implements DoctorsService {
     public void delete(Doctors doctors) {
      doctorsDAO.deleteEntity(doctors);
     }
+
+    @Override
+    public List<Doctors> searchByLetters(String letters) {
+        return doctorsDAO.searchByLetters(letters);
+    }
 }

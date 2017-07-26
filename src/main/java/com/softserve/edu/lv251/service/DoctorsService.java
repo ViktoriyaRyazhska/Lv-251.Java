@@ -13,4 +13,5 @@ public interface DoctorsService {
     void update(Doctors doctors);
     Doctors find(long id);
     void delete(Doctors doctors);
+    List<Doctors>searchByLetters(String search);
 }

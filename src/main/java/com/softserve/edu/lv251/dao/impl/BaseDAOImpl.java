@@ -18,7 +18,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
     private Class<T> entityClass;
 
     @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
 
 //    @Autowired
