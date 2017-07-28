@@ -1,12 +1,14 @@
 package com.softserve.edu.lv251.dao.impl;
 
 import com.softserve.edu.lv251.dao.BaseDAO;
-import javax.transaction.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
@@ -57,5 +59,18 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
     @Transactional
     public void deleteEntity(T entity) {
         entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
+    }
+
+    @Override
+    public List<T> pagination(Integer chainIndex, Integer size) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
+        Root<T> from = criteriaQuery.from(entityClass);
+        CriteriaQuery<T> select = criteriaQuery.select(from);
+        TypedQuery<T> typedQuery = entityManager.createQuery(select);
+        typedQuery.setFirstResult(chainIndex*size-size);
+        typedQuery.setMaxResults(size);
+        List<T> list = typedQuery.getResultList();
+        return list;
     }
 }

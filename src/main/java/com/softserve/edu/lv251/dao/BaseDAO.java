@@ -18,4 +18,6 @@ public interface BaseDAO<T> {
     List<T> getAllEntities();
 
     void deleteEntity(T entity);
+
+    public List<T> pagination(Integer chainIndex, Integer size);
 }

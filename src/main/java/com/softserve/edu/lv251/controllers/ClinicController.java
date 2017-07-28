@@ -20,12 +20,15 @@ public class ClinicController {
 
 
     @RequestMapping(value = "/{current}", method = RequestMethod.GET)
-    public ModelAndView getTenClinics(@PathVariable("current") Integer i){
+    public ModelAndView getClinics(@PathVariable("current") Integer chainIndex){
         ModelAndView model = new ModelAndView("clinics");
-        model.addObject("tenClinics", clinicService.getTenClinics(i));
-        model.addObject("size", clinicService.numberOfPaging());
+        model.addObject("getClinics", clinicService.getClinics(chainIndex, 10));
+        model.addObject("numberChain", clinicService.numberOfPaging(10));
+        model.addObject("maxSize", clinicService.getAllClinics().size());
         return model;
     }
+
+
 
 
     @RequestMapping(value = "/details", method = RequestMethod.GET)

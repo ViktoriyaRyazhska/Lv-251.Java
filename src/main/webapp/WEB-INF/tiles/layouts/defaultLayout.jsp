@@ -55,8 +55,9 @@
                         <span class="glyphicon glyphicon-user"></span><spring:message code="messages.doctors" />
                     </a>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
+
+                <li class="${current == 'contact' ? 'active': ''}">
+                    <a href="${pageContext.request.contextPath}/contact"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
                     </a>
                 </li>
                 <li class="${current == 'doctorCabinet' ? 'active': ''}">
@@ -163,7 +164,9 @@
         </div>
     </sec:authorize>
 
-    <section id="site-content">
+
+
+<section id="site-content">
         <tiles:insertAttribute name="body" />
     </section>
 
