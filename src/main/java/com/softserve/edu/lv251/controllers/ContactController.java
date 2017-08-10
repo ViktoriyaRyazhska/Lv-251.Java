@@ -40,6 +40,7 @@ public class ContactController {
         String messageError = messageSource.getMessage("messages.contactError", null, currentLocale);
 
         if (bindingResult.hasErrors()){
+
             return "contact";
         }
 

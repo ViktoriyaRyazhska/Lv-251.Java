@@ -8,6 +8,7 @@ import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.service.AppointmentService;
+import com.softserve.edu.lv251.service.Base64;
 import com.softserve.edu.lv251.service.ContactsService;
 import com.softserve.edu.lv251.service.UserService;
 import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
@@ -16,9 +17,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
@@ -54,14 +58,21 @@ public class UserCabinetController {
         mapper.map(user, personalInfoDTO);
         mapper.map(contacts, personalInfoDTO);
         model.addAttribute("photo", user.getPhoto());
-        model.addAttribute("userObject", personalInfoDTO);
+        model.addAttribute("personalInfoDTO", personalInfoDTO);
         return "userCabinet";
     }
 
     @PostMapping("/user/cabinet")
+    public String userProfilePOST(@Valid @ModelAttribute PersonalInfoDTO personalInfoDTO, BindingResult bindingResult, Principal principal, ModelMap model){
 
-    public String userProfilePOST(@ModelAttribute PersonalInfoDTO personalInfoDTO, Principal principal){
         Users user = userService.findByEmail(principal.getName());
+
+        if (bindingResult.hasErrors()){
+            personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
+            model.addAttribute("photo", user.getPhoto());
+            return "userCabinet";
+        }
+
         Contacts contacts = user.getContact();
         mapper.map(personalInfoDTO, user);
         mapper.map(personalInfoDTO, contacts);

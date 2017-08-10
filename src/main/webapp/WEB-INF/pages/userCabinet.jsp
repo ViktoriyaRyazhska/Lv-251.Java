@@ -30,7 +30,7 @@
                 <hr>
                 <div class="row">
                     <!-- left column -->
-                    <form:form method="POST" modelAttribute="userObject" enctype="multipart/form-data" action="/user/cabinet">
+                    <form:form method="POST" modelAttribute="personalInfoDTO" enctype="multipart/form-data" action="/user/cabinet">
                     <div class="col-md-3 col-md-offset-1">
                         <div class="text-center">
                             <img src="data:image/jpeg;base64,${photo}" class="avatar img-circle" alt="avatar"
@@ -61,6 +61,7 @@
                                         code="messages.userFirstname"/>:</label>
                                 <div class="col-lg-7">
                                     <form:input type="text" class="form-control" path="firstname"/>
+                                    <form:errors path="firstname" cssClass="text-danger"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -68,6 +69,7 @@
                                         code="messages.userLastname"/>:</label>
                                 <div class="col-lg-7">
                                     <form:input type="text" class="form-control" path="lastname"/>
+                                    <form:errors path="lastname" cssClass="text-danger"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -76,6 +78,7 @@
                                 <div class="col-lg-7">
                                     <form:input type="text" class="form-control" path="email" disabled="false"
                                     />
+                                    <form:errors path="email" cssClass="text-danger"/>
                                 </div>
                             </div>
 

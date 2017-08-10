@@ -65,8 +65,10 @@ public class Mapper extends ConfigurableMapper{
 
             @Override
             public void mapAtoB(PersonalInfoDTO personalInfoDTO, Users user, MappingContext context) {
-                String photo= StoredImagesService.getBase64encodedMultipartFile(personalInfoDTO.getPhoto());
-                user.setPhoto(photo);
+                if(personalInfoDTO.getPhoto().getSize() != 0){
+                    String photo= StoredImagesService.getBase64encodedMultipartFile(personalInfoDTO.getPhoto());
+                    user.setPhoto(photo);
+                }
             }
         })
                 .register();
