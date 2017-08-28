@@ -2,7 +2,6 @@ package com.softserve.edu.lv251.validators;
 
 import com.softserve.edu.lv251.customannotations.ValidFile;
 import com.softserve.edu.lv251.model.FileBucket;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

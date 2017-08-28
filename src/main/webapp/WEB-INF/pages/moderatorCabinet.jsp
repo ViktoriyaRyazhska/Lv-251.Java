@@ -12,8 +12,8 @@
                     <a href="<c:url value="/moderator/cabinet"/>" class="list-group-item navbar-inverse">
                         <spring:message code="messages.clinic" />
                     </a>
-                    <a href="<c:url value="/moderator/cabinet/doctor"/>" class=" list-group-item ">
-                        <spring:message code="messages.doctor" /><span class="badge">${doctor.size()}</span>
+                    <a href="<c:url value="/moderator/cabinet/doctors"/>" class=" list-group-item ">
+                        <spring:message code="messages.doctors" /><span class="badge">${doctors.size()}</span>
                     </a>
                     <a href="<c:url value="/moderator/cabinet/add/doctor"/>" class="list-group-item ">
                         <spring:message code="messages.addDoctors" />
@@ -28,7 +28,7 @@
     <div>
         <div class="container" style="width: 70%; float: right">
             <div class="row row-content">
-                <h3 class="text-center na">${moderator.clinic.clinic_name}</h3>
+                <h3 class="text-center na">${moderator.clinics.clinic_name}</h3>
                 <c:if test="${message != null}"><div role="alert" class=" ${classCss} text-center">${message}</div></c:if>
                 <hr>
                 <div class="row">

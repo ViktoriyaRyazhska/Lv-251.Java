@@ -7,7 +7,6 @@ import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Contact;
 import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
-import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
 import com.softserve.edu.lv251.service.*;
 import org.springframework.beans.factory.annotation.Autowired;

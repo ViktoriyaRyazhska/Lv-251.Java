@@ -1,6 +1,5 @@
 package com.softserve.edu.lv251.validators;
 
-import com.softserve.edu.lv251.customannotations.ValidFile;
 import com.softserve.edu.lv251.customannotations.ValidPhoto;
 import org.springframework.web.multipart.MultipartFile;
 

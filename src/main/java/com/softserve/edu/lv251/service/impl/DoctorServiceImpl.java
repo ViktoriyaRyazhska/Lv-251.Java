@@ -6,7 +6,6 @@ import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dao.DoctorsDAO;
 import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.*;
-import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
 
 import com.softserve.edu.lv251.service.*;

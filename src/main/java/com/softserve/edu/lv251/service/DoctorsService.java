@@ -4,7 +4,6 @@ import com.softserve.edu.lv251.dto.pojos.*;
 
 import com.softserve.edu.lv251.entity.Appointment;
 import com.softserve.edu.lv251.entity.Doctor;
-import com.softserve.edu.lv251.exceptions.EmailExistsException;
 
 import java.util.Date;
 import java.util.List;
