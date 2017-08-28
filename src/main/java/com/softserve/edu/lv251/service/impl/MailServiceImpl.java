@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.constants.Constants;
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.service.MailService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class MailServiceImpl implements MailService {
     private Logger logger;
 
     @Override
-    public void sendEmail(Users user, String messageText) {
+    public void sendEmail(User user, String messageText) {
 
         MimeMessagePreparator mimeMessagePreparator = getMessagePreparator(user, messageText);
 
@@ -49,15 +49,15 @@ public class MailServiceImpl implements MailService {
      * @param messageText   message for user
      * @return MimeMessagePreparator.
      */
-    private MimeMessagePreparator getMessagePreparator(Users user, String messageText) {
+    private MimeMessagePreparator getMessagePreparator(User user, String messageText) {
 
         return mimeMessage -> {
-            mimeMessage.setFrom(Constants.MailConstants.MAIL);
+            mimeMessage.setFrom(Constants.Mail.MAIL);
             mimeMessage.setRecipient(Message.RecipientType.TO,
                     new InternetAddress(user.getEmail()));
             String name = user.getFirstname() + " " + user.getLastname();
             mimeMessage.setText("Dear " + (name.trim().isEmpty() ? "patient" : name) + ", " + messageText);
-            mimeMessage.setSubject("Clinics Lv251");
+            mimeMessage.setSubject("Clinic Lv251");
         };
     }
 }

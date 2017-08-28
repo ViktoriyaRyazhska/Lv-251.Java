@@ -23,7 +23,7 @@ public class UserRestController {
     @RequestMapping(value = "/appointments")
     List<AppointmentDTO> getAppointments() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
-        return appointmentService.getAppointmentByUserEmail(userDetails.getUsername());
+        return appointmentService.getAppointmentDtoByUserEmail(userDetails.getUsername());
     }
 
 

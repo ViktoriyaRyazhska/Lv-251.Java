@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.service;
 
 
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
 
 import java.util.List;
@@ -28,5 +28,5 @@ public interface VerificationTokenService {
 
     VerificationToken findByVerificationToken(String token);
 
-    VerificationToken findByUser(Users user);
+    VerificationToken findByUser(User user);
 }

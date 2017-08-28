@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.dto.pojos;
 
-import com.softserve.edu.lv251.entity.Doctors;
+import com.softserve.edu.lv251.entity.Doctor;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -12,35 +12,35 @@ import java.util.List;
 /**
  * Created by User on 31.07.2017.
  */
-public class DoctorImageDTO extends Doctors {
+public class DoctorImageDTO extends Doctor {
     private BufferedImage img;
 
     DoctorImageDTO() {
     }
 
-    DoctorImageDTO(Doctors doctors) {
+    DoctorImageDTO(Doctor doctor) {
         try {
-            this.setImg(ImageIO.read(new ByteArrayInputStream(Base64.getDecoder().decode(doctors.getPhoto()))));
+            this.setImg(ImageIO.read(new ByteArrayInputStream(Base64.getDecoder().decode(doctor.getPhoto()))));
         } catch (Exception e) {
         }
-        setLastname(doctors.getLastname());
-        setAppointments(doctors.getAppointments());
-        setClinics(doctors.getClinics());
-        setContact(doctors.getContact());
-        setDescription(doctors.getDescription());
-        setDocAppointments(doctors.getDocAppointments());
-        setEmail(doctors.getEmail());
-        setEnabled(doctors.isEnabled());
-        setFirstname(doctors.getFirstname());
-        setLastname(doctors.getLastname());
-        setMiddlename(doctors.getMiddlename());
-        setPassword(doctors.getPassword());
-        setPhoto(doctors.getPhoto());
-        setRoles(doctors.getRoles());
-        setSpecialization(doctors.getSpecialization());
-        setTestsResults(doctors.getTestsResults());
-        setTokenExpired(doctors.isTokenExpired());
-        setId(doctors.getId());
+        setLastname(doctor.getLastname());
+        setAppointments(doctor.getAppointments());
+        setClinic(doctor.getClinic());
+        setContact(doctor.getContact());
+        setDescription(doctor.getDescription());
+        setDocAppointments(doctor.getDocAppointments());
+        setEmail(doctor.getEmail());
+        setEnabled(doctor.isEnabled());
+        setFirstname(doctor.getFirstname());
+        setLastname(doctor.getLastname());
+        setMiddlename(doctor.getMiddlename());
+        setPassword(doctor.getPassword());
+        setPhoto(doctor.getPhoto());
+        setRoles(doctor.getRoles());
+        setSpecialization(doctor.getSpecialization());
+        setTestsResults(doctor.getTestsResults());
+        setTokenExpired(doctor.isTokenExpired());
+        setId(doctor.getId());
     }
 
     public BufferedImage getImg() {
@@ -51,16 +51,16 @@ public class DoctorImageDTO extends Doctors {
         this.img = img;
     }
 
-    public static List<DoctorImageDTO> convert(List<Doctors> list) {
+    public static List<DoctorImageDTO> convert(List<Doctor> list) {
         List<DoctorImageDTO> list1 = new LinkedList<>();
-        for (Doctors d :
+        for (Doctor d :
                 list) {
             list1.add(new DoctorImageDTO(d));
         }
         return list1;
     }
 
-    public static DoctorImageDTO convert(Doctors doctors) {
-        return new DoctorImageDTO(doctors);
+    public static DoctorImageDTO convert(Doctor doctor) {
+        return new DoctorImageDTO(doctor);
     }
 }

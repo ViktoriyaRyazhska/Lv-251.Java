@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.service.impl;
 
-import com.softserve.edu.lv251.entity.Roles;
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.Role;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Users user = userService.findByEmail(email);
+        User user = userService.findByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException("No user found with username: " + email);
         }
@@ -44,7 +44,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         );
     }
 
-    private static List<GrantedAuthority> getAuthorities(List<Roles> roles) {
+    private static List<GrantedAuthority> getAuthorities(List<Role> roles) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
 

@@ -1,7 +1,6 @@
 package com.softserve.edu.lv251.service;
 
 import com.softserve.edu.lv251.dto.pojos.DistrictsDTO;
-import com.softserve.edu.lv251.entity.Districts;
 
 import java.util.List;
 

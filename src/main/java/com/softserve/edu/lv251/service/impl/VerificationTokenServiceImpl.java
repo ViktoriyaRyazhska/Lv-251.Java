@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.dao.VerificationTokenDAO;
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
 import com.softserve.edu.lv251.service.VerificationTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +60,7 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
     }
 
     @Override
-    public VerificationToken findByUser(Users user) {
+    public VerificationToken findByUser(User user) {
         List<VerificationToken> tokens = getVerificationTokensByColumnNameAndValue("user", user);
         return tokens.isEmpty() ? null : tokens.get(0);
     }

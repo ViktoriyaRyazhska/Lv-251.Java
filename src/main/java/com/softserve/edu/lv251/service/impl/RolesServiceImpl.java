@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.service.impl;
 
-import com.softserve.edu.lv251.dao.RolesDAO;
-import com.softserve.edu.lv251.entity.Roles;
+import com.softserve.edu.lv251.dao.RoleDAO;
+import com.softserve.edu.lv251.entity.Role;
 import com.softserve.edu.lv251.service.RolesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,31 +12,31 @@ import java.util.List;
 public class RolesServiceImpl implements RolesService {
 
     @Autowired
-    private RolesDAO rolesDAO;
+    private RoleDAO roleDAO;
 
     @Override
-    public void addRole(Roles role) {
-        this.rolesDAO.addEntity(role);
+    public void addRole(Role role) {
+        this.roleDAO.addEntity(role);
     }
 
     @Override
-    public void updateRole(Roles role) {
-        this.rolesDAO.updateEntity(role);
+    public void updateRole(Role role) {
+        this.roleDAO.updateEntity(role);
     }
 
     @Override
-    public Roles findByName(String name) {
-        List<Roles> roles = this.rolesDAO.getEntitiesByColumnNameAndValue("name", name);
+    public Role findByName(String name) {
+        List<Role> roles = this.roleDAO.getEntitiesByColumnNameAndValue("name", name);
         return roles.isEmpty() ? null : roles.get(0);
     }
 
     @Override
-    public Roles findById(Long roleId) {
-        return this.rolesDAO.getEntityByID(roleId);
+    public Role findById(Long roleId) {
+        return this.roleDAO.getEntityByID(roleId);
     }
 
     @Override
-    public List<Roles> getAllRoles() {
-        return this.rolesDAO.getAllEntities();
+    public List<Role> getAllRoles() {
+        return this.roleDAO.getAllEntities();
     }
 }

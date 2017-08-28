@@ -20,9 +20,6 @@ public class EmailAlreadyExistsValidator implements ConstraintValidator<EmailAlr
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
-        if(userService.findByEmail(email)==null){
-            return  true;
-        }else {
-            return false;}
+        return userService.findByEmail(email) == null;
     }
 }

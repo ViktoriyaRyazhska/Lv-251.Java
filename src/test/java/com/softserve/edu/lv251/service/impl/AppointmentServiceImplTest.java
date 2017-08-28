@@ -1,12 +1,8 @@
 package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.dao.AppointmentsDAO;
-import com.softserve.edu.lv251.dao.impl.AppointmentsDAOImpl;
-import com.softserve.edu.lv251.dto.pojos.AppointmentsDTO;
-import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
-import com.softserve.edu.lv251.entity.Appointments;
-import com.softserve.edu.lv251.entity.Doctors;
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.Appointment;
+import com.softserve.edu.lv251.entity.Doctor;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,10 +12,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -31,14 +25,13 @@ import static org.mockito.Mockito.*;
 public class AppointmentServiceImplTest {
 
     @Spy
-    List<Appointments> appointments = new LinkedList<>();
-
-    @Spy
-    List<AppointmentsForCreationDTO> appointmentsForCreationDTOS = new LinkedList<>();
+    List<Appointment> appointments = new LinkedList<>();
     @Captor
-    ArgumentCaptor<Appointments> captor;
+    ArgumentCaptor<Appointment> captor;
+
     @Mock
     private AppointmentsDAO appointmentsDAO;
+
     @InjectMocks
     private AppointmentServiceImpl appointmentService;
 
@@ -48,57 +41,35 @@ public class AppointmentServiceImplTest {
     public void setUp() throws ParseException {
         MockitoAnnotations.initMocks(this);
 
-        Doctors doc=new Doctors();
-        doc.setFirstname("Petro");
+        Appointment appointment2 = new Appointment();
+        Appointment appointment1 = new Appointment();
 
-        Users users = new Users();
-        users.setFirstname("Ivan");
+        appointment1.setAppointmentDate(sdf.parse("12/09/2017 - 15:00"));
+        appointment2.setAppointmentDate(sdf.parse("12/08/2017 - 15:00"));
 
-        Appointments appointments2 = new Appointments();
-        Appointments appointments1 = new Appointments();
+        appointment1.setIsApproved(true);
+        appointment2.setIsApproved(true);
 
-        appointments1.setAppointmentDate(sdf.parse("12/09/2017 - 15:00"));
-        appointments2.setAppointmentDate(sdf.parse("12/08/2017 - 15:00"));
-
-        appointments1.setDoctors(doc);
-        appointments2.setDoctors(doc);
-
-        appointments1.setUsers(users);
-        appointments2.setUsers(users);
-
-        appointments1.setId(1);
-        appointments2.setId(2);
-
-        appointments1.setIsApproved(true);
-        appointments2.setIsApproved(true);
-
-        appointments.add(appointments1);
-        appointments.add(appointments2);
-
-        AppointmentsForCreationDTO appointmentsDTO1 = new AppointmentsForCreationDTO();
-        AppointmentsForCreationDTO appointmentsDTO2 = new AppointmentsForCreationDTO();
-
-        appointmentsDTO1.setAppointmentDate(sdf.parse("12/09/2017 - 15:00"));
-        appointmentsDTO2.setAppointmentDate(sdf.parse("12/08/2017 - 15:00"));
-
-        appointmentsForCreationDTOS.add(appointmentsDTO1);
-        appointmentsForCreationDTOS.add(appointmentsDTO2);
+        appointments.add(appointment1);
+        appointments.add(appointment2);
     }
 
     @Test
     public void addAppointment() throws Exception {
-        doNothing().when(appointmentsDAO).addEntity(any(Appointments.class));
-        Appointments appointments = new Appointments();
-        appointments.setId(1);
+        doNothing().when(appointmentsDAO).addEntity(any(Appointment.class));
+        Appointment appointment = new Appointment();
+        appointment.setId(1);
 
-        Doctors doc=new Doctors();
+        Doctor doc = new Doctor();
         doc.setFirstname("Petro");
-        appointments.setDoctors(doc);
-        appointmentService.addAppointment(appointments);
+        appointment.setDoctor(doc);
+        appointmentService.addAppointment(appointment);
 
         verify(appointmentsDAO, times(1)).addEntity(captor.capture());
         Assert.assertEquals(1, captor.getValue().getId());
-        Assert.assertEquals("Petro", captor.getValue().getDoctors().getFirstname());
+        Assert.assertEquals("Petro", captor.getValue().getDoctor().getFirstname());
+
+
     }
 
     @Test
@@ -116,13 +87,7 @@ public class AppointmentServiceImplTest {
 
     @Test
     public void getAllDoctorsAppointmentsAfterNow() throws Exception {
-        when(appointmentService.getAllDoctorsAppointmentsAfterNow()).thenReturn(appointmentsForCreationDTOS
-                .stream()
-                .filter(p->p.getAppointmentDate().after(new Date()))
-                .collect(Collectors.toList()));
 
-
-        Assert.assertEquals(1, appointmentService.getAllDoctorsAppointmentsAfterNow().size());
     }
 
     @Test
@@ -135,6 +100,13 @@ public class AppointmentServiceImplTest {
 
     @Test
     public void getAppiontmentbyDoctorsEmail() throws Exception {
+
+        when(appointmentsDAO.getAppointmentByUserEmail("kilopo@ex.ua")).thenReturn(appointments);
+
+        when(appointmentService.getAppiontmentbyDoctorsEmail("kilopo@ex.ua")).thenReturn(appointments);
+
+        List<Appointment> forTest = appointmentService.getAppiontmentbyDoctorsEmail("kilopo@ex.ua");
+        Assert.assertEquals(2,forTest.size());
     }
 
     @Test

@@ -32,13 +32,13 @@
                     <spring:message code="messages.profile"/>
                 </a>
                 <a href="#" class="list-group-item">
-                    <spring:message code="messages.doctors"/>
+                    <spring:message code="messages.doctor"/>
                 </a>
                 <a href="#" class="list-group-item">
                     <spring:message code="messages.medicalCard"/>
                 </a>
-                <a href="/user/appointments" class="list-group-item">
-                    <spring:message code="messages.appointments"/>
+                <a href="/user/appointment" class="list-group-item">
+                    <spring:message code="messages.appointment"/>
                 </a>
                 <a href="/doctor/patients" class="active list-group-item">
                     <spring:message code="messages.patients"/>

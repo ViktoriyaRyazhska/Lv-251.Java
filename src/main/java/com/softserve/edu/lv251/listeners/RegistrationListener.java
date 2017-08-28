@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.listeners;
 
 import com.softserve.edu.lv251.constants.Constants;
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.events.OnRegistrationCompleteEvent;
 import com.softserve.edu.lv251.service.UserService;
 import com.softserve.edu.lv251.service.VerificationTokenService;
@@ -46,7 +46,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     }
 
     private void confirmRegistration(OnRegistrationCompleteEvent event) {
-        Users user = event.getUser();
+        User user = event.getUser();
         //A UUID (Universally Unique Identifier) represents a 128-bit value.
         String token = UUID.randomUUID().toString();
         userService.createVerificationToken(user, token);

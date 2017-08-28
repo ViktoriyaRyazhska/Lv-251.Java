@@ -28,7 +28,7 @@
     <div>
         <div class="container" style="width: 70%; float: right">
             <div class="row row-content">
-                <h3 class="text-center">${moderator.clinics.clinic_name}</h3>
+                <h3 class="text-center">${moderator.clinic.clinic_name}</h3>
                 <hr>
                 <div class="row">
                     <c:choose>
@@ -46,7 +46,7 @@
                                                 <p><spring:message code="messages.specialization"/>: ${doctor.specialization.name}</p>
                                             </div>
                                             <!-- Large modal -->
-                                            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                            <div class="modal fade bs-example-modal-lg" id="modal_${doctor.id}"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -64,7 +64,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <button data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-github" ><spring:message code="messages.delete"/></button >
+                                                <button data-toggle="modal"  data-target="#modal_${doctor.id}" class="btn btn-github" ><spring:message code="messages.delete"/></button >
                                             </div>
                                             <hr>
                                         </div>
@@ -75,7 +75,7 @@
                             </c:forEach>
                         </c:when>
                         <c:otherwise>
-                            <p>Gthkffj</p>
+                            <p></p>
                         </c:otherwise>
                     </c:choose>
                 </div>

@@ -4,9 +4,8 @@
 
 
     $("#autocomplete-spec").autocomplete({
-        serviceUrl: '/doc/by/spec',
+        serviceUrl:'/rest/autocomplete/specializations/byName',
         paramName: "name",
-        delimiter: ",",
         transformResult: function (response) {
             console.log("before doc by spec" );
             return {

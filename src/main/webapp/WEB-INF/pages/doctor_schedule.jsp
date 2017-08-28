@@ -132,7 +132,7 @@
 
 
             $("#autocom").autocomplete({
-                serviceUrl: '/users/search',
+                serviceUrl: '/user/search',
                 paramName: "name",
                 transformResult: function (response) {
                     return {
@@ -153,7 +153,7 @@
             $( "#control-button" ).click(function() {
                 if ($("#first-date").val() !== "" && $("#temp1").html() !== "") {
                     $.ajax({
-                        url: '/users/addApp/',
+                        url: '/user/addApp/',
                         method: 'POST',
                         data: {
                             "datatime": $("#first-date").val(),
@@ -465,7 +465,7 @@
         <h5><spring:message code="messages.links"/></h5>
         <ul class="list-unstyled">
             <li><a href=<c:url value="/"/>><spring:message code="messages.home"/></a></li>
-            <li><a href=<c:url value="/clinics/1"/>><spring:message code="messages.clinics"/></a></li>
+            <li><a href=<c:url value="/clinics/1"/>><spring:message code="messages.clinic"/></a></li>
             <li><a href=<c:url value="/allDoctors/1"/>><spring:message code="messages.doctors"/> </a></li>
             <li><a href="#"><spring:message code="messages.contact"/></a></li>
         </ul>

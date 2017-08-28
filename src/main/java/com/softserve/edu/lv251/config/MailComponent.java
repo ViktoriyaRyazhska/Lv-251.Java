@@ -34,7 +34,7 @@ public class MailComponent {
 
         try {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
-            messageHelper.setTo(Constants.MailConstants.MAIL);
+            messageHelper.setTo(Constants.Mail.MAIL);
             messageHelper.setSubject(contactDTO.getSubject());
             messageHelper.setText(mes, true);
             javaMailSender.send(mimeMessage);

@@ -2,10 +2,10 @@ package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.BaseDAO;
-import com.softserve.edu.lv251.dao.ClinicsDAO;
+import com.softserve.edu.lv251.dao.ClinicDAO;
 import com.softserve.edu.lv251.dto.pojos.ClinicSearchDTO;
 import com.softserve.edu.lv251.dto.pojos.SearchResultClinicDTO;
-import com.softserve.edu.lv251.entity.Clinics;
+import com.softserve.edu.lv251.entity.Clinic;
 import com.softserve.edu.lv251.service.ClinicService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.List;
  * Created by Taras on 14.07.2017.
  */
 @Service("clinicService")
-public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements ClinicService {
+public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinic> implements ClinicService {
 
     @Autowired
     private Mapper mapper;
@@ -28,19 +28,19 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
     private Logger logger;
 
     @Autowired
-    private ClinicsDAO clinicsDAO;
+    private ClinicDAO clinicDAO;
 
     @Override
     public List<SearchResultClinicDTO> getWithOffsetOrderedByName(String name, int offset, int limit) {
-        List<Clinics> clinics;
+        List<Clinic> clinics;
         if (name == null || name.isEmpty()) {
-            clinics = clinicsDAO.getWithOffsetAndLimit(offset, limit);
+            clinics = clinicDAO.getWithOffsetAndLimit(offset, limit);
         } else {
-            clinics = clinicsDAO.getByNameWithOffsetAndLimit(name, offset, limit);
+            clinics = clinicDAO.getByNameWithOffsetAndLimit(name, offset, limit);
         }
         List<SearchResultClinicDTO> results = new ArrayList<>();
 
-        for (Clinics clinic : clinics) {
+        for (Clinic clinic : clinics) {
             SearchResultClinicDTO result = new SearchResultClinicDTO();
             mapper.map(clinic, result);
             results.add(result);
@@ -50,59 +50,59 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
     }
 
     @Override
-    public void addClinic(Clinics clinic) {
-        this.clinicsDAO.addEntity(clinic);
+    public void addClinic(Clinic clinic) {
+        this.clinicDAO.addEntity(clinic);
     }
 
     @Override
-    public void updateClinic(Clinics clinic) {
-        this.clinicsDAO.updateEntity(clinic);
+    public void updateClinic(Clinic clinic) {
+        this.clinicDAO.updateEntity(clinic);
     }
 
     @Override
-    public Clinics getClinicByID(Long clinicId) {
-        return clinicsDAO.getEntityByID(clinicId);
+    public Clinic getClinicByID(Long clinicId) {
+        return clinicDAO.getEntityByID(clinicId);
     }
 
     @Override
     public ClinicSearchDTO clinicSearchById(Long clinicId) {
-        Clinics clinics = clinicsDAO.getEntityByID(clinicId);
+        Clinic clinic = clinicDAO.getEntityByID(clinicId);
         ClinicSearchDTO clinicSearchDTO = new ClinicSearchDTO();
-        mapper.map(clinics, clinicSearchDTO);
+        mapper.map(clinic, clinicSearchDTO);
         return clinicSearchDTO;
     }
 
     @Override
-    public List<Clinics> getClinicsByColumnNameAndValue(String columnName, Object value) {
-        return this.clinicsDAO.getEntitiesByColumnNameAndValue(columnName, value);
+    public List<Clinic> getClinicsByColumnNameAndValue(String columnName, Object value) {
+        return this.clinicDAO.getEntitiesByColumnNameAndValue(columnName, value);
     }
 
     @Override
-    public List<Clinics> getAllClinics() {
-        return this.clinicsDAO.getAllEntities();
+    public List<Clinic> getAllClinics() {
+        return this.clinicDAO.getAllEntities();
     }
 
     @Override
-    public void deleteClinic(Clinics clinic) {
-        this.clinicsDAO.deleteEntity(clinic);
+    public void deleteClinic(Clinic clinic) {
+        this.clinicDAO.deleteEntity(clinic);
     }
 
-    public Clinics getFirst() {
-        return clinicsDAO.getEntityByID(1L);
+    public Clinic getFirst() {
+        return clinicDAO.getEntityByID(1L);
     }
 
     @Override
-    public BaseDAO<Clinics> getDao() {
-        return clinicsDAO;
+    public BaseDAO<Clinic> getDao() {
+        return clinicDAO;
     }
 
     public List<ClinicSearchDTO> findByDistrict(String name)
 
     {
-        List<Clinics> clinics = clinicsDAO.findByDistrict(name);
+        List<Clinic> clinics = clinicDAO.findByDistrict(name);
         List<ClinicSearchDTO> results = new ArrayList<>();
 
-        for (Clinics clinic : clinics) {
+        for (Clinic clinic : clinics) {
             ClinicSearchDTO result = new ClinicSearchDTO();
             mapper.map(clinic, result);
             results.add(result);
@@ -112,10 +112,10 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
 
     @Override
     public List<ClinicSearchDTO> searchByLetters(String letters) {
-        List<Clinics> clinics = clinicsDAO.searchByLetters(letters);
+        List<Clinic> clinics = clinicDAO.searchByLetters(letters);
         List<ClinicSearchDTO> results = new ArrayList<>();
 
-        for (Clinics clinic : clinics) {
+        for (Clinic clinic : clinics) {
             ClinicSearchDTO result = new ClinicSearchDTO();
             mapper.map(clinic, result);
             results.add(result);
@@ -124,14 +124,16 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
     }
 
     @Override
-    public Clinics getByName(String name) {
-        return clinicsDAO.getEntitiesByColumnNameAndValue("clinic_name", name).get(0);
+    public Clinic getByName(String name) {
+       List< Clinic> clinic= clinicDAO.getEntitiesByColumnNameAndValue("clinic_name", name);
+        return clinic.isEmpty()?null:clinic.get(0);
     }
 
     @Override
-    public void updatePhoto(MultipartFile file, Clinics clinics) {
+    public void updatePhoto(MultipartFile file, Clinic clinic) {
+        if(!file.isEmpty()){
         String photo = StoredImagesService.getBase64encodedMultipartFile(file);
-        clinics.setPhoto(photo);
-        clinicsDAO.updateEntity(clinics);
+        clinic.setPhoto(photo);
+        clinicDAO.updateEntity(clinic);}
         }
 }

@@ -91,11 +91,11 @@
                                                     <div class="media-body">
                                                         <div>
                                                             <div >
-                                                                <h3 class="media-heading"><c:out value="${appointment.doctors.firstname} ${appointment.doctors.lastname}"/></h3>
+                                                                <h3 class="media-heading"><c:out value="${appointment.doctor.firstname} ${appointment.doctor.lastname}"/></h3>
                                                             </div>
                                                         </div>
 
-                                                        <div class="specialization"><c:out value="${appointment.doctors.specialization.name}"/></div>
+                                                        <div class="specialization"><c:out value="${appointment.doctor.specialization.name}"/></div>
                                                         <div class="diagnosis"><c:out value="${appointment.description}"/></div>
                                                         <div class="diagnosis"><c:out value="${aDate}"/></div>
                                                     </div>

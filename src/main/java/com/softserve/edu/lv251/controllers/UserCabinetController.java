@@ -5,15 +5,14 @@ import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
-import com.softserve.edu.lv251.entity.Contacts;
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.Contact;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.ContactsService;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +29,7 @@ import java.util.Date;
  * Author: Brynetskyi Marian
  * Updated: Kovalevskyy Vitaliy
  */
-@Controller
+@org.springframework.stereotype.Controller
 public class UserCabinetController {
 
     @Autowired
@@ -52,16 +51,18 @@ public class UserCabinetController {
     @GetMapping("/user/cabinet")
     public String userProfileGET(ModelMap model, Principal principal) {
 
-        Users user = userService.findByEmail(principal.getName());
-        Contacts contacts = user.getContact();
+        User user = userService.findByEmail(principal.getName());
+        Contact contact = user.getContact();
         PersonalInfoDTO personalInfoDTO = new PersonalInfoDTO();
         PasswordDTO passwordDTO = new PasswordDTO();
 
         mapper.map(user, personalInfoDTO);
-        mapper.map(contacts, personalInfoDTO);
-        model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
-        model.addAttribute(Constants.ControllersConstants.PERSONAL_INFO_DTO, personalInfoDTO);
-        model.addAttribute(Constants.ControllersConstants.PASSWORD_DTO, passwordDTO);
+
+        mapper.map(contact, personalInfoDTO);
+        model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
+        model.addAttribute(Constants.Controller.PERSONAL_INFO_DTO, personalInfoDTO);
+        model.addAttribute(Constants.Controller.PASSWORD_DTO, passwordDTO);
+
         return "userCabinet";
     }
 
@@ -70,19 +71,21 @@ public class UserCabinetController {
      */
     @PostMapping("/user/cabinet")
     public String userProfilePOST(@Valid @ModelAttribute PersonalInfoDTO personalInfoDTO, BindingResult bindingResult, Principal principal, ModelMap model) {
-        Users user = userService.findByEmail(principal.getName());
+        User user = userService.findByEmail(principal.getName());
 
         if (bindingResult.hasErrors()) {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
-            model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
+
+            model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
+
             return "userCabinet";
         }
 
-        Contacts contacts = user.getContact();
+        Contact contact = user.getContact();
         mapper.map(personalInfoDTO, user);
-        mapper.map(personalInfoDTO, contacts);
+        mapper.map(personalInfoDTO, contact);
         userService.updateUser(user);
-        contactsService.updateContacts(contacts);
+        contactsService.updateContacts(contact);
         ((UpdatableUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
                 .setUsername(personalInfoDTO.getEmail());
         return "redirect:/user/cabinet";
@@ -95,15 +98,17 @@ public class UserCabinetController {
     public String savePassword(@Valid @ModelAttribute PasswordDTO passwordDTO, BindingResult bindingPasswordDTO,
                                @ModelAttribute PersonalInfoDTO personalInfoDTO, BindingResult bindingInfoDTO,
                                Principal principal,  ModelMap model) {
-        Users user = userService.findByEmail(principal.getName());
-        Contacts contacts = user.getContact();
+        User user = userService.findByEmail(principal.getName());
+        Contact contact = user.getContact();
 
         if (bindingPasswordDTO.hasErrors()){
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
             mapper.map(user, personalInfoDTO);
-            mapper.map(contacts, personalInfoDTO);
-            model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
-            model.addAttribute(Constants.ControllersConstants.PERSONAL_INFO_DTO, personalInfoDTO);
+
+            mapper.map(contact, personalInfoDTO);
+            model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
+            model.addAttribute(Constants.Controller.PERSONAL_INFO_DTO, personalInfoDTO);
+
             return "userCabinet";
         }
 
@@ -117,8 +122,9 @@ public class UserCabinetController {
     @GetMapping("/user/medicalcard")
     public String medicalCardGET(ModelMap model, Principal principal, HttpServletRequest request) {
 
-        Users user = userService.findByEmail(principal.getName());
-        model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
+        User user = userService.findByEmail(principal.getName());
+        //model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
+        model.addAttribute("listAppointments", appointmentService.getAppointmentByUserEmail(principal.getName()));
         model.addAttribute("date", new Date().getTime());
 
         return "userCabinetMedicalCard";

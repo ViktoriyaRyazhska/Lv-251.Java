@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.service.impl;
 
-import com.softserve.edu.lv251.dao.ContactsDAO;
-import com.softserve.edu.lv251.entity.Contacts;
+import com.softserve.edu.lv251.dao.ContactDAO;
+import com.softserve.edu.lv251.entity.Contact;
 import com.softserve.edu.lv251.service.ContactsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,15 +13,15 @@ import org.springframework.stereotype.Service;
 public class ContactsServiceImpl implements ContactsService {
 
     @Autowired
-    private ContactsDAO contactsDAO;
+    private ContactDAO contactDAO;
 
     @Override
-    public void addContacts(Contacts contacts) {
-        this.contactsDAO.addEntity(contacts);
+    public void addContacts(Contact contact) {
+        this.contactDAO.addEntity(contact);
     }
 
-    public void updateContacts(Contacts contacts) {
-        this.contactsDAO.updateEntity(contacts);
+    public void updateContacts(Contact contact) {
+        this.contactDAO.updateEntity(contact);
     }
 
 }

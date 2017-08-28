@@ -38,8 +38,8 @@
                 <a href="#" class="list-group-item">
                     <spring:message code="messages.medicalCard"/>
                 </a>
-                <a href="/user/appointments" class="active list-group-item">
-                    <spring:message code="messages.appointments"/>
+                <a href="/user/appointment" class="active list-group-item">
+                    <spring:message code="messages.appointment"/>
                 </a>
             </div>
         </div>

@@ -42,6 +42,7 @@
         <p id="clinic" style="display: none"><spring:message code="messages.searchClinics"/></p>
         <p id="doctor" style="display: none"><spring:message code="messages.searchDoctors"/></p>
         <p id="docByspec" style="display: none"><spring:message code="messages.doctorsSearchBySpec"/></p>
+        <p id="spec" style="display: none"><spring:message code="messages.specialization"/></p>
 
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">

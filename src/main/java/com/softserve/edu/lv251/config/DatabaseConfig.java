@@ -24,7 +24,7 @@ import java.util.Properties;
  */
 
 @Configuration
-@PropertySource(Constants.DatabaseConstants.DATABASE_PROPERTY_SOURCE)
+@PropertySource(Constants.Database.PROPERTY_SOURCE)
 @ComponentScan(basePackages = {Constants.BASE_PACKAGE})
 @EnableTransactionManagement
 public class DatabaseConfig {

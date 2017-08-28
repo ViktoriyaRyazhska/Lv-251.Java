@@ -2,7 +2,7 @@ package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dto.pojos.ClinicLatLngDTO;
-import com.softserve.edu.lv251.entity.Clinics;
+import com.softserve.edu.lv251.entity.Clinic;
 import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.MapService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +26,9 @@ public class MapServiceImpl implements MapService {
     @Override
     public List<ClinicLatLngDTO> getAllClinicsCoordinates() {
         List<ClinicLatLngDTO> dtoList = new ArrayList<>();
-        List<Clinics> clinics = clinicService.getAllClinics();
+        List<Clinic> clinics = clinicService.getAllClinics();
 
-        for (Clinics clinic : clinics) {
+        for (Clinic clinic : clinics) {
             ClinicLatLngDTO latlang = new ClinicLatLngDTO();
             mapper.map(clinic, latlang);
 

@@ -16,7 +16,8 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
                 WebConfig.class,
                 DatabaseConfig.class,
                 WebSecurityConfig.class,
-                TokenSecurityConfig.class
+                TokenSecurityConfig.class,
+                WebSocketConfig.class
 
         };
     }

@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.events;
 
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.User;
 import org.springframework.context.ApplicationEvent;
 
 import java.util.Locale;
@@ -12,9 +12,9 @@ public class OnRegistrationCompleteEvent extends ApplicationEvent {
 
     private String appUrl;
     private Locale locale;
-    private Users user;
+    private User user;
 
-    public OnRegistrationCompleteEvent(Users user, Locale locale, String appUrl) {
+    public OnRegistrationCompleteEvent(User user, Locale locale, String appUrl) {
         super(user);
 
         this.user = user;
@@ -38,11 +38,11 @@ public class OnRegistrationCompleteEvent extends ApplicationEvent {
         this.locale = locale;
     }
 
-    public Users getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }

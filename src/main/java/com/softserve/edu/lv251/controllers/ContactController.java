@@ -6,7 +6,6 @@ import com.softserve.edu.lv251.dto.pojos.ContactDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +19,7 @@ import java.util.Locale;
  *
  */
 
-@Controller
+@org.springframework.stereotype.Controller
 public class ContactController {
 
     @Autowired
@@ -48,11 +47,13 @@ public class ContactController {
         }
 
         if (mailComponent.sendMail(contactDTO)) {
-            model.addFlashAttribute(Constants.ControllersConstants.CLASS_CSS, "alert alert-success");
-            model.addFlashAttribute(Constants.ControllersConstants.MESSAGE, messageSuccess);
+
+            model.addFlashAttribute(Constants.Controller.CLASS_CSS, "alert alert-success");
+            model.addFlashAttribute(Constants.Controller.MESSAGE, messageSuccess);
         } else {
-            model.addFlashAttribute(Constants.ControllersConstants.CLASS_CSS, "alert alert-warning");
-            model.addFlashAttribute(Constants.ControllersConstants.MESSAGE, messageError);
+            model.addFlashAttribute(Constants.Controller.CLASS_CSS, "alert alert-warning");
+            model.addFlashAttribute(Constants.Controller.MESSAGE, messageError);
+
         }
         return "redirect:/contact";
     }

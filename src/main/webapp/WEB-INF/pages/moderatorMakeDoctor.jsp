@@ -9,7 +9,7 @@
                     <a href="/moderator/cabinet" class="list-group-item ">
                         <spring:message code="messages.clinic" />
                     </a>
-                    <a href="/moderator/cabinet/doctors" class=" list-group-item ">
+                    <a href="/moderator/cabinet/doctor" class=" list-group-item ">
                         <spring:message code="messages.doctors" /><span class="badge">${doctors.size()}</span>
                     </a>
                     <a href="/moderator/cabinet/add/doctor" class="list-group-item ">
@@ -25,7 +25,7 @@
     <div>
         <div class="container" style="width: 70%; float: right">
             <div class="row row-content">
-                <h3 class="text-center">${moderator.clinics.clinic_name}</h3>
+                <h3 class="text-center">${moderator.clinic.clinic_name}</h3>
                 <hr>
                 <div class="row">
                     <div class="col-lg-10" style="margin-left: 10%">
@@ -48,10 +48,10 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 control-label"> <spring:message
-                                        code="messages.specialization"/>:</label>
+                                        code="messages.Description"/>:</label>
                                 <div class="col-lg-7">
                                         <form:errors path="description" cssClass="text-danger"/>
-                                    <form:input type="text" class="form-control" id="autocomplete-spec" path="description"/>
+                                    <form:input type="text" class="form-control"  path="description"/>
                                 </div>
                             </div>
                             <div class="form-group">

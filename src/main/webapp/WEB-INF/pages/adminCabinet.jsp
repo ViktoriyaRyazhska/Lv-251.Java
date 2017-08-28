@@ -20,7 +20,7 @@
                                     <div class="col-md-1 col-lg-1"></div>
                                     <div class="col-xs-6 col-md-8 col-lg-9">
                                         <div class="row">
-                                            <div> ${moderators.firstname} ${moderators.lastname}</div>
+                                            <div> ${doctor.firstname} ${doctor.lastname}</div>
                                         </div>
                                         <hr>
                                     </div>

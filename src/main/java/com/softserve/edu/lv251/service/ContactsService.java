@@ -1,15 +1,12 @@
 package com.softserve.edu.lv251.service;
 
-import com.softserve.edu.lv251.entity.Contacts;
-import com.softserve.edu.lv251.entity.Users;
-
-import java.util.List;
+import com.softserve.edu.lv251.entity.Contact;
 
 /**
  * Created by : Kovalevskyy Vitaliy
  */
 public interface ContactsService {
 
-    void addContacts(Contacts contact);
-    void updateContacts(Contacts contacts);
+    void addContacts(Contact contact);
+    void updateContacts(Contact contact);
 }

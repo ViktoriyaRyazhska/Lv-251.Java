@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.idl;
 
-import com.softserve.edu.lv251.entity.Roles;
+import com.softserve.edu.lv251.entity.Role;
 import com.softserve.edu.lv251.service.RolesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -34,10 +34,10 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     }
 
     private void createRoleIfNotFound(String name) {
-        Roles role = this.rolesService.findByName(name);
+        Role role = this.rolesService.findByName(name);
 
         if (role == null) {
-            role = new Roles();
+            role = new Role();
             role.setName(name);
             this.rolesService.addRole(role);
         }

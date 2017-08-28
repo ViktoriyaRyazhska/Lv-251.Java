@@ -3,9 +3,8 @@ package com.softserve.edu.lv251.service;
 
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
-import com.softserve.edu.lv251.exceptions.EmailExistsException;
 
 import java.util.List;
 
@@ -14,35 +13,35 @@ import java.util.List;
  */
 public interface UserService {
 
-    void addUser(Users user);
+    void addUser(User user);
 
-    void updateUser(Users user);
+    void updateUser(User user);
 
-    Users getUserByID(Long userId);
+    User getUserByID(Long userId);
 
-    List<Users> getUsersByColumnNameAndValue(String columnName, Object value);
+    List<User> getUsersByColumnNameAndValue(String columnName, Object value);
 
-    List<Users> getAllUsers();
+    List<User> getAllUsers();
 
-    void deleteUser(Users user);
+    void deleteUser(User user);
 
-    List<Users> getWithOffsetOrderedByName(int offset, int limit);
+    List<User> getWithOffsetOrderedByName(int offset, int limit);
 
-    Users getFirst();
+    User getFirst();
 
-    Users findByEmail(String email);
+    User findByEmail(String email);
 
-    Users getUserByVerificationToken(String verificationToken);
+    User getUserByVerificationToken(String verificationToken);
 
-    void createVerificationToken(Users user, String verificationToken);
+    void createVerificationToken(User user, String verificationToken);
 
     VerificationToken getVerificationToken(String verificationToken);
 
-    Users registerNewUserAccount(UserDTO accountDto) throws EmailExistsException;
+    User registerNewUserAccount(UserDTO accountDto);
 
-    void sendEmail(Users user, String messageText);
+    void sendEmail(User user, String messageText);
 
-    List<Users> searchByLetters(String search);
+    List<User> searchByLetters(String search);
 
-    Users changePassword(Users user, PasswordDTO passwordDTO);
+    User changePassword(User user, PasswordDTO passwordDTO);
 }

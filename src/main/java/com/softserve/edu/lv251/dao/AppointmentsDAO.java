@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.dao;
 
-import com.softserve.edu.lv251.entity.Appointments;
+import com.softserve.edu.lv251.entity.Appointment;
 
 import java.util.Date;
 import java.util.List;
@@ -8,12 +8,12 @@ import java.util.List;
 /**
  * Created by Taras on 16.07.2017.
  */
-public interface AppointmentsDAO extends BaseDAO<Appointments>{
-    List<Appointments> getAppointmentByDoctorsEmailAfterSomeDate(String email, Date date);
+public interface AppointmentsDAO extends BaseDAO<Appointment>{
+    List<Appointment> getAppointmentByDoctorsEmailAfterSomeDate(String email, Date date);
 
-    List<Appointments> appointmentsWithDoctor (Long id);
+    List<Appointment> appointmentsWithDoctor (Long id);
 
     List getAppiontmentbyDoctorsEmail(String email);
 
-    List<Appointments> getAppointmentByUserEmail(String email);
+    List<Appointment> getAppointmentByUserEmail(String email);
 }

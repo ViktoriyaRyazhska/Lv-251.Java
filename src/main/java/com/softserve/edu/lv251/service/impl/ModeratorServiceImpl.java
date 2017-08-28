@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by Admin on 31.07.2017.
+ * Created by Yana Martynyak on 31.07.2017.
  */
 @Service
 public class ModeratorServiceImpl implements ModeratorService {

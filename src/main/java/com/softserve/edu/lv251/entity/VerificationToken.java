@@ -23,9 +23,9 @@ public class VerificationToken extends BaseEntity {
 
     private String token;
 
-    @OneToOne(targetEntity = Users.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private User user;
 
     private Date expiryDate = calculateExpiryDate(EXPIRATION);
 
@@ -45,11 +45,11 @@ public class VerificationToken extends BaseEntity {
         this.token = token;
     }
 
-    public Users getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

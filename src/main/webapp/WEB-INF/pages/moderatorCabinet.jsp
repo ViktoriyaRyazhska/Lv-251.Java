@@ -21,11 +21,42 @@
                     <a href="<c:url value="/moderator/cabinet/make/doctor"/>" class="list-group-item ">
                         <spring:message code="messages.makeDoctor" />
                     </a>
+
+
                 </div>
+                <div></div>
             </div>
         </div>
     </div>
     <div>
+        <div class="chatbox chatbox--tray chatbox--empty g ">
+            <div class="chatbox__title">
+                <h5><a href="#">Customer Service</a></h5>
+                <button class="chatbox__title__tray" >
+                    <span></span>
+                </button>
+            </div>
+            <div class="chatbox__body">
+                <div class="chatbox__body__message chatbox__body__message--right">
+                    <div class="messageChat" style="background-color: #b2dba1 ;border-radius: 3px">
+
+                    </div>
+
+                    <c:forEach items="${messages}" var="message">
+                        <p><span >${message.date}      ${message.from.firstname} ${message.from.lastname}</span><br> ${message.text} </p>
+
+                    </c:forEach>
+
+                    <p id="response"></p>
+
+                </div>
+            </div>
+            <div id="conversationDiv">
+                <textarea class="chatbox__message" id="text" placeholder="Write something interesting"></textarea>
+            </div>
+            <button class=" btn btn-clinic " onclick="sendMessage()" >Send</button>
+
+        </div>
         <div class="container" style="width: 70%; float: right">
             <div class="row row-content">
                 <h3 class="text-center na">${moderator.clinics.clinic_name}</h3>
@@ -34,23 +65,26 @@
                 <div class="row">
                     <div class="row">
                         <!-- left column -->
-                        <div class="col-md-3 col-md-offset-1">
+                        <div class="col-md-4 col-md-offset-1">
                             <div class="text-center">
                                 <div class="image-container ">
-                                <img src="data:image/jpeg;base64,${moderator.clinics.photo}" class="avatar img-circle image img-responsive "  alt="avatar" width="100%"height="100%">
+
+                                <img src="data:image/jpeg;base64,${moderator.clinic.photo}" class="avatar img-circle image img-responsive "  alt="avatar" width="100%"height="100%">
+
                                     <div class="middle">
                                         <div class="text">Change</div>
                                     </div>
                                 </div>
-                                <form:form action="/moderator/upload/clinicPhoto" method="post" enctype="multipart/form-data" modelAttribute="photoForm">
-                                    <div class="col-lg-7">
+                                <div class="col-lg-7">
+                                <form:form action="/moderator/upload/clinicPhoto" method="post" onsubmit=" return validPhoto(this)" enctype="multipart/form-data" modelAttribute="photoForm" >
 
-                                            <div style="position:relative;">
+
+                                        <div style="position:relative;">
+                                            <div id="errorPhoto" style="display: none;color: darkred"> More then 100Kb of Invalid Format</div>
                                                 <a class='btn btn-file' href='javascript:;'>
                                                     Choose File...
                                                     <form:errors path="multipartFile"></form:errors>
-                                                    <div class="errors" style="display: none"></div>
-                                                    <form:input path="multipartFile" type="file" id="photo"  style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'/>
+                                                    <form:input  path="multipartFile" type="file" id="photo" onblur="validPhoto()" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'/>
                                                 </a>
                                                 &nbsp;
                                                 <span class='label label-info' id="upload-file-info"></span>
@@ -58,7 +92,7 @@
 
                                                 <form:button class='btn btn-github' style="margin-top: 5px;margin-left: 20px">Change</form:button>
 
-                                            </div>
+                                        </div>
 
                                     </div>
                                 </form:form>
@@ -66,13 +100,14 @@
                             <div></div>
                         </div>
                         <div class="col-md-7 personal-info">
-                    <form:form method="POST" modelAttribute="clinicDTO" action="/moderator/cabinet">
+                    <form:form method="POST" modelAttribute="clinicDTO" action="/moderator/cabinet" onsubmit="return validName(this)">
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.clinicName"/>:</label>
                         <div class="col-lg-7">
 
                             <form:errors path="clinic_name"/>
-                            <form:input type="text" class="form-control" path="clinic_name"/>
+                            <div id="errorClinicName" style="display: none;color: darkred"> Cant be empty</div>
+                            <form:input type="text" id="clinicName"  class="form-control" onblur="validName()" path="clinic_name"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -84,43 +119,43 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userEmail"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control" path="email" value="${clinic.contact.email}" disabled="false" cssStyle="background-color: #72d9b9;"/>
+                            <form:input type="text" class="form-control" path="email" value="${clinicDTO.email}" disabled="false" cssStyle="background-color: #72d9b9;"/>
                         </div>
                     </div>
                         <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userAddress"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control d" path="address" />
+                            <form:input type="text" class="form-control d" value="${clinicDTO.address}" path="address" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userCity"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control" path="city"/>
+                            <form:input type="text" class="form-control" path="city" value="${clinicDTO.city}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userZipcode"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control" path="zipCode"/>
+                            <form:input type="text" class="form-control" path="zipCode" value="${clinicDTO.zipCode}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userFirstPhone"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control" path="firstPhone"/>
+                            <form:input type="text" class="form-control" path="firstPhone" value="${clinicDTO.firstPhone}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userSecondPhone"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control" path="secondPhone"/>
+                            <form:input type="text" class="form-control" path="secondPhone" value="${clinicDTO.secondPhone}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userThirdPhone"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control" path="thirdPhone"/>
+                            <form:input type="text" class="form-control" path="thirdPhone" value="${clinicDTO.thirdPhone}"/>
                         </div>
                     </div>
                     <div class="form-group">

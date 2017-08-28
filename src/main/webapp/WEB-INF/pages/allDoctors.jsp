@@ -19,7 +19,7 @@
 
                     <div class="navbar-form " style="width: 95%">
                         <div class="form-group" style="width: 90%">
-                            <select class="selectpicker form-control" style="width:10% " id="selectDocOrClinic">
+                            <select class="selectpicker form-control" style="width:18% " id="selectDocOrClinic">
                                 <option value="3"><spring:message code="messages.chooseSearch"/></option>
                                 <option value="1"><spring:message code="messages.doctorsSearch"/></option>
                                 <option value="2"><spring:message code="messages.doctorsSearchBySpec"/></option>
@@ -45,7 +45,7 @@
         </div>
     </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 
     <script>
 
@@ -87,14 +87,16 @@
                                                  alt="...">
                                         </a>
                                     </div>
-                                    <a href="/doctors/${flag}/${doctor.id}" class="btn-link">
+
+                                    <a href="/doctors/${doctor.id}" class="btn-link">
+
                                         <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span>
                                     </a>
 
                                     <p><spring:message
                                             code="messages.specialization"/>:${doctor.specialization.name}</p>
                                     <hr>
-                                    <p><spring:message code="messages.clinicName"/>:${doctor.clinics.clinic_name}</p>
+                                    <p><spring:message code="messages.clinicName"/>:${doctor.clinic.clinic_name}</p>
                                     <button class="btn btn-facebook" style="margin-top: 10%;margin-left: 55%"
                                             data-toggle="modal" data-target="#modal_${doctor.id}">
 
@@ -168,7 +170,7 @@
                                                     <c:choose>
                                                         <c:when test="${docApps.size()>0}">
                                                             <c:forEach items="${docApps}" var="apointments">
-                                                                <c:if test="${apointments.doctors == doctor.id}">
+                                                                <c:if test="${apointments.doctor == doctor.id}">
                                                                     dd = new Date("${apointments.appointmentDate}");
                                                                     dates.push(dd);
                                                                 </c:if>
@@ -207,7 +209,7 @@
             <div class="container">
                 <div class="row row-content">
                     <div class="container-fluid">
-                        There are no doctors in database
+                        There are no doctor in database
                     </div>
                 </div>
             </div>

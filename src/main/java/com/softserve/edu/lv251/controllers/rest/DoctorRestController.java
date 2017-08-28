@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.controllers.rest;
 
 import com.softserve.edu.lv251.dto.pojos.PatientDTO;
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class DoctorRestController {
 
     @RequestMapping("/doctor/patients")
     public List<PatientDTO> getPatients(Principal principal) {
-        Users users = userService.findByEmail(principal.getName());
-        return doctorsService.getDoctorPatients(users.getId());
+        User user = userService.findByEmail(principal.getName());
+        return doctorsService.getDoctorPatients(user.getId());
     }
 }

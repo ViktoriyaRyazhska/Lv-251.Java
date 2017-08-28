@@ -15,7 +15,7 @@ public class Specialization extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "specialization")
-    private List<Doctors> doctors;
+    private List<Doctor> doctors;
 
 
     public Specialization() {
@@ -31,11 +31,11 @@ public class Specialization extends BaseEntity {
 
 
 
-    public List<Doctors> getDoctors() {
+    public List<Doctor> getDoctors() {
         return doctors;
     }
 
-    public void setDoctors(List<Doctors> doctors) {
+    public void setDoctors(List<Doctor> doctors) {
         this.doctors = doctors;
     }
 

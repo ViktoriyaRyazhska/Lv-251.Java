@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class PersonalInfoDTO {
 
-    //data from Users
+    //data from User
     @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
     private String firstname;
 
@@ -24,7 +24,7 @@ public class PersonalInfoDTO {
     private MultipartFile photo;
 
 
-    //data from Contacts
+    //data from Contact
     private String address;
     private String city;
     private String zipCode;

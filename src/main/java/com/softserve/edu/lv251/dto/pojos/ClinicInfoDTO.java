@@ -12,7 +12,7 @@ public class ClinicInfoDTO {
     private String clinic_name;
     private String description;
 
-    //data from Contacts
+    //data from Contact
     private String address;
     private String city;
     private String zipCode;

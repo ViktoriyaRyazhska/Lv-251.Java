@@ -5,16 +5,17 @@ import com.softserve.edu.lv251.dao.AppointmentsDAO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentDTO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsForDateTimePickerInDocDTO;
-import com.softserve.edu.lv251.entity.Appointments;
+import com.softserve.edu.lv251.entity.Appointment;
 import com.softserve.edu.lv251.service.AppointmentService;
+import com.softserve.edu.lv251.service.DoctorsService;
+import com.softserve.edu.lv251.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by kilopo on 31.07.2017.
@@ -26,20 +27,29 @@ public class AppointmentServiceImpl implements AppointmentService {
     private AppointmentsDAO appointmentsDAO;
 
     @Autowired
+    private DoctorsService doctorsService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
     private Mapper mapper;
 
+    @Autowired
+    Logger logger;
+
     @Override
-    public void addAppointment(Appointments appointments) {
-        appointmentsDAO.addEntity(appointments);
+    public void addAppointment(Appointment appointment) {
+        appointmentsDAO.addEntity(appointment);
     }
 
     @Override
-    public void updateAppointment(Appointments appointments) {
-        appointmentsDAO.updateEntity(appointments);
+    public void updateAppointment(Appointment appointment) {
+        appointmentsDAO.updateEntity(appointment);
     }
 
     @Override
-    public Appointments getAppointmentById(Long id) {
+    public Appointment getAppointmentById(Long id) {
         return appointmentsDAO.getEntityByID(id);
     }
 
@@ -48,7 +58,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<AppointmentsForCreationDTO> appointmentsForCreationDTOS = new ArrayList<>();
         appointmentsDAO.getAllEntities()
                 .stream()
-                .filter(p -> p.getDoctors().getId() == doctorId)
+                .filter(p -> p.getDoctor().getId() == doctorId)
                 .filter(p -> p.getIsApproved())
                 .filter(p -> p.getAppointmentDate().after(new Date()))
                 .forEach(p -> appointmentsForCreationDTOS.add(mapper.map(p, AppointmentsForCreationDTO.class)));
@@ -62,7 +72,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<AppointmentsForCreationDTO> appointmentsForCreationDTOS = new ArrayList<>();
         appointmentsDAO.getAllEntities()
                 .stream()
-                .filter(Appointments::getIsApproved)
+                .filter(Appointment::getIsApproved)
                 .filter(p -> p.getAppointmentDate().after(new Date()))
                 .forEach(p -> appointmentsForCreationDTOS.add(mapper.map(p, AppointmentsForCreationDTO.class)));
         return appointmentsForCreationDTOS;
@@ -71,7 +81,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<AppointmentsForDateTimePickerInDocDTO> getAllDoctorsAppointmentsAfterNow(String email, Date date) {
         List<AppointmentsForDateTimePickerInDocDTO> appointmentsForDateTimePickerInDocDTOS = new LinkedList<>();
-        for (Appointments a :
+        for (Appointment a :
                 appointmentsDAO.getAppointmentByDoctorsEmailAfterSomeDate(email, date)) {
             AppointmentsForDateTimePickerInDocDTO appointmentsForDateTimePickerInDocDTO = new AppointmentsForDateTimePickerInDocDTO();
             mapper.map(a, appointmentsForDateTimePickerInDocDTO);
@@ -80,19 +90,19 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentsForDateTimePickerInDocDTOS;
     }
 
-    public List<Appointments> listAppointmensWithDoctor(Long id) {
+    public List<Appointment> listAppointmensWithDoctor(Long id) {
         return appointmentsDAO.appointmentsWithDoctor(id);
     }
 
-    public List<Appointments> getAppiontmentbyDoctorsEmail(String email) {
+    public List<Appointment> getAppiontmentbyDoctorsEmail(String email) {
         return appointmentsDAO.getAppiontmentbyDoctorsEmail(email);
     }
 
     @Override
-    public List<AppointmentDTO> getAppointmentByUserEmail(String email) {
+    public List<AppointmentDTO> getAppointmentDtoByUserEmail(String email) {
         List<AppointmentDTO> results = new ArrayList<>();
 
-        for (Appointments appointment : appointmentsDAO.getAppointmentByUserEmail(email)) {
+        for (Appointment appointment : appointmentsDAO.getAppointmentByUserEmail(email)) {
             AppointmentDTO res = new AppointmentDTO();
             mapper.map(appointment, res);
             results.add(res);
@@ -100,4 +110,41 @@ public class AppointmentServiceImpl implements AppointmentService {
         return results;
     }
 
+    @Override
+    public List<Appointment> getAppointmentByUserEmail(String email) {
+        return appointmentsDAO.getAppointmentByUserEmail(email);
+    }
+
+    public boolean createAppointment (String localdate, String userEmail, long doctorId){
+        Date date;
+
+        SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        try {
+            date = isoFormat.parse(localdate);
+            if (date.before(new Date())) {
+                return false;
+            }
+
+            boolean appointments1 = listAppointmensWithDoctor(doctorId)
+                    .stream()
+                    .anyMatch(p -> p.getIsApproved() && p.getAppointmentDate().getTime() == date.getTime());
+
+            if(appointments1){
+                return false;
+            }
+
+            Appointment appointment = new Appointment();
+            appointment.setAppointmentDate(date);
+            appointment.setIsApproved(false);
+            appointment.setUser(userService.findByEmail(userEmail));
+            appointment.setDoctor(doctorsService.find(doctorId));
+            addAppointment(appointment);
+        } catch (ParseException e) {
+            logger.info(e);
+            return false;
+        }
+        return true;
+
+    }
 }

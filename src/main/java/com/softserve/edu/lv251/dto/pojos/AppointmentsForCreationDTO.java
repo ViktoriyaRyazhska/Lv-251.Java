@@ -8,7 +8,7 @@ import java.util.Date;
 public class AppointmentsForCreationDTO {
     private Date appointmentDate;
     private double duration;
-    private long doctors;
+    private long doctor;
 
     public AppointmentsForCreationDTO() {
     }
@@ -29,11 +29,11 @@ public class AppointmentsForCreationDTO {
         this.duration = duration;
     }
 
-    public long getDoctors() {
-        return doctors;
+    public long getDoctor() {
+        return doctor;
     }
 
-    public void setDoctors(long doctors) {
-        this.doctors = doctors;
+    public void setDoctor(long doctor) {
+        this.doctor = doctor;
     }
 }

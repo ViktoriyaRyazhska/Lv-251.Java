@@ -1,7 +1,6 @@
 package com.softserve.edu.lv251.service;
 
 import com.softserve.edu.lv251.entity.Specialization;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

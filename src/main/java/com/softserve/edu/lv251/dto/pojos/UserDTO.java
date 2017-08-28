@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Added by Pavlo Kuchereshko.
- * Used for transferring Users entity into more convenient DTO object for registration purposes.
+ * Used for transferring User entity into more convenient DTO object for registration purposes.
  */
 @PasswordMatches
 public class UserDTO {

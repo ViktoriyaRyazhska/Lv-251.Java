@@ -3,7 +3,7 @@ package com.softserve.edu.lv251.service;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentDTO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsForDateTimePickerInDocDTO;
-import com.softserve.edu.lv251.entity.Appointments;
+import com.softserve.edu.lv251.entity.Appointment;
 
 import java.util.Date;
 import java.util.List;
@@ -13,11 +13,11 @@ import java.util.List;
  */
 public interface AppointmentService {
 
-    void addAppointment(Appointments appointments);
+    void addAppointment(Appointment appointment);
 
-    void updateAppointment(Appointments appointments);
+    void updateAppointment(Appointment appointment);
 
-    Appointments getAppointmentById(Long id);
+    Appointment getAppointmentById(Long id);
 
     List<AppointmentsForCreationDTO> getAllDoctorAppointmentsAfterNow(long doctorId);
 
@@ -25,9 +25,13 @@ public interface AppointmentService {
 
     List<AppointmentsForDateTimePickerInDocDTO> getAllDoctorsAppointmentsAfterNow(String email, Date date);
 
-    List<Appointments> listAppointmensWithDoctor(Long id);
+    List<Appointment> listAppointmensWithDoctor(Long id);
 
-    List<Appointments> getAppiontmentbyDoctorsEmail(String email);
+    List<Appointment> getAppiontmentbyDoctorsEmail(String email);
 
-    List<AppointmentDTO> getAppointmentByUserEmail(String email);
+    List<AppointmentDTO> getAppointmentDtoByUserEmail(String email);
+
+    List<Appointment> getAppointmentByUserEmail(String email);
+
+    boolean createAppointment (String date, String userEmail, long doctorId);
 }

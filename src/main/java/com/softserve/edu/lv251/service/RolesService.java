@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.service;
 
 
-import com.softserve.edu.lv251.entity.Roles;
+import com.softserve.edu.lv251.entity.Role;
 
 import java.util.List;
 
@@ -11,13 +11,13 @@ import java.util.List;
  */
 public interface RolesService {
 
-    void addRole(Roles role);
+    void addRole(Role role);
 
-    void updateRole(Roles role);
+    void updateRole(Role role);
 
-    Roles findByName(String name);
+    Role findByName(String name);
 
-    Roles findById(Long roleId);
+    Role findById(Long roleId);
 
-    List<Roles> getAllRoles();
+    List<Role> getAllRoles();
 }

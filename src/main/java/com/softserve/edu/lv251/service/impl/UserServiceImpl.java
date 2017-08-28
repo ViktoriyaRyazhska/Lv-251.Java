@@ -1,13 +1,12 @@
 package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.config.Mapper;
-import com.softserve.edu.lv251.dao.UsersDAO;
+import com.softserve.edu.lv251.dao.UserDAO;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
-import com.softserve.edu.lv251.entity.Contacts;
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.Contact;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
-import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
 import com.softserve.edu.lv251.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UsersDAO usersDAO;
+    private UserDAO userDAO;
 
     @Autowired
     private RolesService rolesService;
@@ -54,51 +53,51 @@ public class UserServiceImpl implements UserService {
     private MailService mailService;
 
     @Override
-    public void addUser(Users user) {
-        this.usersDAO.addEntity(user);
+    public void addUser(User user) {
+        this.userDAO.addEntity(user);
     }
 
     @Override
-    public void updateUser(Users user) {
-        this.usersDAO.updateEntity(user);
+    public void updateUser(User user) {
+        this.userDAO.updateEntity(user);
     }
 
     @Override
-    public Users getUserByID(Long userId) {
-        return this.usersDAO.getEntityByID(userId);
+    public User getUserByID(Long userId) {
+        return this.userDAO.getEntityByID(userId);
     }
 
     @Override
-    public List<Users> getUsersByColumnNameAndValue(String columnName, Object value) {
-        return this.usersDAO.getEntitiesByColumnNameAndValue(columnName, value);
+    public List<User> getUsersByColumnNameAndValue(String columnName, Object value) {
+        return this.userDAO.getEntitiesByColumnNameAndValue(columnName, value);
     }
 
     @Override
-    public List<Users> getAllUsers() {
-        return this.usersDAO.getAllEntities();
+    public List<User> getAllUsers() {
+        return this.userDAO.getAllEntities();
     }
 
     @Override
-    public void deleteUser(Users user) {
-        this.usersDAO.deleteEntity(user);
+    public void deleteUser(User user) {
+        this.userDAO.deleteEntity(user);
     }
 
-    public Users getFirst() {
-        return this.usersDAO.getEntityByID(1L);
+    public User getFirst() {
+        return this.userDAO.getEntityByID(1L);
     }
 
     @Override
-    public Users findByEmail(String email) {
-        List<Users> users = getUsersByColumnNameAndValue("email", email);
+    public User findByEmail(String email) {
+        List<User> users = getUsersByColumnNameAndValue("email", email);
         return users.isEmpty() ? null : users.get(0);
     }
 
-    public List<Users> getWithOffsetOrderedByName(int offset, int limit) {
+    public List<User> getWithOffsetOrderedByName(int offset, int limit) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Users> criteriaQuery = criteriaBuilder.createQuery(Users.class);
-        Root<Users> from = criteriaQuery.from(Users.class);
-        CriteriaQuery<Users> select = criteriaQuery.select(from);
-        TypedQuery<Users> typedQuery = entityManager.createQuery(select);
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> from = criteriaQuery.from(User.class);
+        CriteriaQuery<User> select = criteriaQuery.select(from);
+        TypedQuery<User> typedQuery = entityManager.createQuery(select);
         typedQuery.setFirstResult(offset);
         typedQuery.setMaxResults(limit);
 
@@ -107,20 +106,16 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public Users registerNewUserAccount(UserDTO accountDto)
-            throws EmailExistsException {
+    public User registerNewUserAccount(UserDTO accountDto) {
 
-        if (emailExist(accountDto.getEmail())) {
-            throw new EmailExistsException("There is an account with that email address: " + accountDto.getEmail());
-        }
-        Users user = new Users();
+        User user = new User();
         mapper.map(accountDto, user);
         user.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         user.setEnabled(false);
         user.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
         user.setRoles(Arrays.asList(rolesService.findByName(WebRoles.ROLE_USER.name())));
-        Contacts contact = new Contacts();
-        contact.setUsers(user);
+        Contact contact = new Contact();
+        contact.setUser(user);
         contact.setEmail(accountDto.getEmail());
         this.contactsService.addContacts(contact);
         user.setContact(contact);
@@ -129,27 +124,23 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    private boolean emailExist(String email) {
-        return findByEmail(email) != null;
-    }
-
     @Override
-    public void sendEmail(Users user, String messageText) {
+    public void sendEmail(User user, String messageText) {
         this.mailService.sendEmail(user, messageText);
     }
 
     @Override
-    public List<Users> searchByLetters(String search) {
-        return usersDAO.searchByLetters(search);
+    public List<User> searchByLetters(String search) {
+        return userDAO.searchByLetters(search);
     }
 
     @Override
-    public Users getUserByVerificationToken(String verificationToken) {
+    public User getUserByVerificationToken(String verificationToken) {
         return this.verificationTokenService.findByVerificationToken(verificationToken).getUser();
     }
 
     @Override
-    public void createVerificationToken(Users user, String verificationToken) {
+    public void createVerificationToken(User user, String verificationToken) {
         VerificationToken myVerificationToken = new VerificationToken();
         myVerificationToken.setUser(user);
         myVerificationToken.setToken(verificationToken);
@@ -163,7 +154,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public Users changePassword(Users user, PasswordDTO passwordDTO) {
+    public User changePassword(User user, PasswordDTO passwordDTO) {
         user.setPassword(bCryptPasswordEncoder.encode(passwordDTO.getPassword()));
         updateUser(user);
 
