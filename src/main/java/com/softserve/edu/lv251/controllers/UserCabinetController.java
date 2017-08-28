@@ -57,10 +57,12 @@ public class UserCabinetController {
         PasswordDTO passwordDTO = new PasswordDTO();
 
         mapper.map(user, personalInfoDTO);
+
         mapper.map(contact, personalInfoDTO);
         model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
         model.addAttribute(Constants.Controller.PERSONAL_INFO_DTO, personalInfoDTO);
         model.addAttribute(Constants.Controller.PASSWORD_DTO, passwordDTO);
+
         return "userCabinet";
     }
 
@@ -73,7 +75,9 @@ public class UserCabinetController {
 
         if (bindingResult.hasErrors()) {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
+
             model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
+
             return "userCabinet";
         }
 
@@ -100,9 +104,11 @@ public class UserCabinetController {
         if (bindingPasswordDTO.hasErrors()){
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
             mapper.map(user, personalInfoDTO);
+
             mapper.map(contact, personalInfoDTO);
             model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
             model.addAttribute(Constants.Controller.PERSONAL_INFO_DTO, personalInfoDTO);
+
             return "userCabinet";
         }
 

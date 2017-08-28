@@ -3,8 +3,10 @@ package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsDTO;
+
 import com.softserve.edu.lv251.entity.Appointment;
 import com.softserve.edu.lv251.entity.User;
+
 import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.UserService;
@@ -42,7 +44,9 @@ public class DoctorCabinetController {
 
     @RequestMapping(value = "/doctor/сabinet",method = RequestMethod.GET)
     public String home(ModelMap model,Principal principal,HttpServletRequest httpServletRequest){
+
         model.addAttribute(Constants.Controller.DOC_APPS,appointmentService.getAllDoctorsAppointmentsAfterNow(principal.getName(), Calendar.getInstance().getTime()));
+
         model.addAttribute("locale", LocaleContextHolder.getLocale().getLanguage());
         return "doctor_schedule";
     }

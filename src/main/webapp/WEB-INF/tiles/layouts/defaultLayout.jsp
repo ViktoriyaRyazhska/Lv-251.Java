@@ -22,6 +22,9 @@
     <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/passwordStrength.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/medicalCard.css"/>" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="/resources/css/chatbox.css">
+
 
 </head>
 
@@ -260,6 +263,9 @@
 <script src="<c:url value="/resources/js/autoSpecDocs.js"/>"></script>
 <script src="<c:url value="/resources/js/profile.js"/>"></script>
 <script src="<c:url value="/resources/js/matchPassword.js"/>"></script>
-
+<script src="<c:url value="/resources/js/addDoctorValidate.js"/>"></script>
+<script src="/resources/js/sockjs-0.3.4.js"></script>
+<script src="/resources/js/stomp.js"></script>
+<script src="<c:url value="/resources/js/chat.js"/>"></script>
 </body>
 </html>

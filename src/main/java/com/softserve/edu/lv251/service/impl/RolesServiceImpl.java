@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.service.impl;
 
-import com.softserve.edu.lv251.dao.RolesDAO;
+import com.softserve.edu.lv251.dao.RoleDAO;
 import com.softserve.edu.lv251.entity.Role;
 import com.softserve.edu.lv251.service.RolesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,31 +12,31 @@ import java.util.List;
 public class RolesServiceImpl implements RolesService {
 
     @Autowired
-    private RolesDAO rolesDAO;
+    private RoleDAO roleDAO;
 
     @Override
     public void addRole(Role role) {
-        this.rolesDAO.addEntity(role);
+        this.roleDAO.addEntity(role);
     }
 
     @Override
     public void updateRole(Role role) {
-        this.rolesDAO.updateEntity(role);
+        this.roleDAO.updateEntity(role);
     }
 
     @Override
     public Role findByName(String name) {
-        List<Role> roles = this.rolesDAO.getEntitiesByColumnNameAndValue("name", name);
+        List<Role> roles = this.roleDAO.getEntitiesByColumnNameAndValue("name", name);
         return roles.isEmpty() ? null : roles.get(0);
     }
 
     @Override
     public Role findById(Long roleId) {
-        return this.rolesDAO.getEntityByID(roleId);
+        return this.roleDAO.getEntityByID(roleId);
     }
 
     @Override
     public List<Role> getAllRoles() {
-        return this.rolesDAO.getAllEntities();
+        return this.roleDAO.getAllEntities();
     }
 }

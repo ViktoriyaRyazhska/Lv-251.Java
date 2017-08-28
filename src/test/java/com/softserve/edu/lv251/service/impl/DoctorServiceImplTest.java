@@ -1,13 +1,17 @@
 package com.softserve.edu.lv251.service.impl;
 
-import com.softserve.edu.lv251.dao.DoctorsDAO;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
+
+
+
+
+import com.softserve.edu.lv251.dao.DoctorDAO;
 import com.softserve.edu.lv251.entity.Doctor;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.*;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -27,7 +31,7 @@ public class DoctorServiceImplTest {
     @Captor
     private ArgumentCaptor<Doctor> captor;
     @Mock
-    private DoctorsDAO doctorsDAO;
+    private DoctorDAO doctorDAO;
     @InjectMocks
     private DoctorServiceImpl doctorService;
 
@@ -41,11 +45,11 @@ public class DoctorServiceImplTest {
 
     @Test
     public void addDoctor() throws Exception {
-        doNothing().when(doctorsDAO).addEntity(any(Doctor.class));
+        doNothing().when(doctorDAO).addEntity(any(Doctor.class));
         Doctor doc=new Doctor();
         doc.setFirstname("Petro");
         doctorService.addDoctor(doc);
-        verify(doctorsDAO, times(1)).addEntity(captor.capture());
+        verify(doctorDAO, times(1)).addEntity(captor.capture());
         Assert.assertEquals(captor.getValue().getFirstname(), "Petro");
 
     }
@@ -54,7 +58,7 @@ public class DoctorServiceImplTest {
     public void getAll() throws Exception {
 
 
-        when(doctorsDAO.getAllEntities()).thenReturn(doctors);
+        when(doctorDAO.getAllEntities()).thenReturn(doctors);
         assertEquals(2,doctorService.getAll().size());
     }
 

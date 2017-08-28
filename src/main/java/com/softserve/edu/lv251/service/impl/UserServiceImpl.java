@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.config.Mapper;
-import com.softserve.edu.lv251.dao.UsersDAO;
+import com.softserve.edu.lv251.dao.UserDAO;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Contact;
@@ -29,7 +29,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UsersDAO usersDAO;
+    private UserDAO userDAO;
 
     @Autowired
     private RolesService rolesService;
@@ -54,36 +54,36 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
-        this.usersDAO.addEntity(user);
+        this.userDAO.addEntity(user);
     }
 
     @Override
     public void updateUser(User user) {
-        this.usersDAO.updateEntity(user);
+        this.userDAO.updateEntity(user);
     }
 
     @Override
     public User getUserByID(Long userId) {
-        return this.usersDAO.getEntityByID(userId);
+        return this.userDAO.getEntityByID(userId);
     }
 
     @Override
     public List<User> getUsersByColumnNameAndValue(String columnName, Object value) {
-        return this.usersDAO.getEntitiesByColumnNameAndValue(columnName, value);
+        return this.userDAO.getEntitiesByColumnNameAndValue(columnName, value);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return this.usersDAO.getAllEntities();
+        return this.userDAO.getAllEntities();
     }
 
     @Override
     public void deleteUser(User user) {
-        this.usersDAO.deleteEntity(user);
+        this.userDAO.deleteEntity(user);
     }
 
     public User getFirst() {
-        return this.usersDAO.getEntityByID(1L);
+        return this.userDAO.getEntityByID(1L);
     }
 
     @Override
@@ -131,7 +131,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> searchByLetters(String search) {
-        return usersDAO.searchByLetters(search);
+        return userDAO.searchByLetters(search);
     }
 
     @Override

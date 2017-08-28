@@ -19,12 +19,13 @@ public class Moderator extends User {
     public Moderator() {
     }
 
-    public Clinic getClinics() {
+    public Clinic getClinic() {
         return clinic;
     }
 
-    public void setClinics(Clinic clinic) {
+    public void setClinic(Clinic clinic) {
         this.clinic = clinic;
+
     }
 
     public Admin getAdmin() {

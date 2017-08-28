@@ -127,7 +127,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public CookieLocaleResolver localeCookieResolver() {
         CookieLocaleResolver localeResolver = new CookieLocaleResolver();
-        localeResolver.setDefaultLocale(new Locale("uk"));
+        localeResolver.setDefaultLocale(Locale.ENGLISH);
         localeResolver.setCookieName("my-locale-cookie");
         localeResolver.setCookieMaxAge(3600);
         return localeResolver;
@@ -143,7 +143,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
-        localeResolver.setDefaultLocale(Locale.ENGLISH); // change this
+        localeResolver.setDefaultLocale(Locale.ENGLISH);
         return localeResolver;
     }
 
@@ -157,6 +157,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
         resolver.setDefaultEncoding("utf-8");
+
         return resolver;
     }
 

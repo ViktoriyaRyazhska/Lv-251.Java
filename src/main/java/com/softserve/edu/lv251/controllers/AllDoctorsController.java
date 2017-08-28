@@ -1,7 +1,6 @@
 package com.softserve.edu.lv251.controllers;
 
 import com.softserve.edu.lv251.constants.Constants;
-import com.softserve.edu.lv251.dto.pojos.DoctorImageDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorsSearchDTO;
 import com.softserve.edu.lv251.entity.Doctor;
 import com.softserve.edu.lv251.service.AppointmentService;
@@ -19,7 +18,7 @@ import java.security.Principal;
 import java.util.List;
 
 /**
- * Created by Yana on 23.07.2017.
+ * Created by Yana Martynyak on 23.07.2017.
  * Updated: Brynetskyi Marian
  */
 @org.springframework.stereotype.Controller
@@ -27,10 +26,11 @@ public class AllDoctorsController {
 
     @Autowired
     private DoctorsService doctorsService;
-
     @Autowired
     @Qualifier("doctorService")
+
     private PagingSizeService<Doctor> pagingSizeService;
+
 
     @Autowired
     private UserService userService;
@@ -42,10 +42,12 @@ public class AllDoctorsController {
 
     @RequestMapping(value = "/allDoctors/{current}", method = RequestMethod.GET)
     public String allDoctors(@PathVariable("current") Integer chainIndex, Model model) {
+
         model.addAttribute("getDoctors", pagingSizeService.getEntity(chainIndex, 10));
         model.addAttribute(Constants.Controller.NUMBER_CHAIN, pagingSizeService.numberOfPaging(10));
         model.addAttribute(Constants.Controller.DOC_APPS, appointmentService.getAllDoctorsAppointmentsAfterNow());
         return "allDoctors";
+
     }
 
     /**
@@ -60,12 +62,14 @@ public class AllDoctorsController {
      */
     @RequestMapping(value = "/user/addAppointment", method = RequestMethod.POST)
     public ModelAndView addAppointment(Model modelMap, @RequestParam("datetime") String localdate,
+
                                        @RequestParam(Constants.Controller.DOCTOR_ID) long doctorId,
                                        @RequestParam(Constants.Controller.CURRENT) Integer chainIndex, Principal principal) {
 
         ModelAndView modelAndView = new ModelAndView();
         if (!appointmentService.createAppointment(localdate, principal.getName(), doctorId)) {
             modelAndView.addObject(Constants.Controller.DATE_FLAG, true);
+
             modelAndView.addObject("doc", doctorId);
 
             modelAndView.setViewName("redirect:/" + allDoctors(chainIndex, modelMap) + "/" + chainIndex);
@@ -76,25 +80,10 @@ public class AllDoctorsController {
         return modelAndView;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/all/doc")
-    public List<DoctorsSearchDTO> searchDoctors(@RequestParam String name) {
-        System.out.println(name);
-        return doctorsService.searchByLetters(name);
 
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/searchResult/{id}")
-    public DoctorsSearchDTO doctorById(@PathVariable Long id) {
-        System.out.println(id);
-        System.out.println(doctorsService.findById(id));
-        return doctorsService.findById(id);
-    }
-
-    @RequestMapping(value = "/doctor/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/doctors/{id}", method = RequestMethod.GET)
     public String Doctor(@PathVariable Long id, Model model) {
-        model.addAttribute("doctor", DoctorImageDTO.convert(doctorsService.find(id)));
+        model.addAttribute("doctor", doctorsService.find(id));
         return "doctor_details";
     }
 

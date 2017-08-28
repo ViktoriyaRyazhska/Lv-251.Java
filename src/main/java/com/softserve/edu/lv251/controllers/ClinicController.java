@@ -32,7 +32,9 @@ public class ClinicController {
     public ModelAndView tenClinics(@PathVariable("current") Integer chainIndex) {
         ModelAndView model = new ModelAndView("clinics");
         model.addObject("getClinics", pagingSizeService.getEntity(chainIndex, 10));
+
         model.addObject(Constants.Controller.NUMBER_CHAIN, pagingSizeService.numberOfPaging(10));
+
         return model;
     }
 

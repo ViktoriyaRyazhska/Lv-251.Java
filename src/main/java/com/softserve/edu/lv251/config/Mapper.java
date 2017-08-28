@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.config;
 
-import com.softserve.edu.lv251.dao.ContactsDAO;
+import com.softserve.edu.lv251.dao.ContactDAO;
 import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.*;
 import com.softserve.edu.lv251.service.ClinicService;
@@ -31,7 +31,7 @@ public class Mapper extends ConfigurableMapper {
     RolesService rolesService;
 
     @Autowired
-    ContactsDAO contactsDAO;
+    ContactDAO contactDAO;
 
     @Autowired
     private SpecializationService specializationService;

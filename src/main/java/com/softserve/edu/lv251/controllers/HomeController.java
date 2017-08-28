@@ -41,50 +41,6 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value = "/all/clinics")
-    @ResponseBody
-    public List<ClinicSearchDTO> autocompleteClinics(@RequestParam("name") String name) {
-        System.out.println(name);
-        System.out.println(clinicService.searchByLetters(name));
-        return clinicService.searchByLetters(name);
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/search/clinics/{id}")
-    public ClinicSearchDTO searchClinics(@PathVariable("id") Long id) {
-        return clinicService.clinicSearchById(id);
-    }
-
-
-    @ResponseBody
-    @RequestMapping(value = "/districts/byName")
-    public List<DistrictsDTO> autocompletedistricts(@RequestParam("name") String name) {
-        return districtsService.findByName(name);
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/search/clinics/by/district/{name}")
-    public List<ClinicSearchDTO> clinicsByDistrict(@PathVariable("name") String name) {
-        return clinicService.findByDistrict(name);
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/search/doctors/by/district/{name}")
-    public List<Doctor> doctorsByDistrict(@PathVariable("name") String name) {
-        return doctorsService.searchByDistrict(name);
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/doc/by/spec")
-    public List<Specialization> autocompleteSpec(@RequestParam("name") String name) {
-        return specializationService.searchByLetters(name);
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/search/doctors/by/spec/{name}")
-    public List<Doctor> doctorsBySpec(@PathVariable("name") String name) {
-        return doctorsService.searchBySpecialization(name);
-    }
 
 
 }

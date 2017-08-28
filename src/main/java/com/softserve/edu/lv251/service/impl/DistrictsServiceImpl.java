@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.config.Mapper;
-import com.softserve.edu.lv251.dao.DistrictsDAO;
+import com.softserve.edu.lv251.dao.DistrictDAO;
 import com.softserve.edu.lv251.dto.pojos.DistrictsDTO;
 import com.softserve.edu.lv251.entity.District;
 import com.softserve.edu.lv251.service.DistrictsService;
@@ -17,13 +17,13 @@ import java.util.List;
 @Service
 public class DistrictsServiceImpl implements DistrictsService {
     @Autowired
-    private DistrictsDAO districtsDAO;
+    private DistrictDAO districtDAO;
     @Autowired
     private Mapper mapper;
 
     @Override
     public List<DistrictsDTO> findByName(String name) {
-        List<District> districts = districtsDAO.findByName(name);
+        List<District> districts = districtDAO.findByName(name);
         List<DistrictsDTO> results = new ArrayList<>();
 
         for (District district : districts) {

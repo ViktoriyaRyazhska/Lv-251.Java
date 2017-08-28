@@ -25,6 +25,36 @@
             </div>
         </div>
 
+        <div class="chatbox chatbox--tray chatbox--empty g ">
+            <div class="chatbox__title">
+                <h5><a href="#">Customer Service</a></h5>
+                <button class="chatbox__title__tray" >
+                    <span></span>
+                </button>
+            </div>
+            <div class="chatbox__body">
+                <div class="chatbox__body__message chatbox__body__message--right">
+                    <div class="messageChat" style="background-color: #b2dba1 ;border-radius: 3px">
+
+                    </div>
+
+                    <c:forEach items="${messages}" var="message">
+                        <p><span >${message.date}      ${message.from.firstname} ${message.from.lastname}</span><br> ${message.text} </p>
+
+                    </c:forEach>
+
+                    <p id="response"></p>
+
+                </div>
+            </div>
+            <div id="conversationDiv">
+                <textarea class="chatbox__message" id="text" placeholder="Write something interesting"></textarea>
+            </div>
+            <button class=" btn btn-clinic " onclick="sendMessage()" >Send</button>
+
+        </div>
+
+
         <div class="container" style="width: 70%; float: right">
             <div class="row row-content">
                 <hr>

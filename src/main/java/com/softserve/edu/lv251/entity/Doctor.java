@@ -31,7 +31,18 @@ public class Doctor extends User {
     @ManyToOne
     private Specialization specialization;
 
+    @OneToMany(mappedBy = "doctor", cascade = {CascadeType.ALL})
+    private List<Respond> responds;
+
     public Doctor() {
+    }
+
+    public List<Respond> getResponds() {
+        return responds;
+    }
+
+    public void setResponds(List<Respond> responds) {
+        this.responds = responds;
     }
 
     public List<Appointment> getDocAppointments() {

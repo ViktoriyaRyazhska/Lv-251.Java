@@ -19,7 +19,7 @@
 
                     <div class="navbar-form " style="width: 95%">
                         <div class="form-group" style="width: 90%">
-                            <select class="selectpicker form-control" style="width:10% " id="selectDocOrClinic">
+                            <select class="selectpicker form-control" style="width:18% " id="selectDocOrClinic">
                                 <option value="3"><spring:message code="messages.chooseSearch"/></option>
                                 <option value="1"><spring:message code="messages.doctorsSearch"/></option>
                                 <option value="2"><spring:message code="messages.doctorsSearchBySpec"/></option>
@@ -45,7 +45,7 @@
         </div>
     </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 
     <script>
 
@@ -77,7 +77,7 @@
         <c:when test="${getDoctors.size()>0}">
             <div class="container">
                 <c:forEach items="${getDoctors}" var="doctor">
-                    <a href="doctor/${doctor.id}">
+                    <a href="doctors/${doctor.id}">
                         <div class="row row-content">
                             <div class="container-fluid">
                                 <div class="row">
@@ -87,7 +87,9 @@
                                                  alt="...">
                                         </a>
                                     </div>
-                                    <a href="/doctor/${flag}/${doctor.id}" class="btn-link">
+
+                                    <a href="/doctors/${doctor.id}" class="btn-link">
+
                                         <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span>
                                     </a>
 

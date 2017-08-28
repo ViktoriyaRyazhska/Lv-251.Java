@@ -8,6 +8,7 @@ $(document).ready(function() {
             $(".fa-user-md").removeClass("fa-user-md");
             $(".change").addClass("fa-ambulance");
             $("#autocomplete").attr('placeholder',$("#clinic").html());
+
             clinicsByDistrict();
             console.log("You select 0");
             clinicsAll();
@@ -46,7 +47,7 @@ clinicsByDistrict();
 
 function clinicsAll() {
     $("#autocomplete").autocomplete({
-        serviceUrl: '/all/clinics',
+        serviceUrl: '/rest/autocomplete/clinics/byName',
         paramName: "name",
         delimiter: ",",
            transformResult: function (response) {
@@ -56,7 +57,7 @@ function clinicsAll() {
                     var i = item.clinic_name;
                     console.log(i);
                     var html="<a href='"+"/clinics/"+item.id+"'>"+i+"</a>";
-                    return {value: i, data: item.id,url:'/clinics/'+item.id};
+                    return {value: i, data: item.id};
 
                 })
 
@@ -70,18 +71,20 @@ function clinicsAll() {
             var id = suggestion.data;
 
             $.ajax({
-                url: '/search/clinics/'+id,
+                url: '/rest/search/clinic/'+id,
                 method: 'GET',
                 contentType: 'application/json',
 
                 success: function (result) {
+                    var v=$("#spec").html();
+                    console.log(v);
                     console.log(result.clinic_name);
                    $("#myCarousel").empty();
                     $(".content").empty();
                     $(".content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                         "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                         "<img width=200' height='200' src='data:image/jpeg;base64,"+result.photo+"' alt='...'></a></div>"+
-                        "<a href='"+"clinics/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.clinic_name+"</span></a><p>"+result.description+"</p>"+
+                        "<a href='"+"clinics/details/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.clinic_name+"</span></a><p>"+result.description+"</p>"+
                         " </div> </div>");
 
                 }
@@ -98,7 +101,7 @@ function clinicsAll() {
 
 function clinicsByDistrict() {
     $("#autocomplete-districts").autocomplete({
-        serviceUrl: '/districts/byName',
+        serviceUrl: '/rest/autocomplete/districts/ByName',
         paramName: "name",
         delimiter: ",",
         transformResult: function (response) {
@@ -117,7 +120,7 @@ function clinicsByDistrict() {
             console.log('You selected: ' + suggestion.value + ', ' + suggestion.data );
             var name = suggestion.data;
             $.ajax({
-                url: '/search/clinics/by/district/'+name,
+                url: '/rest/search/clinics/byDistrict/'+name,
                 method: 'GET',
                 contentType: 'application/json',
 
@@ -133,7 +136,7 @@ function clinicsByDistrict() {
                         $(".content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='data:image/jpeg;base64,"+res[i].photo+"' alt='...'></a></div>"+
-                            "<a href='"+"clinics/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].clinic_name+"</span></a>"+
+                            "<a href='"+"clinics/details/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].clinic_name+"</span></a><p>"+res[i].description+"</p>"+
                             " </div> </div>");
                     }
 
@@ -150,10 +153,8 @@ function clinicsByDistrict() {
 
 function doctorsByDistrict() {
     $("#autocomplete-districts").autocomplete({
-        serviceUrl: '/districts/byName',
+        serviceUrl: '/rest/autocomplete/districts/ByName',
         paramName: "name",
-        noSuggestionNotice:'No results',
-        showNoSuggestionNotice:true,
         delimiter: ",",
         transformResult: function (response) {
             console.log("before doc by districts");
@@ -171,10 +172,11 @@ function doctorsByDistrict() {
             console.log('You selected: ' + suggestion.value + ', ' + suggestion.data );
             var name = suggestion.data;
             $.ajax({
-                url: '/search/doctors/by/district/'+name,
+                url: '/rest/search/doctors/byDistrict/'+name,
                 method: 'GET',
                 contentType: 'application/json',
                 success: function (res) {
+                    var specialization=$("#spec").html();
                     console.log(res.length);
                     $("#myCarousel").empty();
                     $("#content").empty();
@@ -183,8 +185,8 @@ function doctorsByDistrict() {
                         $("#content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='data:image/jpeg;base64,"+res[i].photo+"' alt='...'></a></div>"+
-                            "<a href='"+"clinic/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
-                            "<p><spring:message code='messages.specialization'/>:"+res[i].specialization.name+"</p> </div> </div>")
+                            "<a href='"+"clinics/details/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
+                            "<p>"+specialization+":"+res[i].specialisation+"</p><hr> <p>"+res[i].clinicName+"</p></div> </div>");
                     }
 
 
@@ -199,9 +201,9 @@ function doctorsByDistrict() {
 
 }
 function  doctorsBySpecialization() {
-    console.log("doc by cpec");
+    console.log("doc by spec");
     $("#autocomplete").autocomplete({
-        serviceUrl: '/doc/by/spec',
+        serviceUrl: '/rest/autocomplete/specializations/byName',
         noSuggestionNotice:'No results',
         showNoSuggestionNotice:true,
         paramName: "name",
@@ -222,10 +224,11 @@ function  doctorsBySpecialization() {
             console.log('You selected: ' + suggestion.value + ', ' + suggestion.data );
             var name = suggestion.data;
             $.ajax({
-                url: '/search/doctors/by/spec/'+name,
+                url: '/rest/search/doctors/bySpec/'+name,
                 method: 'GET',
                 contentType: 'application/json',
                 success: function (res) {
+                    var specialization=$("#spec").html();
                     console.log(res.length);
                     $("#myCarousel").empty();
                     $("#content").empty();
@@ -234,8 +237,8 @@ function  doctorsBySpecialization() {
                         $("#content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='data:image/jpeg;base64,"+res[i].photo+"' alt='...'></a></div>"+
-                            "<a href='"+"doctors/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
-                            "<p><spring:message code='messages.specialization'/>:"+res[i].specialization.name+"</p> </div> </div>")
+                            "<a href='"+"/doctors/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+" "+res[i].lastname+"</span></a>"+
+                            "<p>"+specialization+":"+res[i].specialisation+"</p><hr> <p>"+res[i].clinicName+"</p></div> </div>");
                     }
 
 
@@ -244,6 +247,56 @@ function  doctorsBySpecialization() {
             })
 
         }
+
+
+    });
+}
+function allDocs() {
+    $("#autocomplete").autocomplete({
+        serviceUrl: '/rest/autocomplete/doctors/byName',
+        paramName: "name",
+        delimiter: ",",
+        transformResult: function (response) {
+            console.log("before"+response.toString());
+            return {
+                suggestions: $.map($.parseJSON(response), function (item) {
+                    var i=item.firstname+" "+item.lastname +" "+item.specialisation;
+                    console.log(i);
+                    return {value:i, data:item.id};
+
+                })
+            };
+        },
+        onSelect: function (suggestion) {
+            console.log('You selected: ' + suggestion.value + ', ' + suggestion.data);
+            var id=suggestion.data;
+            $.ajax({
+                url:'/rest/search/doctor/'+id,
+                method:'GET',
+                contentType:'application/json',
+
+                success:function (result) {
+                    var specialization=$("#spec").html();
+                    console.log(result.firstname+""+result.clinicName);
+                    var photo="data:image/jpeg;base64,"+result.photo;
+                    $("#myCarousel").empty();
+                    $("#content").empty();
+                    $("#content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
+                        "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
+                        "<img width=200' height='200' src='"+photo+"'alt='...'></a></div>"+
+                        "<a href='"+"/doctors/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.firstname+" "+result.lastname+"</span></a>"+
+                        "<p>"+specialization+":"+result.specialisation+"<h</p><hr> <p>"+result.clinicName+"</p></div> </div>");
+
+
+
+
+                }
+
+            })
+
+        }
+
+
 
 
     });

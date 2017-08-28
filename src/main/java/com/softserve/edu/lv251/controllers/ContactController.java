@@ -47,11 +47,13 @@ public class ContactController {
         }
 
         if (mailComponent.sendMail(contactDTO)) {
+
             model.addFlashAttribute(Constants.Controller.CLASS_CSS, "alert alert-success");
             model.addFlashAttribute(Constants.Controller.MESSAGE, messageSuccess);
         } else {
             model.addFlashAttribute(Constants.Controller.CLASS_CSS, "alert alert-warning");
             model.addFlashAttribute(Constants.Controller.MESSAGE, messageError);
+
         }
         return "redirect:/contact";
     }

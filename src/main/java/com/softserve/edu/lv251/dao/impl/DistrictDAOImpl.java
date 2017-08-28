@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.dao.impl;
 
-import com.softserve.edu.lv251.dao.DistrictsDAO;
+import com.softserve.edu.lv251.dao.DistrictDAO;
 import com.softserve.edu.lv251.entity.District;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Repository
 @PersistenceContext
-public class DistrictDAOImpl extends BaseDAOImpl<District> implements DistrictsDAO {
+public class DistrictDAOImpl extends BaseDAOImpl<District> implements DistrictDAO {
 
     @Override
     public List<District> findByName(String name) {
