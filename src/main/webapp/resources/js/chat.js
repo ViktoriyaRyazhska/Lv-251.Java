@@ -8,7 +8,7 @@
             $chatboxTitleClose = $('.chatbox__title__close'),
             $chatboxCredentials = $('.chatbox__credentials');
         $chatboxTitle.on('click', function(e) {
-            console.log("in")
+            console.log("in chat")
             connect();
             $chatbox.toggleClass('chatbox--tray');
 
@@ -60,11 +60,10 @@ function disconnect() {
 }
 
 function sendMessage() {
-    console.log("hereerererer")
+
     var text = document.getElementById('text').value;
     stompClient.send("/app/chat", {},
         JSON.stringify({  'text':text}));
-    console.log("before")
     $("textarea").val("")
 }
 

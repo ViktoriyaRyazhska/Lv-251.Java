@@ -38,13 +38,6 @@ $(document).ready(function() {
 clinicsByDistrict();
 
 
-
-
-
-
-
-
-
 function clinicsAll() {
     $("#autocomplete").autocomplete({
         serviceUrl: '/rest/autocomplete/clinics/byName',

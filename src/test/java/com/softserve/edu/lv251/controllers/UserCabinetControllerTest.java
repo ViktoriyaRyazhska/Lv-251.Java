@@ -15,13 +15,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Created by Marian Brynetskyi on 14.08.2017.
@@ -35,13 +31,13 @@ public class UserCabinetControllerTest {
     @Mock
     private AppointmentService appointmentService;
     @InjectMocks
-    private UserCabinetController userCabinetController;
+    private UserCabinetController userEditController;
 
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders
-                .standaloneSetup(userCabinetController)
+                .standaloneSetup(userEditController)
                 .build();
     }
 

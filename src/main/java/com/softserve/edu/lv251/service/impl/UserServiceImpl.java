@@ -5,6 +5,7 @@ import com.softserve.edu.lv251.dao.UserDAO;
 import com.softserve.edu.lv251.dto.pojos.DoctorCabinetUser;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
+import com.softserve.edu.lv251.dto.pojos.UserUpdate;
 import com.softserve.edu.lv251.entity.Contact;
 import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
@@ -91,6 +92,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         List<User> users = getUsersByColumnNameAndValue("email", email);
+        System.out.println(users);
         return users.isEmpty() ? null : users.get(0);
     }
 
@@ -163,5 +165,18 @@ public class UserServiceImpl implements UserService {
         updateUser(user);
 
         return user;
+    }
+        @Override
+    public UserUpdate getByEmail(String email){
+       User user= findByEmail(email);
+      UserUpdate userUpdate= new UserUpdate();
+      userUpdate.setId(user.getId());
+      userUpdate.setName(user.getFirstname());
+      userUpdate.setLastName(user.getLastname());
+      userUpdate.setEmail(user.getEmail());
+      userUpdate.setCity(user.getContact().getCity());
+      userUpdate.setAddress(user.getContact().getAddress());
+      userUpdate.setDistrict(user.getContact().getDistrict().getName());
+        return  userUpdate;
     }
 }

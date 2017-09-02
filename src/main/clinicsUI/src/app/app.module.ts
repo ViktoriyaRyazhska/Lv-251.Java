@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -14,11 +12,27 @@ import { DoctorCabinetComponent } from './doctor-cabinet/doctor-cabinet.componen
 import { ModeratorCabinetComponent } from './moderator-cabinet/moderator-cabinet.component';
 import {UserCabinetProfileComponent} from './user-cabinet/user-cabinet-profile/user-cabinet-profile.component';
 import {AppRoutingModule} from './app-routing-module';
-import { RegistrationComponent } from './auth/registration/registration.component';
-import { ClinicsEditComponent } from './clinics/clinics-edit/clinics-edit.component';
-import { ClinicsListComponent } from './clinics/clinics-list/clinics-list.component';
+
+import {UserCabinetMedicalComponent} from './user-cabinet/user-cabinet-medical/user-cabinet-medical.component';
+import {FormsModule, NgModel, ReactiveFormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {UserService} from "./user.service";
+import { UserCabinetDoctorsComponent } from './user-cabinet/user-cabinet-doctors/user-cabinet-doctors.component';
+import { AppointmentsHistoryComponent } from './user-cabinet/user-cabinet-medical/appointments-history/appointments-history.component';
+import { LoginComponent } from './auth/login/login.component';
+import {AuthenticationService} from "./auth/authentication.service";
+import {AlertService} from "./auth/alert.service";
+
+
+// import { RegistrationComponent } from './auth/registration/registration.component';
+// import { ClinicsEditComponent } from './clinics/clinics-edit/clinics-edit.component';
+// import { ClinicsListComponent } from './clinics/clinics-list/clinics-list.component';
 import {ContactService} from "./contacts/contact.service";
-import {HttpModule} from "@angular/http";
+import {ClinicsEditComponent} from "./clinics/clinics-edit/clinics-edit.component";
+import {ClinicsListComponent} from "./clinics/clinics-list/clinics-list.component";
+import { RegistrationComponent } from './auth/registration/registration.component';
+
+
 
 @NgModule({
   declarations: [
@@ -33,19 +47,28 @@ import {HttpModule} from "@angular/http";
     DoctorCabinetComponent,
     ModeratorCabinetComponent,
     UserCabinetProfileComponent,
-    RegistrationComponent,
+    UserCabinetMedicalComponent,
+    UserCabinetDoctorsComponent,
+    AppointmentsHistoryComponent,
     ClinicsEditComponent,
-    ClinicsListComponent
+    ClinicsListComponent,
+    LoginComponent,
+    RegistrationComponent
+
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
-    FormsModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpModule,
-    ReactiveFormsModule
+
   ],
-  providers: [ContactService],
+
+  providers: [UserService,AuthenticationService,AlertService,ContactService],
+
+
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -77,6 +77,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     @Override
     public List<DoctorsSearchDTO> searchByLetters(String letters) {
         List<Doctor> doctors = doctorDAO.searchByLetters(letters);
+        System.out.println(doctors);
         List<DoctorsSearchDTO> results = new ArrayList<>();
 
         for (Doctor doctor : doctors) {
@@ -296,6 +297,19 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     }
 
     @Override
+//<<<<<<< HEAD
+//    public List<DoctorInfoDTO> getDoctorsByUser(long id) {
+//        System.out.println("before");
+//        List<Doctor> doctors = doctorDAO.getDoctorsByUser(id);
+//        System.out.println(doctors);
+//        List<DoctorInfoDTO> results = new ArrayList<>();
+//        for (Doctor doctor : doctors) {
+//            DoctorInfoDTO result = new DoctorInfoDTO();
+//            mapper.map(doctor, result);
+//            results.add(result);
+//        }
+//        return results;
+//=======
     public List<DoctorRespondDTO> getDoctorsByUser(long userId) {
         List<DoctorRespondDTO> doctorRespondDTOS = new LinkedList<>();
         Date date = new Date();
@@ -319,5 +333,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     @Override
     public Doctor getById(long doctorId) {
         return doctorDAO.getEntityByID(doctorId);
+
     }
 }

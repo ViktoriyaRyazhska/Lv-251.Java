@@ -1,4 +1,4 @@
-export class Clinic{
+export  class Clinic{
   private _id: number;
   private _name: string;
   private _firstPhone: string;
@@ -74,3 +74,4 @@ export class Clinic{
     this._district_name = value;
   }
 }
+

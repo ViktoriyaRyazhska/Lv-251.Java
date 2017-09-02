@@ -72,19 +72,16 @@ if($("#file").val()!=''){
     }
  }
 function  validPhoto(form) {
-    console.log("hello")
     var maxSize=100000;
     var size=0;
     if($("#photo").val()!=''){
        var size = document.getElementById('photo').files[0].size;}
 
     var photoName=$("#photo").val()
-    console.log(photoName)
     var ext = $('#photo').val().split('.').pop().toLowerCase();
 
 
     if(size>maxSize ||$.inArray(ext, ['gif','png','jpg','jpeg','']) == -1 ){
-        console.log("if block");
         $("#errorPhoto").show();
         return false;
     }

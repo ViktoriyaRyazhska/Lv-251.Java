@@ -20,4 +20,8 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
         return entityManager.createQuery("from User d where lower(d.firstname) like" +
                 " :letters or lower(d.lastname) like :letters").setParameter("letters", search).getResultList();
     }
+
+
+
+
 }

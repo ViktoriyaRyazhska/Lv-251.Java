@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import {Clinic} from "../models/Clinic";
 import {ClinicsService} from "./clinics.service";
+
 
 @Component({
   selector: 'app-clinics',
@@ -9,7 +11,7 @@ import {ClinicsService} from "./clinics.service";
   providers: [ClinicsService]
 })
 export class ClinicsComponent implements OnInit {
-  clinics: Clinic[];
+ clinics: Clinic[];
   constructor(private clinicsService: ClinicsService) { }
 
   ngOnInit() {
@@ -17,6 +19,13 @@ export class ClinicsComponent implements OnInit {
       this.clinics = responce.json();
     });
 
+
+
+
   }
+
+
+
+
 
 }

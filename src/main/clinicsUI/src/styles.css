@@ -1,4 +1,5 @@
-
+body{background-color: #d9d9d9
+}
 .navbar-inverse {
   color: #fff;
   background: #35bfae;
@@ -12,6 +13,10 @@
   padding: 10px 15px;
 }
 .active a{
+  background-color: #35bfae !important;
+  border-color:  #35bfae !important;
+}
+.active{
   background-color: #35bfae !important;
   border-color:  #35bfae !important;
 }

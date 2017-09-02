@@ -54,7 +54,8 @@
             <div id="conversationDiv">
                 <textarea class="chatbox__message" id="text" placeholder="Write something interesting"></textarea>
             </div>
-            <button class=" btn btn-clinic " onclick="sendMessage()" >Send</button>
+            <button   class=" btn btn-clinic " onclick="sendMessage()" >Send</button>
+
 
         </div>
         <div class="container" style="width: 70%; float: right">

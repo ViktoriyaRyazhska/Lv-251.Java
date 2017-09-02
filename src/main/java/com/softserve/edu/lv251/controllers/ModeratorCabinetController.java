@@ -5,6 +5,7 @@ import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.ClinicInfoDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
+import com.softserve.edu.lv251.dto.pojos.PhotoDTO;
 import com.softserve.edu.lv251.dto.pojos.UserToDoctor;
 import com.softserve.edu.lv251.entity.*;
 import com.softserve.edu.lv251.model.FileBucket;
@@ -153,7 +154,7 @@ public class ModeratorCabinetController {
 
 
     @PostMapping(value = "/upload/clinicPhoto")
-    public String uploadPhoto(@ModelAttribute("photoForm") @Valid FileBucket fileBucket, BindingResult bindingResult,
+    public String uploadPhoto(@ModelAttribute("photoForm") @Valid PhotoDTO photoDTO, BindingResult bindingResult,
                               Principal principal, RedirectAttributes model) {
         if (bindingResult.hasErrors()) {
             Locale currentLocale = LocaleContextHolder.getLocale();
@@ -164,7 +165,7 @@ public class ModeratorCabinetController {
 
             return "redirect:/moderator/cabinet";
         } else {
-            clinicService.updatePhoto(fileBucket.getMultipartFile(), moderatorService.getByEmail(principal.getName()).getClinic());
+            clinicService.updatePhoto(photoDTO.getMultipartFile(), moderatorService.getByEmail(principal.getName()).getClinic());
             return "redirect:/moderator/cabinet";
         }
     }

@@ -18,6 +18,7 @@ public class ClinicsRestAgularController {
 
     @RequestMapping(value = "api/getAllClinics", method = RequestMethod.GET)
     List<ClinicsAngularDTO> getAllClinics() {
+        System.out.println(clinicService.getAllClinicsDto());
         return clinicService.getAllClinicsDto();
     }
 }
