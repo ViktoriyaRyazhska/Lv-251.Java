@@ -59,7 +59,20 @@ public class Mapper extends ConfigurableMapper {
     }
 
     private void userConfigure(MapperFactory factory){
-
+        factory.classMap(UserUpdate.class, User.class)
+                .field("name","firstname")
+                 .field("lastName", "lastname")
+                .field("email", "email")
+                .register();
+        factory.classMap(UserUpdate.class, Contact.class)
+                .field("address", "address")
+                .field("city", "city")
+                .field("zipCode", "zipCode")
+                .field("firstPhone", "firstPhone")
+                .field("secondPhone", "secondPhone")
+                .field("thirdPhone", "thirdPhone")
+                .field("email", "email")
+                .register();
         factory.classMap(UserDTO.class, User.class)
                 .field("firstName", "firstname")
                 .field("lastName", "lastname")
@@ -311,8 +324,10 @@ public class Mapper extends ConfigurableMapper {
                 .customize(new CustomMapper<Doctor, DoctorsSearchDTO>() {
                     @Override
                     public void mapAtoB(Doctor doctor, DoctorsSearchDTO doctorsSearchDTO, MappingContext context) {
-                        doctorsSearchDTO.setClinicName(doctor.getClinic().getClinic_name());
-                        doctorsSearchDTO.setSpecialisation(doctor.getSpecialization().getName());
+                        if(doctor.getClinic()!= null){
+                        doctorsSearchDTO.setClinicName(doctor.getClinic().getClinic_name());}
+                        if(doctor.getSpecialization()!=null){
+                        doctorsSearchDTO.setSpecialisation(doctor.getSpecialization().getName());}
                     }
                 }).register();
 
@@ -334,6 +349,25 @@ public class Mapper extends ConfigurableMapper {
 
     private void respondConfigure(MapperFactory factory){
 
+
+        factory.classMap(Appointment.class,AppointmentsInfoDTO.class)
+                .field("isApproved","status")
+                .field("id","id")
+                .field("appointmentDate","date")
+                .field("description","description")
+                .customize(new CustomMapper<Appointment, AppointmentsInfoDTO>() {
+                    @Override
+                    public void mapAtoB(Appointment appointment, AppointmentsInfoDTO appointmentsInfoDTO, MappingContext context) {
+                        super.mapAtoB(appointment, appointmentsInfoDTO, context);
+                        appointmentsInfoDTO.setDoctorName(appointment.getDoctor().getFirstname());
+                        appointmentsInfoDTO.setDoctorLastName(appointment.getDoctor().getLastname());
+                        appointmentsInfoDTO.setDoctorPhoto(appointment.getDoctor().getPhoto());
+                        appointmentsInfoDTO.setSpecialization(appointment.getDoctor().getSpecialization().getName());
+
+                    }
+                })
+                .register();
+
         factory.classMap(Respond.class, RespondDTO.class)
                 .field("raiting", "raiting")
                 .field("description", "description")
@@ -347,5 +381,6 @@ public class Mapper extends ConfigurableMapper {
                         respondDTO.setDate(sdf.format(respond.getDate()));
                     }
                 }).register();
+
     }
 }

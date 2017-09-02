@@ -1,22 +1,35 @@
-
-    <form >
+<form [formGroup]="editUserForm" >
       <div class="row">
-        <div class="col-sm-3">
-          <img class="img-responsive" src="http://www.pngall.com/wp-content/uploads/2016/03/Food-PNG.png" alt="Photo" style="max-height:100px ">
-        </div>
+
         <div class="col-sm-9 form-group">
+
           <label for="name">First Name</label>
-          <input type="text" id="name" class="form-control"#nameInput>
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" class="form-control"#nameInput>
+          <input formControlName="name" type="text" name="name"  id="name" class="form-control">
+          <span *ngIf="!editUserForm.get('name').valid && editUserForm.get('name').touched" class="help-block">Enter valid name!</span>
+          <label  for="lastName">Last Name</label>
+          <input formControlName="lastName" name="lastName" id="lastName" class="form-control">
+          <span *ngIf="!editUserForm.get('lastName').valid && editUserForm.get('lastName').touched" class="help-block">Enter valid Last name!</span>
           <label for="email">Email</label>
-          <input type="text" id="email" class="form-control"#nameInput>
-          <button class="btn btn-success" type="submit" >Add</button>
-          <button class="btn btn-primary" type="button">Clear</button>
+          <input  formControlName="email" type="text" name="email" id="email" class="form-control">
+          <span *ngIf="!editUserForm.get('email').valid && editUserForm.get('email').touched" class="help-block">Enter valid email!</span>
+          <label  for="city">City</label>
+          <input formControlName="city" name="lastName" id="city" class="form-control">
+          <label  for="district">District</label>
+          <input formControlName="district" name="district" id="district" class="form-control">
+          <label  for="address">Address</label>
+          <input formControlName="address" name="address" id="address" class="form-control">
+
+
+
+          <div style="margin-left: 42% ;margin-top: 2%">
+          <button class="btn btn-clinic " type="submit" *ngIf="!editUserForm.invalid" (click)="onSave()" >Submit</button>
+
+          </div>
         </div>
+
 
       </div>
 
-    </form>
+</form>
 
 

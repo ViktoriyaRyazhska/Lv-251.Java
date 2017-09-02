@@ -2,10 +2,7 @@ package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.AppointmentDAO;
-import com.softserve.edu.lv251.dto.pojos.AppointmentDTO;
-import com.softserve.edu.lv251.dto.pojos.AppointmentsDTO;
-import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
-import com.softserve.edu.lv251.dto.pojos.AppointmentsForDateTimePickerInDocDTO;
+import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.Appointment;
 import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.DoctorService;
@@ -159,5 +156,17 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<Appointment> listAppointmensWithUser(Long id) {
         return appointmentDAO.getAllEntities().stream().filter(p->p.getUser().getId() == id).collect(Collectors.toList());
+    }
+
+    public List<AppointmentsInfoDTO> getAppointmentsToUser(long id){
+        List<Appointment> appointments= new LinkedList<>();
+        appointments=listAppointmensWithUser(id);
+        List<AppointmentsInfoDTO> results = new LinkedList<>();
+        for (Appointment appointment : appointments) {
+            AppointmentsInfoDTO res = new AppointmentsInfoDTO();
+            mapper.map(appointment, res);
+            results.add(res);
+        }
+        return results;
     }
 }

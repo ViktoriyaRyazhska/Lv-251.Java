@@ -8,7 +8,7 @@
             $chatboxTitleClose = $('.chatbox__title__close'),
             $chatboxCredentials = $('.chatbox__credentials');
         $chatboxTitle.on('click', function(e) {
-            console.log("in")
+            console.log("in chat")
             connect();
             $chatbox.toggleClass('chatbox--tray');
 

@@ -162,4 +162,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.favorPathExtension(false);
+    }
 }
