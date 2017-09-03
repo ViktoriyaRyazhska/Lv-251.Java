@@ -62,7 +62,8 @@ public class User extends BaseEntity {
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private List<Role> roles;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = {CascadeType.ALL})
+
     private Contact contact;
 
     @JsonIgnore

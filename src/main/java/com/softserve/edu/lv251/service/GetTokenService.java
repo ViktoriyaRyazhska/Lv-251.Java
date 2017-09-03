@@ -1,6 +1,5 @@
 package com.softserve.edu.lv251.service;
 
-import com.softserve.edu.lv251.config.TokenAuthentication;
 import com.softserve.edu.lv251.dto.pojos.TokenAuthenticationDTO;
 
 /**
