@@ -24,13 +24,13 @@ public class Contact extends BaseEntity {
     private Double longitude;
     private Double latitude;
 
-    @JsonIgnore
+
     @OneToOne(mappedBy = "contact")
     private Clinic clinic;
     @ManyToOne
-    @JsonIgnore
+
     private District district;
-    @JsonIgnore
+
     @OneToOne(mappedBy = "contact")
     private User user;
 

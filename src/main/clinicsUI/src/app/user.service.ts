@@ -33,8 +33,8 @@ export  class UserService {
       .catch((error) => Observable.throw(error));
   }
 
-  getUserByEmail(email: string): Observable<any> {
-    return this.http.get(this.baseUrl + '/api/getUser/'+ email )
+  getUserByEmail(id: number): Observable<any> {
+    return this.http.get(this.baseUrl + '/api/getUser/'+ id )
       .map((response) => response.json())
       .catch((error) => Observable.throw(error));
   }

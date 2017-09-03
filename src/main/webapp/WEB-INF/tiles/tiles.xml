@@ -42,13 +42,6 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
         <put-attribute name="current" value="registrationComfirm"/>
     </definition>
 
-    <!--Registration Success Page-->
-    <definition name="successRegistration" extends="base-definition">
-        <put-attribute name="title" value="Registration Successful"/>
-        <put-attribute name="body" value="/WEB-INF/pages/successRegistration.jsp"/>
-        <put-attribute name="current" value="successRegistration"/>
-    </definition>
-
     <!-- Bad User Page -->
     <definition name="403" extends="base-definition">
         <put-attribute name="title" value="Bad User"/>
@@ -84,18 +77,12 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
         <put-attribute name="current" value="clinic"/>
     </definition>
 
-    <!--<definition name="map" extends="base-definition">-->
-    <!--<put-attribute name="title" value="Map" />-->
-    <!--<put-attribute name="body" value="/WEB-INF/pages/map.jsp" />-->
-    <!--</definition>-->
-
     <!-- Doctor_details Page -->
     <definition name="doctor_details" extends="base-definition">
         <put-attribute name="title" value="Doctor"/>
         <put-attribute name="body" value="/WEB-INF/pages/doctor_details.jsp"/>
         <put-attribute name="current" value="doctorsss"/>
     </definition>
-
 
     <!-- User cabinet Page -->
     <definition name="userCabinet" extends="base-definition">
@@ -104,9 +91,9 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
         <put-attribute name="current" value="userCabinet"/>
     </definition>
 
-    <definition name="doctor_cabinet_patients" extends="base-definition">
+    <definition name="doctor_cabinet_patients2" extends="base-definition">
         <put-attribute name="title" value="Patients" />
-        <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet_patients.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet_patients2.jsp" />
         <put-attribute name="current" value="doctor/patients"/>
     </definition>
 

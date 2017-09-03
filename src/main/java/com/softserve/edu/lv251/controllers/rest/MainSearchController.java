@@ -3,6 +3,7 @@ package com.softserve.edu.lv251.controllers.rest;
 import com.softserve.edu.lv251.dto.pojos.ClinicSearchDTO;
 import com.softserve.edu.lv251.dto.pojos.DistrictsDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorsSearchDTO;
+import com.softserve.edu.lv251.dto.pojos.SpecializationDTO;
 import com.softserve.edu.lv251.entity.Specialization;
 import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.DistrictsService;
@@ -63,7 +64,7 @@ public class MainSearchController {
     }
     @ResponseBody
     @RequestMapping(value = "/rest/autocomplete/specializations/byName")
-    public List<Specialization> autocompleteSpec(@RequestParam("name") String name) {
+    public List<SpecializationDTO> autocompleteSpec(@RequestParam("name") String name) {
         return specializationService.searchByLetters(name);
     }
     @ResponseBody
