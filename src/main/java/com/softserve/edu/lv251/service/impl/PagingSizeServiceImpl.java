@@ -19,7 +19,7 @@ public abstract class PagingSizeServiceImpl<T> implements PagingSizeService<T> {
     }
 
     @Override
-    public List<T> getEntity(Integer chainIndex, Integer size) {
+    public List<T> getEntities(Integer chainIndex, Integer size) {
         return getDao().pagination(chainIndex, size);
     }
 
