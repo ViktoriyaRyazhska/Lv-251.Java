@@ -34,14 +34,10 @@
                                 <c:set var="listPastAppointmentsLength" value="0"/>
                                 <c:set var="listPendingAppointmentsLength" value="0"/>
                                 <c:forEach items="${doctors}" var="doctor" varStatus="loop">
-                                    <%--<fmt:formatDate var="aDate" pattern = 'dd-MM-yyyy HH:mm' value='${appointment.appointmentDate}'/>--%>
-
                                     <c:set var="listPastAppointmentsLength" value="${listPastAppointmentsLength + 1}"/>
-
                                     <c:set var="cssClass" value="label label-warning"/>
                                     <spring:message code="messages.appointmentIsNotApproved" var="appointmentIsNotApproved"/>
                                     <c:set var="appointmentSatatus" value="${appointmentIsNotApproved}"/>
-
                                     <div>
                                         <div class="col-sm-6 appointmentWrapper">
                                             <c:if test="${doctor.responded}">
@@ -55,7 +51,7 @@
                                             <div class="medical-card">
                                                 <div class="media">
                                                     <div class="media-left">
-                                                        <img class="media-object img-circle profile-img" src="<c:url value="/resources/img/User_Default.png"/>">
+                                                        <img class="media-object img-circle profile-img" src="data:image/jpeg;base64,${doctor.photo}">
                                                     </div>
                                                     <div class="media-body">
                                                         <div>
