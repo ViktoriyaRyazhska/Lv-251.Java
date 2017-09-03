@@ -12,14 +12,14 @@
                               class="fa fa-ambulance change"
                               aria-hidden="true"
                               style="color: #226ed9"></i></span>
-            <input type="text" class="form-control " id="autocomplete"
+            <input #clinic_search (input)="onClinicSearchOrDistinctChange()" class="form-control " id="autocomplete"
                    placeholder='Clinic search'
                    aria-describedby="sizing-addon1">
           </div>
-          <input id="autocomplete-districts" type="text" class="form-control " style="width: 20%"
-                 placeholder='District'>
+          <input #distinct id="autocomplete-districts" class="form-control " style="width: 20%"
+                 placeholder='District' (input)="onClinicSearchOrDistinctChange()" >
         </div>
-        <a href="/">
+        <a>
           <button id="main-search-btn" class="btn btn-facebook">Search</button>
         </a>
       </div>

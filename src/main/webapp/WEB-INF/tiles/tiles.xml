@@ -42,15 +42,11 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
         <put-attribute name="current" value="registrationComfirm"/>
     </definition>
 
-    <!--Registration Success Page-->
-    <definition name="successRegistration" extends="base-definition">
-        <put-attribute name="body" value="/WEB-INF/pages/successRegistration.jsp"/>
-    </definition>
-
     <!-- Bad User Page -->
     <definition name="403" extends="base-definition">
         <put-attribute name="title" value="Bad User"/>
         <put-attribute name="body" value="/WEB-INF/pages/403.jsp"/>
+        <put-attribute name="current" value="403"/>
     </definition>
 
     <!--Doctors Page -->
@@ -79,13 +75,7 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
         <put-attribute name="title" value="Clinic" />
         <put-attribute name="body" value="/WEB-INF/pages/clinic_details.jsp" />
         <put-attribute name="current" value="clinic"/>
-
     </definition>
-
-    <!--<definition name="map" extends="base-definition">-->
-    <!--<put-attribute name="title" value="Map" />-->
-    <!--<put-attribute name="body" value="/WEB-INF/pages/map.jsp" />-->
-    <!--</definition>-->
 
     <!-- Doctor_details Page -->
     <definition name="doctor_details" extends="base-definition">
@@ -93,7 +83,6 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
         <put-attribute name="body" value="/WEB-INF/pages/doctor_details.jsp"/>
         <put-attribute name="current" value="doctorsss"/>
     </definition>
-
 
     <!-- User cabinet Page -->
     <definition name="userCabinet" extends="base-definition">

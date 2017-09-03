@@ -2,6 +2,7 @@ package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.dto.pojos.Message;
 import com.softserve.edu.lv251.dto.pojos.MessageDTO;
 import com.softserve.edu.lv251.service.MessageService;
+import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -18,20 +19,17 @@ import java.util.Date;
 @Controller
 public class ChatController {
     @Autowired
-    public MessageService messageService;
-
+    private MessageService messageService;
+    @Autowired
+    private UserService userService;
 
     @MessageMapping("/chat")
     @SendTo("/topic/messages")
     public MessageDTO send(Message message, Principal principal) throws Exception {
         message.setFrom(principal.getName());
-        System.out.println(message);
         messageService.add(message);
         String time = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm").format(new Date());
         return new MessageDTO(message.getFrom(), message.getText(), time);
     }
-    @RequestMapping(value = "/chat/1")
-    public String chat(){
-        return "chat";
-    }
+
 }
