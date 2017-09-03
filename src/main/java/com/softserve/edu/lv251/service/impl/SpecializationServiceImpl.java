@@ -1,11 +1,13 @@
 package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.dao.SpecializationDAO;
+import com.softserve.edu.lv251.dto.pojos.SpecializationDTO;
 import com.softserve.edu.lv251.entity.Specialization;
 import com.softserve.edu.lv251.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,8 +19,15 @@ public class SpecializationServiceImpl implements SpecializationService {
     private SpecializationDAO specializationDAO;
 
     @Override
-    public List<Specialization> searchByLetters(String letters) {
-        return specializationDAO.searchByLetters(letters);
+    public List<SpecializationDTO> searchByLetters(String letters) {
+        List<Specialization> specializations= specializationDAO.searchByLetters(letters);
+        List<SpecializationDTO> results=new LinkedList<>();
+        for (Specialization specialization:specializations) {
+           SpecializationDTO  result = new SpecializationDTO();
+           result.setName(specialization.getName());
+            results.add(result);
+        }
+        return results;
     }
 
     @Override

@@ -56,7 +56,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
           <a type="text" *ngIf="user!==null">
-          {{user.name}}{{user.lastName}}
+          <!--{{user.name}}{{user.lastName}}-->
           </a>
         </li>
 
@@ -67,7 +67,7 @@
           </a>
         </li>
         <li *ngIf="user!==null">
-          <a (click)="logoUt()" type="button" id="logoutBtn" style="cursor:pointer;" routerLink="/logout">
+          <a  type="button" id="logoutBtn" style="cursor:pointer;" routerLink="/logout">
             <span class="glyphicon glyphicon-log-out"></span> Logout
           </a>
         </li>

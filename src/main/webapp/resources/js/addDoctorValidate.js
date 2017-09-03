@@ -4,7 +4,6 @@
 
 
 function Validate(oForm) {
-    console.log("in")
  hideErrors();
     var sizeinbytes=0;
      var maxSize=100000;
@@ -92,4 +91,13 @@ function  validPhoto(form) {
     }
 }
 
+function  validMail() {
+    var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+    if($("#mail-user").val()==''||!$("#mail-user").val().match(emailRegex)){
+        $("#errorMail").show();
+    }else {
+        $("#errorMail").hide();
+    }
+
+}

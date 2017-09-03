@@ -6,6 +6,8 @@ import com.softserve.edu.lv251.dto.pojos.UserLoginDTO;
 import com.softserve.edu.lv251.service.GetTokenService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,16 +39,16 @@ public class TokenAuthenticationController {
     }
 
     @RequestMapping(value = "rest/auth",method = RequestMethod.POST)
-    public TokenAuthenticationDTO authCookie(@RequestBody UserLoginDTO userDTO, HttpServletResponse response) {
+    public ResponseEntity< TokenAuthenticationDTO >authCookie(@RequestBody UserLoginDTO userDTO, HttpServletResponse response) {
         try {
             String token = getTokenService.getToken(userDTO.getEmail(), userDTO.getPassword()).getToken();
             Cookie cookie = new Cookie("authToken", token);
             cookie.setHttpOnly(true);
             response.addCookie(cookie);
-            return getTokenService.getToken(userDTO.getEmail(), userDTO.getPassword());
+            return new ResponseEntity<TokenAuthenticationDTO>(getTokenService.getToken(userDTO.getEmail(), userDTO.getPassword()), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return new ResponseEntity<TokenAuthenticationDTO>(HttpStatus.UNAUTHORIZED);
         }
     }
 

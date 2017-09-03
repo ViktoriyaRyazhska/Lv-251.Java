@@ -49,4 +49,5 @@ public interface UserService {
 
     User changePassword(User user, PasswordDTO passwordDTO);
     UserUpdate getByEmail(String email);
+    UserUpdate getById(long id);
 }
