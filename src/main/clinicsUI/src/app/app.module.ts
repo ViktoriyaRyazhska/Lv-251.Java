@@ -33,6 +33,8 @@ import {ClinicsListComponent} from "./clinics/clinics-list/clinics-list.componen
 import { RegistrationComponent } from './auth/registration/registration.component';
 import {RegistrationService} from "./auth/registration/registration.service";
 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +63,9 @@ import {RegistrationService} from "./auth/registration/registration.service";
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDVONjkQbC8wtyxPapK8TvGe8IbIYfIIEA'
+    })
   ],
 
   providers: [UserService,AuthenticationService,AlertService,ContactService, RegistrationService],
