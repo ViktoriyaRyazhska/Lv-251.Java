@@ -327,10 +327,13 @@ public class Mapper extends ConfigurableMapper {
                 .customize(new CustomMapper<Doctor, DoctorsSearchDTO>() {
                     @Override
                     public void mapAtoB(Doctor doctor, DoctorsSearchDTO doctorsSearchDTO, MappingContext context) {
-                        if(doctor.getClinic()!= null){
-                        doctorsSearchDTO.setClinicName(doctor.getClinic().getClinic_name());}
+                        if(doctor.getClinic()!=null){
+                            doctorsSearchDTO.setClinicName(doctor.getClinic().getClinic_name());
+                        }
                         if(doctor.getSpecialization()!=null){
-                        doctorsSearchDTO.setSpecialisation(doctor.getSpecialization().getName());}
+                            doctorsSearchDTO.setSpecialisation(doctor.getSpecialization().getName());
+                        }
+
                     }
                 }).register();
 
