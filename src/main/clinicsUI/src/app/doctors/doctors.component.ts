@@ -26,18 +26,22 @@ export class DoctorsComponent implements OnInit {
 
   onRecieveInfo(event: { select: number, name: string, district: string }) {
     this.activeDoctors = [];
-    switch (event.select) {
-      case (1):
-        /*       for (let doctor of this.doctors) {
-                 if ((doctor.district.toLowerCase().indexOf(event.distinct.toLowerCase()) >= 0)
-                   && (clinic.name.toLowerCase().indexOf(event.clinicSearch.toLowerCase()) >= 0)) {
-                   this.activeClinics.push(clinic);
-                 }
-               }*/
-        break;
-      default:
-
-        break;
+    if (event.select == 1) {
+      for (let doctor of this.doctors) {
+        if ((doctor.firstname.toLowerCase().indexOf(event.name.toLowerCase()) >= 0)
+          || ((doctor.lastname.toLowerCase().indexOf(event.name.toLowerCase()) >= 0))) {
+          this.activeDoctors.push(doctor);
+        }
+      }
+    }
+    else {
+      for (let doctor of this.doctors) {
+        if (doctor.specialization !== undefined) {
+          if ((doctor.specialization.toLowerCase().indexOf(event.name.toLowerCase()) >= 0)) {
+            this.activeDoctors.push(doctor);
+          }
+        }
+      }
     }
   }
 }
