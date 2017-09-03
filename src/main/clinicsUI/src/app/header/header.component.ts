@@ -11,18 +11,13 @@ import {AuthenticationService} from "../auth/authentication.service";
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() user:User=JSON.parse(localStorage.getItem("currentUser"));
-  @Output() userChange: EventEmitter<User>;
+  user:User=JSON.parse(localStorage.getItem("currentUser"));
+
   constructor() {
-    this.userChange = new EventEmitter<User>();
+
   }
 
   ngOnInit() {
-    console.log(this.user.name)
-  }
-  logoUt() {
-    console.log("In Component")
-    this.user===null;
-    this.userChange.emit(this.user);
+
   }
 }

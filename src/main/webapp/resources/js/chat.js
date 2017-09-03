@@ -8,7 +8,6 @@
             $chatboxTitleClose = $('.chatbox__title__close'),
             $chatboxCredentials = $('.chatbox__credentials');
         $chatboxTitle.on('click', function(e) {
-            console.log("in chat")
             connect();
             $chatbox.toggleClass('chatbox--tray');
 
@@ -43,7 +42,6 @@ function connect() {
     stompClient.connect({}, function(frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        console.log("hell")
         stompClient.subscribe('/topic/messages', function (messageOutput) {
             showMessageOutput(JSON.parse(messageOutput.body));
         });
@@ -68,10 +66,7 @@ function sendMessage() {
 }
 
 function showMessageOutput(messageOutput) {
-    var response = document.getElementById('response');
-    var p = document.createElement('p');
-    p.style.wordWrap = 'break-word';
-    p.appendChild(document.createTextNode(messageOutput.from + ": "+
-       " (" + messageOutput.date + ")" + messageOutput.text ));
-    response.appendChild(p);
+
+    $("#response").append("<p style='background-color: #6bd9aa'><span > "
+        + messageOutput.date +"<br> "+messageOutput.from+" </span><br> "+ messageOutput.text+" </p>")
 }

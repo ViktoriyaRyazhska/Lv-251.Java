@@ -20,24 +20,27 @@ export class UserCabinetProfileComponent implements OnInit {
 
   ngOnInit() {
     this.editUserForm = new FormGroup({
-      'name': new FormControl('nnnn',Validators.required),
+      'name': new FormControl('',Validators.required),
       'lastName': new FormControl('',Validators.required),
       'email': new FormControl('',[Validators.required,Validators.email]),
       'city': new FormControl(''),
-      'district': new FormControl(''),
+      'firstPhone': new FormControl(''),
       'address': new FormControl(''),
+      'zipCode': new FormControl(''),
     })
-this.userService.getUserByEmail(this.user.email).subscribe(
+this.userService.getUserByEmail(this.user.id).subscribe(
 
   (response)=> {
+    console.log(response)
     this.userUpdate=response;
     this.editUserForm = new FormGroup({
       'name': new FormControl(this.userUpdate.name,Validators.required),
       'lastName': new FormControl(this.userUpdate.lastName,Validators.required),
       'email': new FormControl(this.userUpdate.email,[Validators.required,Validators.email]),
       'city': new FormControl(this.userUpdate.city),
-      'district': new FormControl(this.userUpdate.district),
+      'firstPhone': new FormControl(this.userUpdate.firstPhone),
       'address': new FormControl(this.userUpdate.address),
+      'zipCode': new FormControl(this.userUpdate.zipCode),
     })
     console.log(response)
   },

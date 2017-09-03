@@ -170,13 +170,21 @@ public class UserServiceImpl implements UserService {
     public UserUpdate getByEmail(String email){
        User user= findByEmail(email);
       UserUpdate userUpdate= new UserUpdate();
-      userUpdate.setId(user.getId());
-      userUpdate.setName(user.getFirstname());
-      userUpdate.setLastName(user.getLastname());
-      userUpdate.setEmail(user.getEmail());
-      userUpdate.setCity(user.getContact().getCity());
-      userUpdate.setAddress(user.getContact().getAddress());
-      userUpdate.setDistrict(user.getContact().getDistrict().getName());
+      if(user!=null){
+      mapper.map(user,userUpdate);}
+      if(user.getContact()!=null){
+      mapper.map(user.getContact(),userUpdate);}
+        return  userUpdate;
+    }
+
+    @Override
+    public UserUpdate getById(long id) {
+        User user= userDAO.getEntityByID(id);
+        UserUpdate userUpdate= new UserUpdate();
+        if(user!=null){
+            mapper.map(user,userUpdate);}
+        if(user.getContact()!=null){
+            mapper.map(user.getContact(),userUpdate);}
         return  userUpdate;
     }
 }
