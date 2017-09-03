@@ -48,6 +48,8 @@ public interface Constants {
         String MODERATOR_CABINET_DOCTORS = "moderatorCabinetDoctors";
         String MODERATOR_ADD_DOCTOR = "moderatorAddDoctor";
         String MODERATOR_MAKE_DOCTOR= "moderatorMakeDoctor";
+        String MESSAGES="messages";
+
 
     }
 

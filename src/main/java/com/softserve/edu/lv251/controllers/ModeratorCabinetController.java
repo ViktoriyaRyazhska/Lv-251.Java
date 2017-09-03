@@ -74,10 +74,10 @@ public class ModeratorCabinetController {
         if (contact != null) {
             mapper.map(contact, clinicDTO);
         }
-        model.addAttribute("photoForm", new FileBucket());
+        model.addAttribute(Constants.Controller.PHOTO_FORM, new PhotoDTO());
         model.addAttribute(Constants.Controller.MODERATOR, moderator);
-        model.addAttribute("clinicDTO", clinicDTO);
-        model.addAttribute("messages",messages);
+        model.addAttribute(Constants.Controller.CLINIC_DTO, clinicDTO);
+        model.addAttribute(Constants.Controller.MESSAGES,messages);
         return Constants.Controller.MODERATOR_CABINET;
 
 
@@ -131,7 +131,7 @@ public class ModeratorCabinetController {
 
     @GetMapping(value = "/cabinet/add/doctor")
     public String addDoctor(Model model, Principal principal) {
-        model.addAttribute("doctorForm", new DoctorDTO());
+        model.addAttribute(Constants.Controller.DOCTOR_FORM, new DoctorDTO());
         Moderator moderator = moderatorService.getByEmail(principal.getName());
 
         List<Doctor> doctors = doctorService.getByClinic(moderator.getClinic().getId());
