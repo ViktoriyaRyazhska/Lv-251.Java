@@ -102,9 +102,9 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
         <put-attribute name="current" value="userCabinet"/>
     </definition>
 
-    <definition name="doctor_cabinet_patients" extends="base-definition">
+    <definition name="doctor_cabinet_patients2" extends="base-definition">
         <put-attribute name="title" value="Patients" />
-        <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet_patients.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet_patients2.jsp" />
         <put-attribute name="current" value="doctor/patients"/>
     </definition>
 
