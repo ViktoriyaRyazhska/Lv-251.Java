@@ -216,8 +216,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
         Clinic clinic = clinicService.getClinicByID(moderator.getClinic().getId());
         doctor.setFirstname(accountDto.getFirstName());
         doctor.setLastname(accountDto.getLastName());
-
-        doctor.setMiddlename("");
         doctor.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         doctor.setEmail(accountDto.getEmail());
         doctor.setEnabled(true);
@@ -243,9 +241,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
             doctor.setSpecialization(specialization);
         } else {
             doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
-        }
-        if (clinicService.getByName(accountDto.getClinic()) == null) {
-
         }
         doctor.setClinic(clinic);
         addDoctor(doctor);
