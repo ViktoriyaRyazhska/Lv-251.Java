@@ -1,6 +1,8 @@
 package com.softserve.edu.lv251.controllers.rest;
 
+import com.softserve.edu.lv251.config.MailComponent;
 import com.softserve.edu.lv251.dto.pojos.ContactDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -13,11 +15,15 @@ import javax.validation.Valid;
 @CrossOrigin(origins = {"*"})
 public class ContactRestController {
 
+    @Autowired
+    private MailComponent mailComponent;
+
     @RequestMapping(value = "/contact-us", method = RequestMethod.POST)
     @ResponseBody
-    public void sendMail(@RequestBody @Valid ContactDTO contactDTO) {
+    public boolean sendMail(@RequestBody @Valid ContactDTO contactDTO) {
 
-        System.out.println("oooooo");
 
+        mailComponent.sendMail(contactDTO);
+        return true;
     }
 }
