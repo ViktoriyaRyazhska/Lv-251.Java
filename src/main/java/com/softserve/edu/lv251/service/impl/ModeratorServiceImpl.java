@@ -86,7 +86,7 @@ public class ModeratorServiceImpl implements ModeratorService {
         contactClinic.setEmail(addModerator.getClinicEmail());
 
         clinic.setClinic_name(addModerator.getClinicName());
-        clinic.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
+        clinic.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("Clinic_Default.png"));
         clinic.setContact(contactClinic);
 
         contactModerator.setEmail(addModerator.getModeratorEmail());
