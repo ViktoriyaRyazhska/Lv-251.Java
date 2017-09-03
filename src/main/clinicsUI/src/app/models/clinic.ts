@@ -6,6 +6,24 @@ export  class Clinic{
   private _address: string;
   private _district_name: string;
   private _photo: string;
+  private _latitude: number;
+  private _longitude: number;
+
+  get latitude(): number {
+    return this._latitude;
+  }
+
+  set latitude(value: number) {
+    this._latitude = value;
+  }
+
+  get longitude(): number {
+    return this._longitude;
+  }
+
+  set longitude(value: number) {
+    this._longitude = value;
+  }
 
   get photo(): string {
     return this._photo;
@@ -16,7 +34,7 @@ export  class Clinic{
   }
 
 
-  constructor(id: number, name: string, firstPhone: string, city: string, address: string, district_name: string, photo: string) {
+  constructor(id: number, name: string, firstPhone: string, city: string, address: string, district_name: string, photo: string, latitude: number, longitude: number) {
     this._id = id;
     this._name = name;
     this._firstPhone = firstPhone;
@@ -24,6 +42,8 @@ export  class Clinic{
     this._address = address;
     this._district_name = district_name;
     this._photo = photo;
+    this._latitude = latitude;
+    this._longitude = longitude;
   }
 
   get id(): number {

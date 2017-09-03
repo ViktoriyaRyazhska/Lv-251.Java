@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from "@angular/forms";
+import {RegistrationService} from "./registration.service";
 
 
 @Component({
@@ -9,7 +10,8 @@ import {FormGroup, FormControl, Validators} from "@angular/forms";
 })
 export class RegistrationComponent implements OnInit {
   regForm: FormGroup;
-  constructor() { }
+
+  constructor(private regService : RegistrationService) { }
 
   ngOnInit() {
     this.regForm = new FormGroup({
@@ -19,6 +21,17 @@ export class RegistrationComponent implements OnInit {
       'password': new FormControl(null, Validators.required),
       'passwordConfirm': new FormControl(null, Validators.required)
     });
+  }
+
+  onSubmit(){
+    this.onSend()
+    this.regForm.reset();
+  }
+
+  onSend(){
+    this.regService.storeIt(this.regForm).subscribe(
+      (response) => console.log(response)
+    );
   }
 
 }
