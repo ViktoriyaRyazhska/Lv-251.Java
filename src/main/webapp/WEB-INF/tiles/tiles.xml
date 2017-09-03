@@ -84,7 +84,6 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
         <put-attribute name="current" value="doctorsss"/>
     </definition>
 
-
     <!-- User cabinet Page -->
     <definition name="userCabinet" extends="base-definition">
         <put-attribute name="title" value="Personal Cabinet"/>
