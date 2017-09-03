@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.dao.impl;
 
-import com.softserve.edu.lv251.dao.AppointmentsDAO;
+import com.softserve.edu.lv251.dao.AppointmentDAO;
 import com.softserve.edu.lv251.entity.Appointment;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Transactional
 @Repository
-public class AppointmentDAOImpl extends BaseDAOImpl<Appointment> implements AppointmentsDAO {
+public class AppointmentDAOImpl extends BaseDAOImpl<Appointment> implements AppointmentDAO {
 
     @Override
     public List<Appointment> getAppointmentByDoctorsEmailAfterSomeDate(String email, Date date) {

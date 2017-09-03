@@ -17,7 +17,7 @@ import java.util.List;
  *
  */
 @Repository
-public abstract class BaseDAOImpl<T> implements BaseDAO<T> {
+public abstract class  BaseDAOImpl<T> implements BaseDAO<T> {
 
     private Class<T> entityClass;
 

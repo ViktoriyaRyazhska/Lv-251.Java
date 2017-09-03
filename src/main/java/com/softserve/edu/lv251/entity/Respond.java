@@ -20,6 +20,8 @@ public class Respond extends BaseEntity{
 
     private Date date;
 
+    private String description;
+
     public Respond() {
     }
 
@@ -53,5 +55,13 @@ public class Respond extends BaseEntity{
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

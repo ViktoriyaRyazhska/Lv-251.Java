@@ -13,7 +13,7 @@
                     <a href="<c:url value="/user/cabinet"/>" class="list-group-item">
                         <spring:message code="messages.profile"/>
                     </a>
-                    <a href="#" class="list-group-item">
+                    <a href="<c:url value="/user/doctors"/>" class="list-group-item">
                         <spring:message code="messages.doctors"/>
                     </a>
                     <a href="<c:url value="/user/medicalcard"/>" class="navbar-inverse list-group-item">
@@ -174,9 +174,6 @@
                                 $("#appointmentsHistoryLink").click(showAppointmentHistory);
                                 $("#pendingAppointmentsLink").click(showPendingAppointments);
 
-                                $(".appointmentsHistory").click(function() {
-                                    $(this).modal();
-                                });
                             </script>
                         </div>
                     </div>

@@ -14,6 +14,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.servlet.*;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -54,18 +55,24 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
-        logger.info("authhhhhhhhhhhhhhhhhh ");
 
         String token = request.getHeader("token");
         if (token == null)
             token = request.getParameter("token");
+        if (token == null){
+            for(Cookie cookie: request.getCookies()){
+                if(cookie.getName().equals("authToken")){
+                    token = cookie.getValue();
+                }
+            }
+        }
         if (token == null) {
             TokenAuthentication authentication = new TokenAuthentication(null);
             authentication.setAuthenticated(false);
             return authentication;
         }
 
-        logger.info("auth " + token);
+
 
         TokenAuthentication tokenAuthentication = new TokenAuthentication(token);
         Authentication authentication = getAuthenticationManager().authenticate(tokenAuthentication);

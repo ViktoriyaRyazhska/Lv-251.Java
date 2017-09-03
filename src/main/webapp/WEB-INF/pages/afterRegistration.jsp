@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <button href="<c:url value="/"/>" class="btn btn-info" style="left: 50%; margin-left: 47%; margin-right: 47%">
+    <button onclick="location.href='/'" class="btn btn-info" style="left: 50%; margin-left: 47%; margin-right: 47%">
         <spring:message code="messages.home"/>
     </button>
 </div>

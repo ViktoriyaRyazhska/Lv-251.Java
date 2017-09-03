@@ -15,7 +15,7 @@
                     <a href="<c:url value="/user/cabinet"/>" class="navbar-inverse list-group-item">
                         <spring:message code="messages.profile"/>
                     </a>
-                    <a href="#" class="list-group-item">
+                    <a href="<c:url value="/user/doctors"/>" class="list-group-item">
                         <spring:message code="messages.doctors"/>
                     </a>
                     <a href="<c:url value="/user/medicalcard"/>" class="list-group-item">
@@ -34,16 +34,24 @@
             </div>
             <div class="chatbox__body">
                 <div class="chatbox__body__message chatbox__body__message--right">
-                    <div class="messageChat" style="background-color: #b2dba1 ;border-radius: 3px">
+                    <div class="messageChat" style="border-radius: 3px">
+                        <c:forEach items="${messages}" var="message">
+                            <c:choose>
+                                <c:when test="${personalInfoDTO.firstname!=message.from.firstname&&personalInfoDTO.lastname!=message.from.lastname}">
+                                    <p style="background-color: #6bd9aa"><span >${message.date} <br>  ${message.from.firstname} ${message.from.lastname}</span><br> ${message.text} </p>
+                                    <br />
+                                </c:when>
+                                <c:otherwise>
+                                    <p style="background-color: #e1e1e1"><span >${message.date}<br>   ${message.from.firstname} ${message.from.lastname}</span><br> ${message.text} </p>
+                                    <br />
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
 
+                        <div id="response"></div>
                     </div>
 
-                    <c:forEach items="${messages}" var="message">
-                        <p><span >${message.date}      ${message.from.firstname} ${message.from.lastname}</span><br> ${message.text} </p>
 
-                    </c:forEach>
-
-                    <p id="response"></p>
 
                 </div>
             </div>

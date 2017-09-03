@@ -13,7 +13,6 @@ import java.util.List;
 public class Specialization extends BaseEntity {
     private String name;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "specialization")
     private List<Doctor> doctors;
 

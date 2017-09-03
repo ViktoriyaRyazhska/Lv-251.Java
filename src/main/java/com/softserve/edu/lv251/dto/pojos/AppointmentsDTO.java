@@ -1,5 +1,7 @@
 package com.softserve.edu.lv251.dto.pojos;
 
+import com.softserve.edu.lv251.idl.StatusEnum;
+
 /**
  * Created by User on 02.08.2017.
  */
@@ -9,6 +11,8 @@ public class AppointmentsDTO {
     private String title;
     private String start;
     private String color;
+    private StatusEnum status;
+
 
     public AppointmentsDTO() {
     }
@@ -46,5 +50,11 @@ public class AppointmentsDTO {
         this.color = color;
     }
 
+    public StatusEnum getStatus() {
+        return status;
+    }
 
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
 }

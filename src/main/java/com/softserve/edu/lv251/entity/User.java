@@ -22,6 +22,7 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "from")
     private List<Message> messagesfrom;
+
     @OneToMany(mappedBy = "to")
     private List<Message> messagesTo;
 
@@ -34,11 +35,11 @@ public class User extends BaseEntity {
     @Column(name = "photo", nullable = false, columnDefinition = "MEDIUMTEXT")
     private String photo;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Respond> responds;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Appointment> appointments;
 
     @JsonIgnore
@@ -62,10 +63,11 @@ public class User extends BaseEntity {
     private List<Role> roles;
 
     @OneToOne(cascade = {CascadeType.ALL})
+
     private Contact contact;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<TestsResult> testsResults;
 
 
