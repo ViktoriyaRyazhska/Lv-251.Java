@@ -5,6 +5,7 @@ import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.ClinicInfoDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
+import com.softserve.edu.lv251.dto.pojos.PhotoDTO;
 import com.softserve.edu.lv251.dto.pojos.UserToDoctor;
 import com.softserve.edu.lv251.entity.*;
 import com.softserve.edu.lv251.model.FileBucket;
@@ -33,7 +34,7 @@ public class ModeratorCabinetController {
     private ModeratorService moderatorService;
 
     @Autowired
-    private DoctorsService doctorsService;
+    private DoctorService doctorService;
 
     @Autowired
     private Logger logger;
@@ -65,7 +66,7 @@ public class ModeratorCabinetController {
         List<Message> messages= messageService.getAll();
         if (clinic != null) {
 
-            List<Doctor> doctors = doctorsService.getByClinic(clinic.getId());
+            List<Doctor> doctors = doctorService.getByClinic(clinic.getId());
             model.addAttribute(Constants.Controller.DOCTORS, doctors);
             mapper.map(clinic, clinicDTO);
         }
@@ -73,10 +74,10 @@ public class ModeratorCabinetController {
         if (contact != null) {
             mapper.map(contact, clinicDTO);
         }
-        model.addAttribute("photoForm", new FileBucket());
+        model.addAttribute(Constants.Controller.PHOTO_FORM, new PhotoDTO());
         model.addAttribute(Constants.Controller.MODERATOR, moderator);
-        model.addAttribute("clinicDTO", clinicDTO);
-        model.addAttribute("messages",messages);
+        model.addAttribute(Constants.Controller.CLINIC_DTO, clinicDTO);
+        model.addAttribute(Constants.Controller.MESSAGES,messages);
         return Constants.Controller.MODERATOR_CABINET;
 
 
@@ -113,7 +114,7 @@ public class ModeratorCabinetController {
     public String moderatorAllDoctors(Principal principal, Model model) {
         Moderator moderator = moderatorService.getByEmail(principal.getName());
 
-        List<Doctor> doctors = doctorsService.getByClinic(moderator.getClinic().getId());
+        List<Doctor> doctors = doctorService.getByClinic(moderator.getClinic().getId());
 
         model.addAttribute(Constants.Controller.DOCTORS, doctors);
         model.addAttribute(Constants.Controller.MODERATOR, moderator);
@@ -123,17 +124,17 @@ public class ModeratorCabinetController {
 
     @GetMapping(value = "/cabinet/doctors/delete/{id}")
     public String deleteDoctor(@PathVariable("id") Long id) {
-        doctorsService.delete(doctorsService.find(id));
+        doctorService.delete(doctorService.find(id));
         return "redirect:/moderator/cabinet/doctors";
 
     }
 
     @GetMapping(value = "/cabinet/add/doctor")
     public String addDoctor(Model model, Principal principal) {
-        model.addAttribute("doctorForm", new DoctorDTO());
+        model.addAttribute(Constants.Controller.DOCTOR_FORM, new DoctorDTO());
         Moderator moderator = moderatorService.getByEmail(principal.getName());
 
-        List<Doctor> doctors = doctorsService.getByClinic(moderator.getClinic().getId());
+        List<Doctor> doctors = doctorService.getByClinic(moderator.getClinic().getId());
         model.addAttribute(Constants.Controller.DOCTORS, doctors);
         model.addAttribute(Constants.Controller.MODERATOR, moderator);
         return Constants.Controller.MODERATOR_ADD_DOCTOR;
@@ -146,14 +147,14 @@ public class ModeratorCabinetController {
             logger.warn("registerDoctor has errors");
             return Constants.Controller.MODERATOR_ADD_DOCTOR;
         } else {
-            doctorsService.addDoctorAccount(doctorDTO,principal.getName());
+            doctorService.addDoctorAccount(doctorDTO,principal.getName());
             return "redirect:/moderator/cabinet/doctors";
         }
     }
 
 
     @PostMapping(value = "/upload/clinicPhoto")
-    public String uploadPhoto(@ModelAttribute("photoForm") @Valid FileBucket fileBucket, BindingResult bindingResult,
+    public String uploadPhoto(@ModelAttribute("photoForm") @Valid PhotoDTO photoDTO, BindingResult bindingResult,
                               Principal principal, RedirectAttributes model) {
         if (bindingResult.hasErrors()) {
             Locale currentLocale = LocaleContextHolder.getLocale();
@@ -164,7 +165,7 @@ public class ModeratorCabinetController {
 
             return "redirect:/moderator/cabinet";
         } else {
-            clinicService.updatePhoto(fileBucket.getMultipartFile(), moderatorService.getByEmail(principal.getName()).getClinic());
+            clinicService.updatePhoto(photoDTO.getMultipartFile(), moderatorService.getByEmail(principal.getName()).getClinic());
             return "redirect:/moderator/cabinet";
         }
     }
@@ -175,7 +176,7 @@ public class ModeratorCabinetController {
         model.addAttribute(Constants.Controller.USERS_TO_DOCTOR, new UserToDoctor());
 
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        List<Doctor> doctors = doctorsService.getByClinic(moderator.getClinic().getId());
+        List<Doctor> doctors = doctorService.getByClinic(moderator.getClinic().getId());
 
 
         model.addAttribute(Constants.Controller.DOCTORS, doctors);
@@ -191,7 +192,7 @@ public class ModeratorCabinetController {
         if (bindingResult.hasErrors()) {
             return Constants.Controller.MODERATOR_MAKE_DOCTOR;
         } else {
-            doctorsService.makeDoctorFromUser(userToDoctor, principal.getName());
+            doctorService.makeDoctorFromUser(userToDoctor, principal.getName());
             return "redirect:/moderator/cabinet/doctors";
         }
     }

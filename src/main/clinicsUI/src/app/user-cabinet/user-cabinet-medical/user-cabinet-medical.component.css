@@ -1,0 +1,87 @@
+
+#menu_mcard
+{
+  height: 41px;
+}
+
+#menu_mcard ul
+{
+  display: inline-block;
+  padding: 0 2em 0 18px;
+  text-align: center;
+}
+
+#menu_mcard li
+{
+  display: inline-block;
+}
+
+#menu_mcard li:hover a, #menu_mcard li.active a, #menu_mcard li a, #menu_mcard li.active span
+{
+  border-radius: 4px 4px 0 0;
+}
+
+.medical-card {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 4px;
+}
+.profile-img {
+  height: 100px;
+  background: white;
+}
+.specialization {
+  color: #666666;
+  font-size: 17px;
+}
+.diagnosis {
+  font-size: 16px;
+}
+
+.well {
+  overflow: auto;
+  background: white;
+}
+
+.mcard_content {
+  border: 1px solid #35bfae;
+  margin-bottom: 0;
+  padding: 10px 13px;
+}
+
+.appointmentsHistory {
+  display: none;
+}
+
+.pendingAppointments {
+  display: none;
+}
+
+#appointmentsHistoryListIsEmpty {
+  display: none;
+}
+
+#pendingAppointmentsListIsEmpty {
+  display: none;
+}
+
+.appointmentWrapper {
+  width: 100%;
+  background-color: rgb(248, 255, 255);
+  border-radius: 5px;
+  border: 1px solid #35bfae;
+  position: relative;
+  margin-bottom: 3px;
+  margin-top: 3px;
+}
+
+.appointmentFloatContainer {
+  float: right;
+  position: relative;
+}
+
+.appointmentInner {
+  position: absolute;
+  right: 5px; top: 10px;
+}

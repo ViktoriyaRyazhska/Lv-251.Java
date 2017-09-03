@@ -1,8 +1,11 @@
 package com.softserve.edu.lv251.service;
 
 
+import com.softserve.edu.lv251.controllers.DoctorCabinetController;
+import com.softserve.edu.lv251.dto.pojos.DoctorCabinetUser;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
+import com.softserve.edu.lv251.dto.pojos.UserUpdate;
 import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
 
@@ -41,7 +44,9 @@ public interface UserService {
 
     void sendEmail(User user, String messageText);
 
-    List<User> searchByLetters(String search);
+    List<DoctorCabinetUser> searchByLetters(String search);
 
     User changePassword(User user, PasswordDTO passwordDTO);
+    UserUpdate getByEmail(String email);
+    UserUpdate getById(long id);
 }

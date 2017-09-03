@@ -3,7 +3,7 @@ package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
 import com.softserve.edu.lv251.entity.Doctor;
 import com.softserve.edu.lv251.service.AppointmentService;
-import com.softserve.edu.lv251.service.DoctorsService;
+import com.softserve.edu.lv251.service.DoctorService;
 import com.softserve.edu.lv251.service.PagingSizeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Created by Yana Martynyak on 13.08.2017.
@@ -27,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AllDoctorsControllerTest {
     private MockMvc mockMvc;
     @Mock
-    private DoctorsService doctorsService;
+    private DoctorService doctorService;
     @Mock
     private PagingSizeService<Doctor> pagingSizeService;
     @Mock

@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.service;
 
+import com.softserve.edu.lv251.dto.pojos.SpecializationDTO;
 import com.softserve.edu.lv251.entity.Specialization;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  */
 
 public interface SpecializationService {
-    List<Specialization> searchByLetters(String letters);
+    List<SpecializationDTO> searchByLetters(String letters);
     List<Specialization> findAll();
     Specialization findByName(String name);
     public  void  add(Specialization specialization);

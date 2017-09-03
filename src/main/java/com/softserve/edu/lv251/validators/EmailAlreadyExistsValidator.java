@@ -13,6 +13,7 @@ import javax.validation.ConstraintValidatorContext;
 public class EmailAlreadyExistsValidator implements ConstraintValidator<EmailAlreadyExists,String> {
     @Autowired
     private UserService userService;
+
     @Override
     public void initialize(EmailAlreadyExists emailAlreadyExists) {
 

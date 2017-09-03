@@ -2,8 +2,10 @@ package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.UserDAO;
+import com.softserve.edu.lv251.dto.pojos.DoctorCabinetUser;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
+import com.softserve.edu.lv251.dto.pojos.UserUpdate;
 import com.softserve.edu.lv251.entity.Contact;
 import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
@@ -20,6 +22,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -89,6 +92,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         List<User> users = getUsersByColumnNameAndValue("email", email);
+        System.out.println(users);
         return users.isEmpty() ? null : users.get(0);
     }
 
@@ -130,8 +134,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> searchByLetters(String search) {
-        return userDAO.searchByLetters(search);
+    public List<DoctorCabinetUser> searchByLetters(String search) {
+        List<DoctorCabinetUser> userList = new LinkedList<>();
+        userDAO.searchByLetters(search).forEach((i)-> userList.add(mapper.map(i,DoctorCabinetUser.class)));
+        return  userList;
     }
 
     @Override
@@ -159,5 +165,26 @@ public class UserServiceImpl implements UserService {
         updateUser(user);
 
         return user;
+    }
+        @Override
+    public UserUpdate getByEmail(String email){
+       User user= findByEmail(email);
+      UserUpdate userUpdate= new UserUpdate();
+      if(user!=null){
+      mapper.map(user,userUpdate);}
+      if(user.getContact()!=null){
+      mapper.map(user.getContact(),userUpdate);}
+        return  userUpdate;
+    }
+
+    @Override
+    public UserUpdate getById(long id) {
+        User user= userDAO.getEntityByID(id);
+        UserUpdate userUpdate= new UserUpdate();
+        if(user!=null){
+            mapper.map(user,userUpdate);}
+        if(user.getContact()!=null){
+            mapper.map(user.getContact(),userUpdate);}
+        return  userUpdate;
     }
 }

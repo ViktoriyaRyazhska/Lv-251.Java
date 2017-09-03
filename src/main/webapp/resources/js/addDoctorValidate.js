@@ -4,7 +4,6 @@
 
 
 function Validate(oForm) {
-    console.log("in")
  hideErrors();
     var sizeinbytes=0;
      var maxSize=100000;
@@ -72,19 +71,16 @@ if($("#file").val()!=''){
     }
  }
 function  validPhoto(form) {
-    console.log("hello")
     var maxSize=100000;
     var size=0;
     if($("#photo").val()!=''){
        var size = document.getElementById('photo').files[0].size;}
 
     var photoName=$("#photo").val()
-    console.log(photoName)
     var ext = $('#photo').val().split('.').pop().toLowerCase();
 
 
     if(size>maxSize ||$.inArray(ext, ['gif','png','jpg','jpeg','']) == -1 ){
-        console.log("if block");
         $("#errorPhoto").show();
         return false;
     }
@@ -95,4 +91,13 @@ function  validPhoto(form) {
     }
 }
 
+function  validMail() {
+    var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+    if($("#mail-user").val()==''||!$("#mail-user").val().match(emailRegex)){
+        $("#errorMail").show();
+    }else {
+        $("#errorMail").hide();
+    }
+
+}

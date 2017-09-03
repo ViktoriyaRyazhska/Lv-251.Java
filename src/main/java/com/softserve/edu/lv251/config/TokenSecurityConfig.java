@@ -5,7 +5,6 @@ package com.softserve.edu.lv251.config;
  */
 
 import com.softserve.edu.lv251.idl.WebRoles;
-import com.softserve.edu.lv251.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,16 +23,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class TokenSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
-
-    @Autowired
     private TokenAuthenticationManager tokenAuthenticationManager;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/rest/api/**")
-                .csrf().
-                disable()
+                .csrf()
+                .disable()
                 .headers().frameOptions().sameOrigin()
                 .and()
                 .addFilterBefore(restTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
@@ -44,14 +40,11 @@ public class TokenSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/rest/api/user/**")
                 .hasAuthority(WebRoles.ROLE_USER.name())
 
-
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
-                .exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint());
+                .exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint())
         ;
-
-
     }
 
     @Bean(name = "restTokenAuthenticationFilter")
@@ -61,6 +54,5 @@ public class TokenSecurityConfig extends WebSecurityConfigurerAdapter {
 
         return restTokenAuthenticationFilter;
     }
-
 
 }

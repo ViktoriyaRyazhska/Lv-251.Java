@@ -1,3 +1,16 @@
-<p>
-  clinics works!
-</p>
+<div class="container">
+  <app-clinics-edit (submit)="OnSubmitChange($event)"></app-clinics-edit>
+</div>
+<div class="container">
+  <div class="row row-content" style="width: 70%; position: relative; float: left">
+    <app-clinics-list *ngFor="let item of activeClinics" [clinic]="item"></app-clinics-list>
+  </div>
+  <div style="padding-top: 1.55%;">
+    <agm-map style="width: 30%; float: right; position: relative" #map style="height: 300px;"
+             [latitude]='49.8327216'
+             [longitude]='23.995499'>
+      <agm-marker [latitude]='49.8327216' [longitude]='23.995499'></agm-marker>
+      <agm-marker *ngFor="let item of activeClinics"  [latitude]='item.latitude' [longitude]='item.longitude' [label]='item.name'></agm-marker>
+    </agm-map>
+  </div>
+</div>

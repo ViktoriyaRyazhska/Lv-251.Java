@@ -18,4 +18,5 @@ public interface DoctorDAO extends BaseDAO<Doctor>{
     List<Doctor>getWithOffsetAndLimit(int offset, int limit);
     List<Doctor>searchByNameAndSpecialisationWithOffsetAndLimit(String value, int offset, int limit);
     List<Doctor>getByClinic(Clinic clinic);
+    List<Doctor>getDoctorsByUser(long id);
 }

@@ -1,5 +1,7 @@
 
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {User} from "../models/user";
+import {AuthenticationService} from "../auth/authentication.service";
 
 
 @Component({
@@ -9,9 +11,13 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  user:User=JSON.parse(localStorage.getItem("currentUser"));
 
-  ngOnInit() {
+  constructor() {
+
   }
 
+  ngOnInit() {
+
+  }
 }

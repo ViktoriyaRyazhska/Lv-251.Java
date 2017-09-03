@@ -1,18 +1,77 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li><a routerLink="/home">Home</a></li>
-        <li><a routerLink="/clinics">Clinics</a></li>
-        <li><a routerLink="/doctors">Doctors</a></li>
-        <li><a routerLink="/contact">Contact</a></li>
-        <li><a routerLink="/personal-cabinet">Personal Cabinet</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right" >
-        <li class="dropdown" appDropdown>
-          <a href="#" class="dropdown-toggle" role="button">LogIn <span class="caret"></span></a>
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+              aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand hidden-md hidden-sm" href="/">
+        <img src="../../assets/heartbeat2.png" height=35 width=100>
+      </a>
 
+
+    </div>
+
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul  class="nav navbar-nav">
+        <li class="active">
+          <a routerLink="/">
+            <span class="glyphicon glyphicon-home"></span>
+            Home
+          </a>
         </li>
+        <li class="">
+          <a routerLink="/clinics">
+            <span class="glyphicon glyphicon-plus-sign"></span>Clinics
+          </a>
+        </li>
+        <li class="">
+          <a routerLink="/doctors">
+            <span class="glyphicon glyphicon-user"></span>Doctors
+          </a>
+        </li>
+
+        <li class="">
+          <a routerLink="/contact">
+            <i class="fa fa-envelope-o"></i>Contact
+          </a>
+        </li>
+
+        <li *ngIf="user!==null">
+          <a routerLink="/personal-cabinet">
+            <i class="fa fa-id-card"></i>
+            Personal Cabinet
+          </a>
+        </li>
+        <li>
+          <a class="navbar-brand pull-right hidden-xs hidden-md hidden-sm" href="">
+            <img src="../../assets/heartbeat2.png" height=35 width=100>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a type="text" *ngIf="user!==null">
+          <!--{{user.name}}{{user.lastName}}-->
+          </a>
+        </li>
+
+
+        <li *ngIf="user===null">
+          <a  type="button" id="logoutBtn1" style="cursor:pointer;" routerLink="/login">
+            <span class="glyphicon glyphicon-log-out"></span> Login
+          </a>
+        </li>
+        <li *ngIf="user!==null">
+          <a  type="button" id="logoutBtn" style="cursor:pointer;" routerLink="/logout">
+            <span class="glyphicon glyphicon-log-out"></span> Logout
+          </a>
+        </li>
+
       </ul>
     </div>
   </div>

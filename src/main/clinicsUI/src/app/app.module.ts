@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -14,6 +13,28 @@ import { ModeratorCabinetComponent } from './moderator-cabinet/moderator-cabinet
 import {UserCabinetProfileComponent} from './user-cabinet/user-cabinet-profile/user-cabinet-profile.component';
 import {AppRoutingModule} from './app-routing-module';
 
+import {UserCabinetMedicalComponent} from './user-cabinet/user-cabinet-medical/user-cabinet-medical.component';
+import {FormsModule, NgModel, ReactiveFormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {UserService} from "./user.service";
+import { UserCabinetDoctorsComponent } from './user-cabinet/user-cabinet-doctors/user-cabinet-doctors.component';
+import { AppointmentsHistoryComponent } from './user-cabinet/user-cabinet-medical/appointments-history/appointments-history.component';
+import { LoginComponent } from './auth/login/login.component';
+import {AuthenticationService} from "./auth/authentication.service";
+import {AlertService} from "./auth/alert.service";
+
+
+// import { RegistrationComponent } from './auth/registration/registration.component';
+// import { ClinicsEditComponent } from './clinics/clinics-edit/clinics-edit.component';
+// import { ClinicsListComponent } from './clinics/clinics-list/clinics-list.component';
+import {ContactService} from "./contacts/contact.service";
+import {ClinicsEditComponent} from "./clinics/clinics-edit/clinics-edit.component";
+import {ClinicsListComponent} from "./clinics/clinics-list/clinics-list.component";
+import { RegistrationComponent } from './auth/registration/registration.component';
+import {RegistrationService} from "./auth/registration/registration.service";
+
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,13 +47,28 @@ import {AppRoutingModule} from './app-routing-module';
     UserCabinetComponent,
     DoctorCabinetComponent,
     ModeratorCabinetComponent,
-    UserCabinetProfileComponent
+    UserCabinetProfileComponent,
+    UserCabinetMedicalComponent,
+    UserCabinetDoctorsComponent,
+    AppointmentsHistoryComponent,
+    ClinicsEditComponent,
+    ClinicsListComponent,
+    LoginComponent,
+    RegistrationComponent
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDVONjkQbC8wtyxPapK8TvGe8IbIYfIIEA'
+    })
   ],
-  providers: [],
+
+  providers: [UserService,AuthenticationService,AlertService,ContactService, RegistrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

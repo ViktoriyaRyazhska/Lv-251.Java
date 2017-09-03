@@ -1,5 +1,4 @@
 package com.softserve.edu.lv251.controllers.rest;
-
 import com.softserve.edu.lv251.dto.pojos.AppointmentDTO;
 import com.softserve.edu.lv251.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;

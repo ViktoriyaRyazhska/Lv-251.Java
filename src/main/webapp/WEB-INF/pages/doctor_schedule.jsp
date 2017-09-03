@@ -9,6 +9,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
+<%@taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -48,13 +49,13 @@
 
         $(document).ready(function () {
 
-            var dialogInstance2 = new BootstrapDialog();
-            dialogInstance2.setTitle('Wrong input!');
-            dialogInstance2.setMessage('Wrong input!');
-            dialogInstance2.setType(BootstrapDialog.TYPE_DANGER);
+            var DangerDialogWindow = new BootstrapDialog();
+            DangerDialogWindow.setTitle('Wrong input!');
+            DangerDialogWindow.setMessage('Wrong input!');
+            DangerDialogWindow.setType(BootstrapDialog.TYPE_DANGER);
 
             // Using chain callings
-            var dialogInstance3 = new BootstrapDialog()
+            var SuccessDialogWindow = new BootstrapDialog()
                 .setTitle('Success!')
                 .setMessage('Event added')
                 .setType(BootstrapDialog.TYPE_SUCCESS);
@@ -71,7 +72,7 @@
                     contentType: 'application/json'
                 },
                 eventClick: function (event) {
-                    if (event.color === "#E53935") {
+                    if (event.status === "PASSIVE") {
                         $(this).confirmation({
                             title: "Do you want to confirm?",
                             container: 'body',
@@ -143,7 +144,7 @@
                     };
                 },
                 onSelect: function (suggestion) {
-                    $("#temp1").html(suggestion.data);
+                    $("#successinfo").html(suggestion.data);
                 }
 
             });
@@ -151,28 +152,28 @@
 
 
             $( "#control-button" ).click(function() {
-                if ($("#first-date").val() !== "" && $("#temp1").html() !== "") {
+                if ($("#first-date").val() !== "" && $("#successinfo").html() !== "") {
                     $.ajax({
                         url: '/user/addApp/',
                         method: 'POST',
                         data: {
                             "datatime": $("#first-date").val(),
-                            "input": $("#temp1").html()
+                            "input": $("#successinfo").html()
                         },
                         success: function (result) {
                             $('#calendar').fullCalendar('rerenderEvents');
                             $('#calendar').fullCalendar('refetchEvents');
                             $('#calendar').fullCalendar('refresh');
                             $("#first-date").val("");
-                            $("#temp1").html("");
+                            $("#successinfo").html("");
                             $("#autocom").val("");
-                            dialogInstance3.open();
+                            SuccessDialogWindow.open();
                         }
                     });
                 }
                 else
                 {
-                    dialogInstance2.open();
+                    DangerDialogWindow.open();
                 }
 
             });
@@ -413,7 +414,7 @@
                 <a href="#" class='list-group-item active'>
                     <spring:message code="messages.schedule"/>
                 </a>
-                <a href="#" class="list-group-item">
+                <a href=<c:url value="/doctor/patients"/> class="list-group-item">
                     <spring:message code="messages.patients"/>
                 </a>
             </div>
@@ -498,7 +499,7 @@
 </div>
 
 
-<p style="display: none" id = "temp1" name="allInfo"></p>
+<p style="display: none" id = "successinfo" name="allInfo"></p>
 </body>
 </html>
 
