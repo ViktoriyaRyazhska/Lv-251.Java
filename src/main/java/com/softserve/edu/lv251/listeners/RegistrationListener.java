@@ -52,14 +52,16 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         userService.createVerificationToken(user, token);
 
         String recipientAddress = user.getEmail();
-        String subject = "Registration Confirmation";
+        String subject = messageSource.getMessage("messages.regConfirmTitle", null, LocaleContextHolder.getLocale());
         String confirmationUrl = event.getAppUrl() + "/registrationConfirm?token=" + token;
-        String message = messageSource.getMessage("message.regSucc", null, LocaleContextHolder.getLocale());
+        String greetings = messageSource.getMessage("messages.regGreetings", null, LocaleContextHolder.getLocale())
+                + " " + user.getFirstname() + " " + user.getLastname() + "!" + System.lineSeparator();
+        String message = messageSource.getMessage("messages.regSuccessful", null, LocaleContextHolder.getLocale());
 
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setTo(recipientAddress);
         simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(message + Constants.HOME + confirmationUrl);
+        simpleMailMessage.setText(greetings + message + System.lineSeparator() + Constants.HOME + confirmationUrl);
 
         javaMailSender.send(simpleMailMessage);
         logger.info(simpleMailMessage);

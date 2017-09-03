@@ -79,13 +79,12 @@
                 style="pointer-events:none; float:left; white-space: pre;">invalid</span>
               <span id="matchPsw"></span>
             </div>
-
-            <div class="form-group">
-              <button class="btn btn-info">Register</button>
-            </div>
-            <div>
-            </div>
-          </form>
+          <div class="form-group">
+            <button [disabled]="!regForm.valid"  (click)="onSend()" class="btn btn-info">Register</button>
+          </div>
+          <div>
+          </div>
+        </form>
         </div>
       </div>
     </div>

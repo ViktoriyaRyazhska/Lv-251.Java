@@ -7,7 +7,8 @@ public interface Constants {
 
     String BASE_PACKAGE = "com.softserve.edu.lv251";
     String MESSAGES_SOURCE = "classpath:messages";
-    String HOME = "http://localhost:8080";
+    //for localhost use HOME = "http://localhost:8080";
+    String HOME = "https://clinics-ua.herokuapp.com";
 
     interface Database {
         String PROPERTY_SOURCE = "classpath:db.properties";
