@@ -268,5 +268,8 @@
 <script src="<c:url value="/resources/js/sockjs-0.3.4.js"/>"></script>
 <script src="<c:url value="/resources/js/stomp.js"/>"></script>
 <script src="<c:url value="/resources/js/chat.js"/>"></script>
+
+<script  src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+<script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 </body>
 </html>

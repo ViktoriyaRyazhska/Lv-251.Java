@@ -15,7 +15,7 @@ function init() {
         for (var i = 0; i < patients.length; i++) {
             var item = patients[i];
             if(item.fullName.toString().toLowerCase().includes(val)){
-                addItem(item.id, item.fullName);
+                addItem2(item.id, item.fullName);
             }
         }
     });
@@ -24,7 +24,9 @@ function init() {
 
 
 function loadData() {
-    var searchValue = document.getElementById("search").value;
+    // var searchValue = document.getElementById("search").value;
+    var searchValue = "";
+
 
     $.ajax({
         type: "GET",
@@ -37,10 +39,9 @@ function loadData() {
             for (var i = 0; i < patients.length; i++) {
 
                 var item = patients[i];
-                addItem(item.id, item.fullName);
+                addItem2(item.id, item.fullName);
 
             }
-
         },
         error: function (response) {
 
@@ -58,6 +59,17 @@ function addItem(id, text){
     tbody.appendChild(tr);
 }
 
+
+function addItem2(id, text){
+    if(text==null){
+        text = "no name";
+    }
+    var dataItems = {
+        "Name" : text,
+        "id" : id};
+
+    $('#template').tmpl(dataItems).appendTo('#dynamic-list');
+}
 
 function clearAll(){
     var tbody = document.getElementById("dynamic-list");
