@@ -48,6 +48,8 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     @Autowired
     private Mapper mapper;
+    @Autowired
+    private ContactsService contactsService;
 
     @Override
     public void addDoctor(Doctor doctor) {
@@ -279,37 +281,32 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
         Clinic clinic = clinicService.getClinicByID(moderator.getClinic().getId());
         Doctor doctor = new Doctor();
         User user = userService.findByEmail(userToDoctor.getEmail());
-
+        Contact contact= new Contact();
+        contact.setEmail(user.getEmail());
+        contactsService.addContacts(contact);
         doctor.setFirstname(user.getFirstname());
         doctor.setLastname(user.getLastname());
         doctor.setPassword(user.getPassword());
         doctor.setEmail(user.getEmail());
         doctor.setPhoto(user.getPhoto());
-        doctor.setSpecialization(specializationService.findByName(userToDoctor.getSpecialization()));
+        if (specializationService.findByName(userToDoctor.getSpecialization())!=null){
+        doctor.setSpecialization(specializationService.findByName(userToDoctor.getSpecialization()));}
+        else
+            {Specialization specialization = new Specialization();
+            specialization.setName(userToDoctor.getSpecialization());
+        }
         doctor.setClinic(clinic);
-        doctor.setContact(user.getContact());
+        doctor.setContact(contact);
         doctor.setDescription(userToDoctor.getDescription());
         doctor.setRoles(Arrays.asList(
                 rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
                 rolesService.findByName(WebRoles.ROLE_USER.name())));
         addDoctor(doctor);
-        userService.deleteUser(user);
+//        userService.deleteUser(user);
     }
 
     @Override
-//<<<<<<< HEAD
-//    public List<DoctorInfoDTO> getDoctorsByUser(long id) {
-//        System.out.println("before");
-//        List<Doctor> doctors = doctorDAO.getDoctorsByUser(id);
-//        System.out.println(doctors);
-//        List<DoctorInfoDTO> results = new ArrayList<>();
-//        for (Doctor doctor : doctors) {
-//            DoctorInfoDTO result = new DoctorInfoDTO();
-//            mapper.map(doctor, result);
-//            results.add(result);
-//        }
-//        return results;
-//=======
+
     public List<DoctorRespondDTO> getDoctorsByUser(long userId) {
         List<DoctorRespondDTO> doctorRespondDTOS = new LinkedList<>();
         Date date = new Date();

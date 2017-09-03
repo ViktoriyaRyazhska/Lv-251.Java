@@ -90,7 +90,7 @@
 
 
                                         <div style="position:relative;">
-                                            <div id="errorPhoto" style="display: none;color: darkred"> More then 100Kb of Invalid Format</div>
+                                            <div id="errorPhoto" style="display: none;color: darkred"> More then 100Kb or Invalid Format</div>
                                                 <a class='btn btn-file' href='javascript:;'>
                                                     Choose File...
                                                     <form:errors path="multipartFile"></form:errors>
