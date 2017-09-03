@@ -1,46 +1,81 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title">"contactUs"</h4>
+      <h4 class="modal-title">Contact Us</h4>
     </div>
 
     <div class="modal-body">
-      <!--<div role="alert">1111111111</div>-->
+      <form [formGroup]="contactUsForm" (ngSubmit)="onSubmit()">
 
-      <div class="form-group">
-        Contact Name
-        <input placeholder="name" type="text" class="form-control"/>
-      </div>
+        <div class="form-group">
+          <label for="name">Contact Name</label>
+          <input
+            id="name"
+            placeholder="Name"
+            type="text"
+            class="form-control"
+            formControlName="name"/>
+          <span
+            *ngIf="!contactUsForm.get('name').valid && contactUsForm.get('name').touched"
+            class="help-block">Please enter username.</span>
+        </div>
 
-      <div class="form-group">
-        Contact Email
-        <input type="email" class="form-control"
-               placeholder="email"/>
-      </div>
+        <div class="form-group">
+          <label for="email">Contact Email</label>
+          <input
+            id="email"
+            type="email"
+            class="form-control"
+            placeholder="E-mail"
+            formControlName="email"/>
+          <span
+            *ngIf="!contactUsForm.get('email').valid && contactUsForm.get('email').touched"
+            class="help-block">Please enter correct email.</span>
+        </div>
 
-      <div class="form-group">
-        Contact Mobile
-        <input type="text" class="form-control"
-               placeholder="phone"/>
-      </div>
+        <div class="form-group">
+          <label for="phone">Contact Phone</label>
+          <input
+            id="phone"
+            type="number"
+            class="form-control"
+            placeholder="Phone"
+          formControlName="phone"/>
 
-      <div class="form-group">
-        Contact Subject
-        <input type="text" class="form-control"
-               placeholder="subject"/>
-      </div>
+        </div>
 
-      <div class="form-group">
-        Contact Message
-        <textarea class="form-control" rows="13" placeholder="Message">
-          </textarea>
-      </div>
-      <hr>
-      <div class="form-group">
-        <button class="btn btn-info form-control">Contact Button</button>
-      </div>
+        <div class="form-group">
+        <label for="subject">Contact Subject</label>
+          <input
+            id="subject"
+            type="text"
+            class="form-control"
+            placeholder="Subject"
+            formControlName="subject"/>
+          <span
+            *ngIf="!contactUsForm.get('subject').valid && contactUsForm.get('subject').touched"
+            class="help-block">Please enter subject.</span>
+        </div>
 
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            class="form-control"
+            rows="4"
+            placeholder="Message"
+            formControlName="message"></textarea>
+          <span
+            *ngIf="!contactUsForm.get('message').valid && contactUsForm.get('message').touched"
+            class="help-block">Please enter message.</span>
+        </div>
+        <hr>
+        <div class="form-group">
+          <button [disabled]="!contactUsForm.valid" class="btn btn-info form-control" (click)="onSend()">Send</button>
+        </div>
+      </form>
 
+      <button class="btn btn-info form-control" (click)="onSend()">Send111111</button>
     </div>
   </div>
 </div>

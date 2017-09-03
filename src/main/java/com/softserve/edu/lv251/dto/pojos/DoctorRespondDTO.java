@@ -15,14 +15,23 @@ public class DoctorRespondDTO {
 
     private String specialization;
 
-
     private String photo;
+
+    private boolean responded;
 
     public DoctorRespondDTO() {
     }
 
     public String getPhoto() {
         return photo;
+    }
+
+    public boolean isResponded() {
+        return responded;
+    }
+
+    public void setResponded(boolean responded) {
+        this.responded = responded;
     }
 
     public void setPhoto(String photo) {
@@ -67,5 +76,28 @@ public class DoctorRespondDTO {
 
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DoctorRespondDTO that = (DoctorRespondDTO) o;
+
+        if (id != that.id) return false;
+        if (!firstname.equals(that.firstname)) return false;
+        if (!lastname.equals(that.lastname)) return false;
+        if (!clinic.equals(that.clinic)) return false;
+        return specialization.equals(that.specialization);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + firstname.hashCode();
+        result = 31 * result + lastname.hashCode();
+        result = 31 * result + clinic.hashCode();
+        return result;
     }
 }

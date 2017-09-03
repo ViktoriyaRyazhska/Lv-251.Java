@@ -1,7 +1,6 @@
 package com.softserve.edu.lv251.controllers.rest;
 
 import com.softserve.edu.lv251.entity.User;
-import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

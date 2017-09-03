@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.service;
 
+import com.softserve.edu.lv251.dto.pojos.DoctorRespondDTO;
 import com.softserve.edu.lv251.dto.pojos.RespondDTO;
 import com.softserve.edu.lv251.entity.Respond;
 
@@ -13,6 +14,8 @@ public interface RespondService {
     List<RespondDTO> getAllRespondsByDoctor(long doctorId);
 
     boolean AddRespond(short raiting, String description, long userId, long doctorId);
+
+    List<DoctorRespondDTO> setResponded(long userId, List<DoctorRespondDTO> doctorRespondDTOS);
 
     List<Respond> getAllRespondsByUser(long userId);
 }

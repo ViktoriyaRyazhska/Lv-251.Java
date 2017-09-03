@@ -191,6 +191,7 @@
                                     </label>
                                     <input id="password" name="j_password" type="password" class="form-control"
                                            placeholder="<spring:message code="messages.password"/>"/>
+
                                 </div>
                                 <div class="form-group">
                                     <input id="remember" type="checkbox" name="remember-me" value="true">
@@ -264,8 +265,8 @@
 <script src="<c:url value="/resources/js/profile.js"/>"></script>
 <script src="<c:url value="/resources/js/matchPassword.js"/>"></script>
 <script src="<c:url value="/resources/js/addDoctorValidate.js"/>"></script>
-<script src="/resources/js/sockjs-0.3.4.js"></script>
-<script src="/resources/js/stomp.js"></script>
+<script src="<c:url value="/resources/js/sockjs-0.3.4.js"/>"></script>
+<script src="<c:url value="/resources/js/stomp.js"/>"></script>
 <script src="<c:url value="/resources/js/chat.js"/>"></script>
 
 <script  src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>

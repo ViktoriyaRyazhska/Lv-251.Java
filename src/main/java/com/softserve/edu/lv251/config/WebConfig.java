@@ -3,6 +3,7 @@ package com.softserve.edu.lv251.config;
 import com.softserve.edu.lv251.constants.Constants;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InjectionPoint;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -89,10 +90,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      * Created by Taras
      */
     @Bean
-    public ReloadableResourceBundleMessageSource messageSource() {
+    public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setDefaultEncoding("UTF-8");
         messageSource.setBasename(Constants.MESSAGES_SOURCE);
+        messageSource.setDefaultEncoding("UTF-8");
 
         return messageSource;
     }
@@ -114,6 +115,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         javaMailSender.setPort(Constants.Mail.PORT);
         javaMailSender.setUsername(Constants.Mail.MAIL);
         javaMailSender.setPassword(Constants.Mail.PASSWORD);
+
+        javaMailSender.setDefaultEncoding("UTF-8");
 
         Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.smtp.starttls.enable", "true");
@@ -162,4 +165,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.favorPathExtension(false);
+    }
 }

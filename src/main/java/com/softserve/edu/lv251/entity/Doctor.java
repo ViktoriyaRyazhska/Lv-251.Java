@@ -14,7 +14,7 @@ public class Doctor extends User {
 
     @Column(length = 10000)
     private String description;
-    @JsonIgnore
+
     @ManyToOne(cascade =
             {
                     CascadeType.DETACH,
@@ -24,7 +24,7 @@ public class Doctor extends User {
             })
     private Clinic clinic;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "doctor", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<Appointment> docAppointments;
 

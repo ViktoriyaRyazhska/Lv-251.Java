@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * Created by Admin on 21.07.2017.
  */
 @Service("doctorService")
-public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements DoctorsService {
+public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements DoctorService {
 
     @Autowired
     private ContactDAO contactDAO;
@@ -77,6 +77,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     @Override
     public List<DoctorsSearchDTO> searchByLetters(String letters) {
         List<Doctor> doctors = doctorDAO.searchByLetters(letters);
+        System.out.println(doctors);
         List<DoctorsSearchDTO> results = new ArrayList<>();
 
         for (Doctor doctor : doctors) {
@@ -179,7 +180,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     @Override
     public List<Doctor> getByClinic(Long clinicId) {
         List<Doctor> doctors = doctorDAO.getEntitiesByColumnNameAndValue("clinic", clinicId);
-        return  doctors;
+        return doctors;
     }
 
     public List<DoctorsSearchDTO> getByClinic(Clinic clinic) {
@@ -296,23 +297,42 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     }
 
     @Override
+//<<<<<<< HEAD
+//    public List<DoctorInfoDTO> getDoctorsByUser(long id) {
+//        System.out.println("before");
+//        List<Doctor> doctors = doctorDAO.getDoctorsByUser(id);
+//        System.out.println(doctors);
+//        List<DoctorInfoDTO> results = new ArrayList<>();
+//        for (Doctor doctor : doctors) {
+//            DoctorInfoDTO result = new DoctorInfoDTO();
+//            mapper.map(doctor, result);
+//            results.add(result);
+//        }
+//        return results;
+//=======
     public List<DoctorRespondDTO> getDoctorsByUser(long userId) {
         List<DoctorRespondDTO> doctorRespondDTOS = new LinkedList<>();
         Date date = new Date();
 
-        for (Doctor doctor: doctorDAO.getAllEntities()) {
-            for (Appointment appointment: doctor.getDocAppointments()) {
-                if(appointment.getUser().getId() == userId
-                        ){
-                    doctorRespondDTOS.add(mapper.map(doctor,DoctorRespondDTO.class));
+        doctorDAO.getAllEntities().forEach(doctor -> {
+            doctor.getDocAppointments().forEach(appointment -> {
+                if (appointment.getUser().getId() == userId
+//                        && appointment.getIsApproved()
+//                        && appointment.getAppointmentDate().before(date)
+                        ) {
+                    doctorRespondDTOS.add(mapper.map(doctor, DoctorRespondDTO.class));
                 }
-            }
-        }
-        return doctorRespondDTOS;
+            });
+        });
+
+
+        return doctorRespondDTOS.stream().distinct().collect(Collectors.toList());
     }
+
 
     @Override
     public Doctor getById(long doctorId) {
         return doctorDAO.getEntityByID(doctorId);
+
     }
 }

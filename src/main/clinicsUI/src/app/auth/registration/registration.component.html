@@ -1,0 +1,91 @@
+<div class="modal-dialog">
+    <div class="row">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">"messages.createAccount"</h4>
+        </div>
+        <div class="modal-header">
+          <form [formGroup]="regForm">
+            <div class="form-group">
+              <input
+                class="form-control"
+                id="firstName"
+                formControlName="firstname"
+                placeholder="First name"
+                type="text"
+                autofocus="true">
+              <span
+                class="help-block"
+                *ngIf="!regForm.get('firstname').valid && regForm.get('firstname').touched"
+                style="pointer-events:none; float:left; white-space: pre;">invalid</span>
+            </div>
+
+            <div class="form-group">
+              <input
+                class="form-control"
+                id="lastName"
+                formControlName="lastname"
+                placeholder="Last name"
+                type="text"/>
+              <span
+                class="help-block"
+                *ngIf="!regForm.get('lastname').valid && regForm.get('lastname').touched"
+                style="pointer-events:none; float:left; white-space: pre;">invalid</span>
+            </div>
+
+            <div class="form-group">
+              <label class="sr-only">email</label>
+              <input
+                class="form-control"
+                id="email"
+                formControlName="email"
+                placeholder="E-mail"
+                type="email"/>
+              <span
+                class="help-block"
+                *ngIf="!regForm.get('email').valid && regForm.get('email').touched"
+                style="pointer-events:none; float:left; white-space: pre;">invalid</span>
+            </div>
+
+            <div class="form-group" id="eye_wrapper">
+              <div id="wrapper">
+                <label class="sr-only"></label>
+                <input
+                  id="password"
+                  formControlName="password"
+                  style="background-color: inherit; z-index: -1"
+                  placeholder="Password"
+                  type="password"
+                  class="form-control"/>
+              </div>
+              <span
+                class="help-block"
+                *ngIf="!regForm.get('password').valid && regForm.get('password').touched"
+                style="pointer-events:none; float:left; white-space: pre;">invalid</span>
+            </div>
+
+            <div class="form-group">
+              <label class="sr-only">passwordConfirm</label>
+              <input
+                id="passwordConfirm"
+                formControlName="passwordConfirm"
+                style="z-index: 0"
+                placeholder="Confirm password"
+                class="form-control"
+                type="password"/>
+              <span
+                class="help-block"
+                *ngIf="!regForm.get('passwordConfirm').valid && regForm.get('passwordConfirm').touched"
+                style="pointer-events:none; float:left; white-space: pre;">invalid</span>
+              <span id="matchPsw"></span>
+            </div>
+          <div class="form-group">
+            <button [disabled]="!regForm.valid"  (click)="onSend()" class="btn btn-info">Register</button>
+          </div>
+          <div>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
