@@ -16,6 +16,8 @@ public interface DoctorService {
 
     List<Doctor> getAll();
 
+    List<DoctorsSearchDTO> getAllDoctors();
+
     void update(Doctor doctor);
 
     Doctor find(long id);
