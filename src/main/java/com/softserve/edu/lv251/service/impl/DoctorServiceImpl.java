@@ -60,6 +60,13 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     }
 
     @Override
+    public List<DoctorsSearchDTO> getAllDoctors() {
+        List<DoctorsSearchDTO> list = new LinkedList<>();
+        doctorDAO.getAllEntities().forEach((doctor)-> list.add(mapper.map(doctor,DoctorsSearchDTO.class)));
+        return list;
+    }
+
+    @Override
     public void update(Doctor doctor) {
         doctorDAO.updateEntity(doctor);
     }
