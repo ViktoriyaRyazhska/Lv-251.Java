@@ -77,7 +77,7 @@ function clinicsAll() {
                     $(".content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                         "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                         "<img width=200' height='200' src='data:image/jpeg;base64,"+result.photo+"' alt='...'></a></div>"+
-                        "<a href='"+"clinics/details/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.clinic_name+"</span></a><p>"+result.description+"</p>"+
+                        "<a href='"+"/clinics/details/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.clinic_name+"</span></a><p>"+result.description+"</p>"+
                         " </div> </div>");
 
                 }
@@ -129,7 +129,7 @@ function clinicsByDistrict() {
                         $(".content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='data:image/jpeg;base64,"+res[i].photo+"' alt='...'></a></div>"+
-                            "<a href='"+"clinics/details/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].clinic_name+"</span></a><p>"+res[i].description+"</p>"+
+                            "<a href='"+"/clinics/details/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].clinic_name+"</span></a><p>"+res[i].description+"</p>"+
                             " </div> </div>");
                     }
 
@@ -178,7 +178,7 @@ function doctorsByDistrict() {
                         $("#content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='data:image/jpeg;base64,"+res[i].photo+"' alt='...'></a></div>"+
-                            "<a href='"+"clinics/details/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
+                            "<a href='"+"/clinics/details/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
                             "<p>"+specialization+":"+res[i].specialisation+"</p><hr> <p>"+res[i].clinicName+"</p></div> </div>");
                     }
 

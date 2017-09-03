@@ -6,6 +6,8 @@ import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
 import com.softserve.edu.lv251.entity.Contact;
+
+import com.softserve.edu.lv251.entity.Message;
 import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.service.*;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -44,6 +47,8 @@ public class UserCabinetController {
 
     @Autowired
     private Mapper mapper;
+    @Autowired
+    private MessageService messageService;
 
     /**
      * Author: Brynetskyi Marian
@@ -56,14 +61,14 @@ public class UserCabinetController {
         Contact contact = user.getContact();
         PersonalInfoDTO personalInfoDTO = new PersonalInfoDTO();
         PasswordDTO passwordDTO = new PasswordDTO();
-
+        List<Message> messages= messageService.getAll();
         mapper.map(user, personalInfoDTO);
 
         mapper.map(contact, personalInfoDTO);
         model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
         model.addAttribute(Constants.Controller.PERSONAL_INFO_DTO, personalInfoDTO);
         model.addAttribute(Constants.Controller.PASSWORD_DTO, passwordDTO);
-
+        model.addAttribute("messages",messages);
         return "userCabinet";
     }
 
