@@ -1,3 +1,5 @@
-<p>
-  doctors works!
-</p>
+<app-doctor-edit (doctorDetails)="onRecieveInfo($event)"></app-doctor-edit>
+<div class="container">
+  <app-doctor-list *ngFor="let doctor of activeDoctors" [doctor]="doctor"></app-doctor-list>
+</div>
+

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row" style="margin-top: 50px">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-form " style="width: 95%">
+          <div class="form-group" style="width: 90%">
+            <select #select class="selectpicker form-control" style="width:18% " id="selectDocOrClinic" (change)="onSelect()">
+              <option value="1">Search by doctor's name</option>
+              <option value="2">Search by doctor's specialization</option>
+            </select>
+            <div class="input-group "  style="width: 60%">
+                                <span class="input-group-addon" id="sizing-addon1"  style="width: 8%"><i class="fa fa-ambulance change"
+                                                                                                         aria-hidden="true"
+                                                                                                         style="color: #226ed9"></i></span>
+              <input #name class="form-control " id="autocomplete"
+                     placeholder='' aria-describedby="sizing-addon1"  (input)="onSmthChange()">
+            </div>
+            <input #district id="autocomplete-districts" class="form-control " style="width: 20%"
+                   placeholder='District'  (input)="onSmthChange()">
+          </div>
+          <a>
+            <button id="main-search-btn" class="btn btn-facebook">Search</button>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>

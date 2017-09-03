@@ -6,5 +6,4 @@ export  class Doctor {
   specialization: string;
   doctorPhoto: string;
   description: string;
-
 }

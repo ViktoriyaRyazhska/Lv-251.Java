@@ -327,10 +327,13 @@ public class Mapper extends ConfigurableMapper {
                 .customize(new CustomMapper<Doctor, DoctorsSearchDTO>() {
                     @Override
                     public void mapAtoB(Doctor doctor, DoctorsSearchDTO doctorsSearchDTO, MappingContext context) {
-                        if(doctor.getClinic()!= null){
-                        doctorsSearchDTO.setClinicName(doctor.getClinic().getClinic_name());}
+                        if(doctor.getClinic()!=null){
+                            doctorsSearchDTO.setClinicName(doctor.getClinic().getClinic_name());
+                        }
                         if(doctor.getSpecialization()!=null){
-                        doctorsSearchDTO.setSpecialisation(doctor.getSpecialization().getName());}
+                            doctorsSearchDTO.setSpecialisation(doctor.getSpecialization().getName());
+                        }
+
                     }
                 }).register();
 
@@ -348,6 +351,26 @@ public class Mapper extends ConfigurableMapper {
                     }
                 })
                 .register();
+
+        factory.classMap(Doctor.class, DoctorSearchAngularDTO.class)
+                .field("id", "id")
+                .field("firstname", "firstname")
+                .field("lastname", "lastname")
+                .field("middlename", "middlename")
+                .field("description", "description")
+                .field("photo", "photo")
+                .customize(new CustomMapper<Doctor, DoctorSearchAngularDTO>() {
+                    @Override
+                    public void mapAtoB(Doctor doctor, DoctorSearchAngularDTO doctorSearchAngularDTO, MappingContext context) {
+                        if(doctor.getClinic()!= null){
+                            doctorSearchAngularDTO.setClinicName(doctor.getClinic().getClinic_name());
+                            doctorSearchAngularDTO.setDistrict(doctor.getClinic().getContact().getDistrict().getName());
+                        }
+                        if(doctor.getSpecialization()!=null){
+                            doctorSearchAngularDTO.setSpecialisation(doctor.getSpecialization().getName());}
+                    }
+                }).register();
+
     }
 
     private void respondConfigure(MapperFactory factory){

@@ -12,13 +12,12 @@ import java.util.List;
 
 @RestController
 @CrossOrigin({"*"})
-public class ClinicsRestAgularController {
+public class ClinicsRestAngularController {
     @Autowired
     ClinicService clinicService;
 
     @RequestMapping(value = "api/getAllClinics", method = RequestMethod.GET)
     List<ClinicsAngularDTO> getAllClinics() {
-        System.out.println(clinicService.getAllClinicsDto());
         return clinicService.getAllClinicsDto();
     }
 }
