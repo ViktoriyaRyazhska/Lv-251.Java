@@ -11,7 +11,7 @@ import {User} from "../../models/user";
 
 })
 export class UserCabinetDoctorsComponent implements OnInit {
-  private doctors: Doctor[] = [];
+  doctors: Doctor[] = [];
   user:User=JSON.parse(localStorage.getItem("currentUser"));
   constructor(private userService: UserService) { }
 

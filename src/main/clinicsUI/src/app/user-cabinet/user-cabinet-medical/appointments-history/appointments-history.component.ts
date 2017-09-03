@@ -10,7 +10,7 @@ import {Appointment} from "../../../models/appointment";
 })
 export class AppointmentsHistoryComponent implements OnInit {
   user:User=JSON.parse(localStorage.getItem("currentUser"));
-  private appointments: Appointment[] = [];
+  appointments: Appointment[] = [];
   constructor(private userService:UserService ) { }
 
   ngOnInit() {
