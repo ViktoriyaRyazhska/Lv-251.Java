@@ -37,7 +37,7 @@ export class DoctorsComponent implements OnInit {
     }
     else {
       for (let doctor of this.doctors) {
-        if (doctor.specialisation !== undefined) {
+        if (doctor.specialisation !== null) {
           if ((doctor.specialisation.toLowerCase().indexOf(event.name.toLowerCase()) >= 0)) {
             this.activeDoctors.push(doctor);
           }
