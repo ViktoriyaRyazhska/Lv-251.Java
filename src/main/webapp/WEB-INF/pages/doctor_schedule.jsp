@@ -116,9 +116,9 @@
                     <c:choose>
                     <c:when test="${docApps.size()>0}">
                     <c:forEach items="${docApps}" var="apointments">
-                    dd = new Date("${apointments.appointmentDate}");
-                    dd.setHours(dd.getHours());
-                    dates.push(dd);
+                    appDate = new Date("${apointments.appointmentDate}");
+                    appDate.setHours(appDate.getHours()+3);
+                    dates.push(appDate);
                     </c:forEach>
                     </c:when>
                     </c:choose>
