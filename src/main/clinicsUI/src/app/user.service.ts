@@ -12,40 +12,48 @@ import {User} from "./models/user";
 @Injectable()
 export  class UserService {
   private baseUrl = 'http://localhost:8080';
-
-
+  currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  token= "";
   constructor(private http: Http) {
   }
 
   updateUser(user: User): Observable<any> {
-    return this.http.post(this.baseUrl + '/api/editUser/' + user.id, user);
+    return this.http.post(this.baseUrl + '/rest/api/editUser/' + "?token="+this.jwt(), user);
   }
 
-  getAppointmentsToUser(userId: number): Observable<any> {
-    return this.http.get(this.baseUrl + '/api/getAppointmentsToUser/' + userId)
+  getAppointmentsToUser(): Observable<any> {
+    return this.http.get(this.baseUrl + '/rest/api/getAppointmentsToUser/'  + "?token="+this.jwt())
       .map((response) => response.json())
       .catch((error) => Observable.throw(error));
   }
 
-  getDoctorsByUser(userId: number): Observable<any> {
-    return this.http.get(this.baseUrl + '/api/getDoctorsToUser/' + userId)
+
+  getPendingAppointmentsToUser(): Observable<any> {
+    return this.http.get(this.baseUrl + '/rest/api/getPendingAppointmentsToUser/'  + "?token="+this.jwt())
+      .map((response) => response.json())
+      .catch((error) => Observable.throw(error));
+  }
+  getDoctorsByUser(): Observable<any> {
+    return this.http.get(this.baseUrl + '/rest/api/getDoctorsToUser/' + "?token="+this.jwt())
       .map((response) => response.json())
       .catch((error) => Observable.throw(error));
   }
 
-  getUserByEmail(id: number): Observable<any> {
-    return this.http.get(this.baseUrl + '/api/getUser/'+ id )
+  getUserByEmail(): Observable<any> {
+    return this.http.get(this.baseUrl + '/rest/api/getUser/' + "?token="+this.jwt())
       .map((response) => response.json())
       .catch((error) => Observable.throw(error));
   }
+
 
 
   private jwt() {
-    // create authorization header with jwt token
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token) {
-      let headers = new Headers({'Authorization': 'Bearer ' + currentUser.token});
-      return new RequestOptions({headers: headers});
+    if (currentUser !==null) {
+     return this.token=currentUser.token;
+
+    }else{
+      return this.token
     }
 
   }

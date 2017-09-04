@@ -28,10 +28,9 @@ export class UserCabinetProfileComponent implements OnInit {
       'address': new FormControl(''),
       'zipCode': new FormControl(''),
     })
-this.userService.getUserByEmail(this.user.id).subscribe(
+this.userService.getUserByEmail().subscribe(
 
   (response)=> {
-    console.log(response)
     this.userUpdate=response;
     this.editUserForm = new FormGroup({
       'name': new FormControl(this.userUpdate.name,Validators.required),

@@ -16,7 +16,7 @@ export class UserCabinetDoctorsComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getDoctorsByUser(this.user.id)
+    this.userService.getDoctorsByUser()
       .subscribe((data)=> {
         console.log(data.length);
         this.doctors = data;

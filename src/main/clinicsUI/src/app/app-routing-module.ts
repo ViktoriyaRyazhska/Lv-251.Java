@@ -12,6 +12,7 @@ import {AppointmentsHistoryComponent} from './user-cabinet/user-cabinet-medical/
 import {LoginComponent} from "./auth/login/login.component";
 import {ContactsComponent} from "./contacts/contacts.component";
 import {RegistrationComponent} from "./auth/registration/registration.component";
+import {PendingAppointmentsComponent} from "./user-cabinet/user-cabinet-medical/pending-appointments/pending-appointments.component";
 
 
 const appRoutes: Routes =[
@@ -29,7 +30,8 @@ const appRoutes: Routes =[
     {path: 'profile', component:UserCabinetProfileComponent },
     {path: 'medical-info' , component: UserCabinetMedicalComponent,children: [
       {path: '', component:AppointmentsHistoryComponent },
-      { path: 'appointments-history', component:AppointmentsHistoryComponent}
+      { path: 'appointments-history', component:AppointmentsHistoryComponent},
+      { path: 'pending-appointments', component:PendingAppointmentsComponent}
     ]},
 
       {path: 'doctors' , component:UserCabinetDoctorsComponent}

@@ -61,11 +61,6 @@ public class GetTokenServiceImpl implements GetTokenService {
 
             TokenAuthenticationDTO authentication = new TokenAuthenticationDTO();
             authentication.setId(userInfo.getId());
-//            authentication.setName(userInfo.getFirstname());
-//            authentication.setLastName(userInfo.getLastname());
-//            authentication.setAddress(userInfo.getContact().getAddress());
-//            authentication.setCity(userInfo.getContact().getCity());
-//            authentication.setDistrict(userInfo.getContact().getDistrict().getName());
             authentication.setToken(token);
             authentication.setEmail(user.getUsername());
             

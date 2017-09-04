@@ -49,10 +49,10 @@
     <div>
         <div class="col-sm-6 appointmentWrapper">
             <div class="appointmentFloatContainer">
-                <button class="btn btn-info" style="margin-top: 15px"
-                data-toggle="modal" data-target="#modal_\${id}">
-                <spring:message code="messages.respond"/>
-                </button>
+                <%--<button class="btn btn-info" style="margin-top: 15px"--%>
+                <%--data-toggle="modal" data-target="#modal_\${id}">--%>
+                <%--<spring:message code="messages.respond"/>--%>
+                <%--</button>--%>
                 </div>
 
             <div class="medical-card">
