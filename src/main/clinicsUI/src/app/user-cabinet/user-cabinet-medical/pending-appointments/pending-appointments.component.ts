@@ -9,7 +9,7 @@ import {User} from "../../../models/user";
   styleUrls: ['../user-cabinet-medical.component.css']
 })
 export class PendingAppointmentsComponent implements OnInit {
-  private appointments: Appointment[] = [];
+   appointments: Appointment[] = [];
 
   constructor(private userService: UserService) {
   }
@@ -19,7 +19,6 @@ export class PendingAppointmentsComponent implements OnInit {
 
     this.userService.getPendingAppointmentsToUser().subscribe((data) => {
       this.appointments = data;
-      console.log(this.appointments)
     }, (error) =>
       console.log(error));
 

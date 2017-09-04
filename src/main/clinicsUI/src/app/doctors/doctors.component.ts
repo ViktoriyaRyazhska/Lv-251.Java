@@ -9,8 +9,8 @@ import {Doctor} from "../models/doctor";
   providers: [DoctorsService]
 })
 export class DoctorsComponent implements OnInit {
-  private doctors: Doctor[];
-  private activeDoctors: Doctor[];
+  doctors: Doctor[];
+  activeDoctors: Doctor[];
 
   constructor(private doctorService: DoctorsService) {
   }

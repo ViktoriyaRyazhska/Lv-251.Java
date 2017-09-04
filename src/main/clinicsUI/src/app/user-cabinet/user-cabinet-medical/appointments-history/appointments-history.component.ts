@@ -9,7 +9,6 @@ import {Appointment} from "../../../models/appointment";
   styleUrls: ['../user-cabinet-medical.component.css']
 })
 export class AppointmentsHistoryComponent implements OnInit {
-  user:User=JSON.parse(localStorage.getItem("currentUser"));
   appointments: Appointment[] = [];
   constructor(private userService:UserService ) { }
 
