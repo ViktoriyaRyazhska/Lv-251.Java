@@ -24,6 +24,7 @@ public class ContactRestController {
 
 
         mailComponent.sendMail(contactDTO);
+        System.out.println("asdasd");
         return true;
     }
 }
