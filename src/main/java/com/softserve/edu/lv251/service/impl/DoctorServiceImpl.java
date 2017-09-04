@@ -297,6 +297,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
             {Specialization specialization = new Specialization();
             specialization.setName(userToDoctor.getSpecialization());
         }
+        doctor.setEnabled(true);
         doctor.setClinic(clinic);
         doctor.setContact(contact);
         doctor.setDescription(userToDoctor.getDescription());
@@ -304,7 +305,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
                 rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
                 rolesService.findByName(WebRoles.ROLE_USER.name())));
         addDoctor(doctor);
-//        userService.deleteUser(user);
     }
 
     @Override

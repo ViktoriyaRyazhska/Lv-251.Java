@@ -34,7 +34,7 @@ public class AllDoctorsController {
     @RequestMapping(value = "/allDoctors/{current}", method = RequestMethod.GET)
     public String allDoctors(@PathVariable("current") Integer chainIndex, Model model) {
 
-        model.addAttribute("getDoctors", pagingSizeService.getEntity(chainIndex, 10));
+        model.addAttribute("getDoctors", pagingSizeService.getEntities(chainIndex, 10));
         model.addAttribute(Constants.Controller.NUMBER_CHAIN, pagingSizeService.numberOfPaging(10));
         model.addAttribute(Constants.Controller.DOC_APPS, appointmentService.getAllDoctorsAppointmentsAfterNow());
         return Constants.Controller.ALL_DOCTORS;
