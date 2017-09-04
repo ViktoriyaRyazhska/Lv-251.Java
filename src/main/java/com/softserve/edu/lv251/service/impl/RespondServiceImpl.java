@@ -76,8 +76,8 @@ public class RespondServiceImpl implements RespondService {
             if (appointmentService.listAppointmensWithUser(userId)
                     .stream()
                     .anyMatch(p -> p.getDoctor().getId() == doctorRespondDTO.getId()
-                            //&& p.getIsApproved()
-                            //&& p.getAppointmentDate().before(date)
+                            && p.getIsApproved()
+                            && p.getAppointmentDate().before(date)
                     )
                     ) {
                 doctorRespondDTO.setResponded(true);
