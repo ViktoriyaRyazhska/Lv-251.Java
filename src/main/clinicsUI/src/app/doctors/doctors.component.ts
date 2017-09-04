@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DoctorsService} from "./doctor-list/doctors.service";
 import {Doctor} from "../models/doctor";
+import {DoctorSearch} from "../models/doctorSearch";
 
 @Component({
   selector: 'app-doctors',
@@ -9,8 +10,8 @@ import {Doctor} from "../models/doctor";
   providers: [DoctorsService]
 })
 export class DoctorsComponent implements OnInit {
-  doctors: Doctor[];
-  activeDoctors: Doctor[];
+  doctors: DoctorSearch[];
+  activeDoctors: DoctorSearch[];
 
   constructor(private doctorService: DoctorsService) {
   }
@@ -36,8 +37,8 @@ export class DoctorsComponent implements OnInit {
     }
     else {
       for (let doctor of this.doctors) {
-        if (doctor.specialization !== undefined) {
-          if ((doctor.specialization.toLowerCase().indexOf(event.name.toLowerCase()) >= 0)) {
+        if (doctor.specialisation !== undefined) {
+          if ((doctor.specialisation.toLowerCase().indexOf(event.name.toLowerCase()) >= 0)) {
             this.activeDoctors.push(doctor);
           }
         }
