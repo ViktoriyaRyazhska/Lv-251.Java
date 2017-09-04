@@ -68,19 +68,19 @@ public class UserCabinetRestController {
     @RequestMapping(value = "/api/getAppointmentsToUser", method = RequestMethod.GET)
     public List<AppointmentsInfoDTO> getAppointments() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
-        return (appointmentService.getAppointmentsToUser(userService.findByEmail(userDetails.getUsername()).getId()));
+        return (appointmentService.getAppointmentsToUser(userDetails.getUsername()));
     }
 
     @RequestMapping(value = "/api/getPendingAppointmentsToUser", method = RequestMethod.GET)
     public List<AppointmentsInfoDTO> getPendingAppointments() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
-        return (appointmentService.getPendingAppointmentsToUser(userService.findByEmail(userDetails.getUsername()).getId()));
+        return appointmentService.getPendingAppointmentsToUser(userDetails.getUsername());
     }
 
     @RequestMapping(value = "/api/getUser", method = RequestMethod.GET)
     public UserUpdate getUser() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
-        return userService.getById(userService.findByEmail(userDetails.getUsername()).getId());
+        return userService.getByEmail(userDetails.getUsername());
 
     }
 }
