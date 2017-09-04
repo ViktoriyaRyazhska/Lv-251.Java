@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.List;
 

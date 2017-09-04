@@ -34,6 +34,8 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import {RegistrationService} from "./auth/registration/registration.service";
 
 import { AgmCoreModule } from '@agm/core';
+import { DoctorEditComponent } from './doctors/doctor-edit/doctor-edit.component';
+import { DoctorListComponent } from './doctors/doctor-list/doctor-list.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { AgmCoreModule } from '@agm/core';
     ClinicsEditComponent,
     ClinicsListComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    DoctorEditComponent,
+    DoctorListComponent
 
   ],
   imports: [

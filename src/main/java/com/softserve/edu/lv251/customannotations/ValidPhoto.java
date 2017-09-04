@@ -1,6 +1,5 @@
 package com.softserve.edu.lv251.customannotations;
 
-
 import com.softserve.edu.lv251.validators.PhotoValidator;
 
 import javax.validation.Constraint;

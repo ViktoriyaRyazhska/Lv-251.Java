@@ -8,7 +8,6 @@ import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.dto.pojos.UserUpdate;
 import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
-import com.softserve.edu.lv251.exceptions.EmailExistsException;
 
 import java.util.List;
 

@@ -9,14 +9,24 @@
             <img class="show-logo" alt="logo" width="200px" src="data:image/jpeg;base64,${doctor.photo}">
             <h4>${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</h4>
             <p>Specialization:${doctor.specialization.name}</p>
+            <div class="row">
+                <div class="container">
+                    <p>${doctor.description}</p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="card">
-        <div class="card-block">
-            <p>${doctor.description}</p>
+        <div class="container">
+            <h4><spring:message code="messages.responds"/></h4>
         </div>
-        <h4>Responds</h4>
-
+        <c:if test="${responds.size() == 0}">
+        <div class="card">
+            <div class="container">
+                <h5><spring:message code="messages.noResponds"/></h5>
+            </div>
+        </div>
+        </c:if>
         <c:forEach items="${responds}" var="respond">
             <div class="card">
                 <div class="container">
@@ -25,14 +35,14 @@
                             <p style="font-size: medium">${respond.userFullName} :</p>
                             <p style="font-size: small">${respond.date}</p>
                         </div>
-                        <div class="col-xs-7">
+                        <div class="col-xs-6">
                             <div class="container">
                                 <p style="font-size: medium">
                                         ${respond.description}
                                 </p>
                             </div>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-xs-3">
                             <c:forEach begin="1" end="${respond.raiting}" varStatus="loop">
                                 <span style="font-size:200%;color:yellow;">&starf;</span>
                             </c:forEach>
