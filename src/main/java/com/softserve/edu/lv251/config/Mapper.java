@@ -294,25 +294,32 @@ public class Mapper extends ConfigurableMapper {
                 searchResultDoctorDTO.setFirstName(doctor.getFirstname());
                 searchResultDoctorDTO.setLastName(doctor.getLastname());
                 searchResultDoctorDTO.setMiddleName(doctor.getMiddlename());
-                searchResultDoctorDTO.setSpecialisation(doctor.getSpecialization().getName());
+                if(doctor.getSpecialization()!=null){
+                    searchResultDoctorDTO.setSpecialisation(doctor.getSpecialization().getName());
+                }
                 searchResultDoctorDTO.setPhoto(doctor.getPhoto());
 
                 ContactsDTO contacts = new ContactsDTO();
-                contacts.setAddress(doctor.getContact().getAddress());
-                contacts.setLatitude(doctor.getContact().getLatitude());
-                contacts.setLongitude(doctor.getContact().getLongitude());
-                contacts.setCity(doctor.getContact().getCity());
-                contacts.setDistrict(doctor.getContact().getDistrict().getName());
-                contacts.setEmail(doctor.getContact().getEmail());
-                List<String> phones = new ArrayList<>();
-                phones.add(doctor.getContact().getFirstPhone());
-                phones.add(doctor.getContact().getSecondPhone());
-                phones.add(doctor.getContact().getThirdPhone());
-                contacts.setPhones(phones);
+                if(doctor.getContact()!=null){
+                    contacts.setAddress(doctor.getContact().getAddress());
+                    contacts.setLatitude(doctor.getContact().getLatitude());
+                    contacts.setLongitude(doctor.getContact().getLongitude());
+                    contacts.setCity(doctor.getContact().getCity());
+                    contacts.setDistrict(doctor.getContact().getDistrict().getName());
+                    contacts.setEmail(doctor.getContact().getEmail());
+                    List<String> phones = new ArrayList<>();
+                    phones.add(doctor.getContact().getFirstPhone());
+                    phones.add(doctor.getContact().getSecondPhone());
+                    phones.add(doctor.getContact().getThirdPhone());
+                    contacts.setPhones(phones);
+                }
                 searchResultDoctorDTO.setContacts(contacts);
 
-                searchResultDoctorDTO.setClinicId(doctor.getClinic().getId());
-                searchResultDoctorDTO.setClinicName(doctor.getClinic().getClinic_name());
+                if(doctor.getClinic()!=null){
+                    searchResultDoctorDTO.setClinicId(doctor.getClinic().getId());
+                    searchResultDoctorDTO.setClinicName(doctor.getClinic().getClinic_name());
+                }
+
             }
 
         }).register();
