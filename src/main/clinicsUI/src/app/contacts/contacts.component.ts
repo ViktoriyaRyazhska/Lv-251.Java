@@ -11,6 +11,7 @@ import {ContactService} from "./contact.service";
 })
 export class ContactsComponent implements OnInit {
   contactUsForm: FormGroup;
+  success: boolean;
 
   constructor(private contactService: ContactService) { }
 
@@ -22,7 +23,7 @@ export class ContactsComponent implements OnInit {
       'subject': new FormControl(null, Validators.required),
       'message': new FormControl(null, Validators.required)
     })
-
+    this.success = false;
   }
 
   onSubmit(){
@@ -32,7 +33,7 @@ export class ContactsComponent implements OnInit {
 
   onSend(){
     this.contactService.storeIt(this.contactUsForm).subscribe(
-      (response) => console.log(response)
+      (response) => this.success = response.ok.valueOf()
     )
   }
 }

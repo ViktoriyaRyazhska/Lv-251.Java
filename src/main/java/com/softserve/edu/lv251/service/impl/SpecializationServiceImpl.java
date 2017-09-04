@@ -32,7 +32,6 @@ public class SpecializationServiceImpl implements SpecializationService {
 
     @Override
     public Specialization findByName(String name) {
-        System.out.println(name);
         if (specializationDAO.getEntitiesByColumnNameAndValue("name", name).size() > 0) {
             return specializationDAO.getEntitiesByColumnNameAndValue("name", name).get(0);
         } else {
