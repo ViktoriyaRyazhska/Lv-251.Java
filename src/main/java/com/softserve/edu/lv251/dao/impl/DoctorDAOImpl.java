@@ -82,7 +82,6 @@ public class DoctorDAOImpl extends BaseDAOImpl<Doctor> implements DoctorDAO {
 
     @Override
     public List<Doctor> getDoctorsByUser(long id) {
-        System.out.println("before dao"+id);
         Query query= entityManager.createQuery("select distinct d from Appointment a join a.doctor d where a.user.id = :id").setParameter("id",id);
 
         List list =  query.getResultList();

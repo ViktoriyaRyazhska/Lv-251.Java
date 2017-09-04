@@ -41,7 +41,6 @@ this.userService.getUserByEmail().subscribe(
       'address': new FormControl(this.userUpdate.address),
       'zipCode': new FormControl(this.userUpdate.zipCode),
     })
-    console.log(response)
   },
   (error)=> console.error(error)
 )

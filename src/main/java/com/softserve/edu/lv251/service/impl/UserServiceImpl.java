@@ -92,7 +92,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         List<User> users = getUsersByColumnNameAndValue("email", email);
-        System.out.println(users);
         return users.isEmpty() ? null : users.get(0);
     }
 
