@@ -21,8 +21,6 @@ public class ContactRestController {
     @RequestMapping(value = "/contact-us", method = RequestMethod.POST)
     @ResponseBody
     public boolean sendMail(@RequestBody @Valid ContactDTO contactDTO) {
-
-
         mailComponent.sendMail(contactDTO);
         return true;
     }
