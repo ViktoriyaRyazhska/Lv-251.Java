@@ -9,7 +9,7 @@ import {Appointment} from "../../../models/appointment";
   styleUrls: ['../user-cabinet-medical.component.css']
 })
 export class AppointmentsHistoryComponent implements OnInit {
-  private appointments: Appointment[] = [];
+  appointments: Appointment[] = [];
   constructor(private userService:UserService ) { }
 
   ngOnInit() {
