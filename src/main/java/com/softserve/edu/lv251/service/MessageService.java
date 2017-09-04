@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.service;
 
+import com.softserve.edu.lv251.dto.pojos.MessagesDTO;
 import com.softserve.edu.lv251.entity.Message;
 import org.springframework.stereotype.Service;
 
@@ -11,5 +12,5 @@ import java.util.List;
 @Service
 public interface MessageService  {
     List<Message> getAll();
-    void add(com.softserve.edu.lv251.dto.pojos.Message message);
+    void addMessage(MessagesDTO messagesDTO);
 }

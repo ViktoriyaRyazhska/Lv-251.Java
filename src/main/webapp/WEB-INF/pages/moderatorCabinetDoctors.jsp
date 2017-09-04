@@ -53,12 +53,13 @@
                                                             <h4 class="modal-title" id="myModalLabel">Are you sure you want Delete?</h4>
                                                         </div>
                                                         <div class="modal-body">
+                                                            <img src="data:image/jpeg;base64,${doctor.photo}" width="100" class="avatar img-circle" alt="avatar">
                                                             <div> ${doctor.firstname}  ${doctor.lastname}</div>
                                                             <p><spring:message code="messages.specialization"/>: ${doctor.specialization.name}</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="/moderator/cabinet/doctors"> <button type="button" class="btn btn-default" >No</button></a>
-                                                            <a href="/moderator/cabinet/doctors/delete/${doctor.id}"><button  class="btn btn-github" ><spring:message code="messages.delete"/></button ></a>
+                                                            <a href="/moderator/cabinet/doctors"> <button type="button" class="btn btn-default" ><spring:message code="messages.no"/></button></a>
+                                                            <a href="/moderator/cabinet/doctors/delete/${doctor.id}"><button  class="btn btn-clinic" ><spring:message code="messages.yes"/></button ></a>
                                                         </div>
                                                     </div>
                                                 </div>
