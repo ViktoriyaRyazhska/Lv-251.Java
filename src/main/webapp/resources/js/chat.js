@@ -68,5 +68,5 @@ function sendMessage() {
 function showMessageOutput(messageOutput) {
 
     $("#response").append("<p style='background-color: #6bd9aa'><span > "
-        + messageOutput.date +"<br> "+messageOutput.from+" </span><br> "+ messageOutput.text+" </p>")
+        + messageOutput.date +"<br> "+messageOutput.name+" "+ messageOutput.lastname+"</span><br> "+ messageOutput.text+" </p>")
 }

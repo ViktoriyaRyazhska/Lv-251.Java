@@ -36,6 +36,7 @@
             <div class="chatbox__body">
                 <div class="chatbox__body__message chatbox__body__message--right">
                     <div class="messageChat" style="border-radius: 3px">
+                        <div id="response"></div>
                         <c:forEach items="${messages}" var="message">
                             <fmt:formatDate var="aDate" pattern = 'dd-MM-yyyy HH:mm' value='${message.date}'/>
                             <c:choose>
@@ -51,7 +52,7 @@
                             </c:choose>
                         </c:forEach>
 
-                        <div id="response"></div>
+
                     </div>
 
 
@@ -60,8 +61,10 @@
             </div>
             <div id="conversationDiv">
                 <textarea class="chatbox__message" id="text" placeholder="Write something interesting"></textarea>
+                <button class="btn btn-clinic form-control" onclick="sendMessage()" >Send</button>
             </div>
-            <button class=" btn btn-clinic " onclick="sendMessage()" >Send</button>
+
+
 
         </div>
 
