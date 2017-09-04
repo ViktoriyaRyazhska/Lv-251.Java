@@ -18,7 +18,6 @@ export class DoctorsComponent implements OnInit {
 
   ngOnInit() {
     this.doctorService.getAllDoctors().subscribe((response) => {
-      console.log(1);
       this.doctors = response.json();
       this.activeDoctors = this.doctors;
     });

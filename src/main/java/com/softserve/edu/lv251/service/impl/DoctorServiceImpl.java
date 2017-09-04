@@ -86,7 +86,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     @Override
     public List<DoctorsSearchDTO> searchByLetters(String letters) {
         List<Doctor> doctors = doctorDAO.searchByLetters(letters);
-        System.out.println(doctors);
         List<DoctorsSearchDTO> results = new ArrayList<>();
 
         for (Doctor doctor : doctors) {
