@@ -3,7 +3,7 @@
 <%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="container">
     <div >
@@ -41,13 +41,14 @@
                 <div class="chatbox__body__message chatbox__body__message--right">
                     <div class="messageChat"  style=" border-radius: 3px">
                         <c:forEach items="${messages}" var="message">
+                            <fmt:formatDate var="aDate" pattern = 'dd-MM-yyyy HH:mm' value='${message.date}'/>
                             <c:choose>
                                 <c:when test="${moderator.firstname!=message.from.firstname&&moderator.lastname!=message.from.lastname}">
-                                    <p style="background-color: #6bd9aa"><span >${message.date} <br>  ${message.from.firstname} ${message.from.lastname}</span><br> ${message.text} </p>
+                                    <p style="background-color: #6bd9aa"><span >${aDate} <br>  ${message.from.firstname} ${message.from.lastname}</span><br> ${message.text} </p>
                                     <br />
                                 </c:when>
                                 <c:otherwise>
-                                    <p style="background-color: #e1e1e1"><span >${message.date}<br>   ${message.from.firstname} ${message.from.lastname}</span><br> ${message.text} </p>
+                                    <p style="background-color: #e1e1e1"><span >${aDate}<br>   ${message.from.firstname} ${message.from.lastname}</span><br> ${message.text} </p>
                                     <br />
                                 </c:otherwise>
                             </c:choose>

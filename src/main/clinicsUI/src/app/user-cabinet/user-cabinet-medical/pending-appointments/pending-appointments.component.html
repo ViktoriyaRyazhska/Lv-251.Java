@@ -1,0 +1,32 @@
+<div class="col-sm-9" style="width: 100%">
+  <div  class="well mcard_content">
+    <div *ngFor="let appointment of appointments"class="col-sm-6 appointmentWrapper">
+      <div  class="appointmentFloatContainer">
+        <div  [ngClass]="appointment.status === true ? 'label-success' : 'label-danger'" class="appointmentInner label   appointmentIsNotApproved">
+          <span *ngIf="appointment.status===true;else notApproved">Approved</span>
+          <ng-template #notApproved>Not Approved</ng-template>
+        </div>
+      </div>
+
+      <div class="medical-card">
+        <div class="media">
+          <div class="media-left">
+            <img class="media-object img-circle profile-img" src="data:image/jpeg;base64,{{appointment.doctorPhoto}}" alt="Photo">
+          </div>
+          <div class="media-body">
+            <div>
+              <div >
+                <h3 class="media-heading">{{appointment.doctorName}} {{appointment.doctorLastName}}</h3>
+              </div>
+            </div>
+
+            <div class="specialization">{{appointment.specialization}}</div>
+            <div class="diagnosis">{{appointment.description}}</div>
+            <div class="diagnosis">{{appointment.date | date:'medium'}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

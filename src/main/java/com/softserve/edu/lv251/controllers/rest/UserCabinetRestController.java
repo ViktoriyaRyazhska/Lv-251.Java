@@ -13,6 +13,8 @@ import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +26,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/rest")
 @CrossOrigin(origins = {"*"})
 public class UserCabinetRestController {
 
@@ -40,9 +42,10 @@ public class UserCabinetRestController {
     @Autowired
     private ContactsService contactsService;
 
-    @RequestMapping(value = "/editUser/{id}", method = RequestMethod.POST)
-    public void saveUser(@RequestBody UserUpdate updateUser, @PathVariable("id") Long id) {
-        User user = userService.getUserByID(id);
+    @RequestMapping(value = "/api/editUser/", method = RequestMethod.POST)
+    public void saveUser(@RequestBody UserUpdate updateUser) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        User user = userService.getUserByID(userService.findByEmail(userDetails.getUsername()).getId());
         mapper.map(updateUser, user);
         userService.updateUser(user);
 
@@ -55,20 +58,29 @@ public class UserCabinetRestController {
     }
 
 
-    @RequestMapping(value = "/getDoctorsToUser/{id}", method = RequestMethod.GET)
-    public List<DoctorRespondDTO> getDoctors(@PathVariable("id") Long id) {
-        List<DoctorRespondDTO> list = doctorService.getDoctorsByUser(id);
-        return (list);
+    @RequestMapping(value = "/api/getDoctorsToUser", method = RequestMethod.GET)
+    public List<DoctorRespondDTO> getDoctors() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        return doctorService.getDoctorsByUser(userService.findByEmail(userDetails.getUsername()).getId());
 
     }
 
-    @RequestMapping(value = "/getAppointmentsToUser/{id}", method = RequestMethod.GET)
-    public List<AppointmentsInfoDTO> getAppointments(@PathVariable("id") Long id) {
-        return (appointmentService.getAppointmentsToUser(id));
+    @RequestMapping(value = "/api/getAppointmentsToUser", method = RequestMethod.GET)
+    public List<AppointmentsInfoDTO> getAppointments() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        return (appointmentService.getAppointmentsToUser(userService.findByEmail(userDetails.getUsername()).getId()));
     }
 
-    @RequestMapping(value = "/getUser/{id}", method = RequestMethod.GET)
-    public UserUpdate getUser(@PathVariable("id") Long id) {
-        return userService.getById(id);
+    @RequestMapping(value = "/api/getPendingAppointmentsToUser", method = RequestMethod.GET)
+    public List<AppointmentsInfoDTO> getPendingAppointments() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        return (appointmentService.getPendingAppointmentsToUser(userService.findByEmail(userDetails.getUsername()).getId()));
+    }
+
+    @RequestMapping(value = "/api/getUser", method = RequestMethod.GET)
+    public UserUpdate getUser() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        return userService.getById(userService.findByEmail(userDetails.getUsername()).getId());
+
     }
 }
