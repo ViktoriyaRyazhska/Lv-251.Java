@@ -110,7 +110,7 @@
                                 <div class="row" style="margin: 0">
                                     <div class="col-xs-6 col-lg-5">
                                         <h3><spring:message
-                                                code="messages.moderatorOf"/>${moderator.clinic.clinic_name} </h3>
+                                                code="messages.moderatorOf"/> ${moderator.clinic.clinic_name} </h3>
                                     </div>
                                     <div class="col-xs-6 col-lg-1 pull-right" style="padding: 0 15px 0 0">
                                         <button data-toggle="modal" data-target="#modal_${moderator.id}"
