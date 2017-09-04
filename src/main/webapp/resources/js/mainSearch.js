@@ -55,7 +55,6 @@ function clinicsAll() {
 
         },
         onSelect: function (suggestion) {
-            console.log('You selected: ' + suggestion.value + ', ' + suggestion.data);
             var id = suggestion.data;
 
             $.ajax({
@@ -95,7 +94,6 @@ function clinicsByDistrict() {
             return {
                 suggestions: $.map($.parseJSON(response), function (item) {
                     var i = item.name;
-                    console.log(i);
                     return {value: i, data: item.name};
                 })
             };
@@ -197,7 +195,6 @@ function doctorsBySpecialization() {
                     $("#myCarousel").empty();
                     $("#content").empty();
                     for (var i = 0; i < res.length; i++) {
-                        console.log("Doctors search by districts");
                         $("#content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>" +
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>" +
                             "<img width=200' height='200' src='data:image/jpeg;base64," + res[i].photo + "' alt='...'></a></div>" +
@@ -224,14 +221,12 @@ function allDocs() {
             return {
                 suggestions: $.map($.parseJSON(response), function (item) {
                     var i = item.firstname + " " + item.lastname + " " + item.specialisation;
-                    console.log(i);
                     return {value: i, data: item.id};
 
                 })
             };
         },
         onSelect: function (suggestion) {
-            console.log('You selected: ' + suggestion.value + ', ' + suggestion.data);
             var id = suggestion.data;
             $.ajax({
                 url: '/rest/search/doctor/' + id,
