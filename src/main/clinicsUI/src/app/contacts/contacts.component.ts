@@ -23,7 +23,6 @@ export class ContactsComponent implements OnInit {
       'subject': new FormControl(null, Validators.required),
       'message': new FormControl(null, Validators.required)
     })
-    this.success = false;
   }
 
   onSubmit(){
