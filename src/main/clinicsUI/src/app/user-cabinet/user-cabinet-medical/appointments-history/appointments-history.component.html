@@ -3,8 +3,8 @@
   <div *ngFor="let appointment of appointments"class="col-sm-6 appointmentWrapper">
     <div  class="appointmentFloatContainer">
       <div  [ngClass]="appointment.status === true ? 'label-success' : 'label-danger'" class="appointmentInner label   appointmentIsNotApproved">
-<span *ngIf="appointment.status===true;else notApproved">Approved</span>
-        <ng-template #notApproved>Not Approved</ng-template>
+<span *ngIf="appointment.status===true;else notApproved">Done</span>
+        <ng-template #notApproved>Rejected</ng-template>
       </div>
     </div>
 

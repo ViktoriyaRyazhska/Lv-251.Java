@@ -40,7 +40,7 @@
           </a>
         </li>
 
-        <li *ngIf="user!==null">
+        <li >
           <a routerLink="/personal-cabinet">
             <i class="fa fa-id-card"></i>
             Personal Cabinet
@@ -55,22 +55,22 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a type="text" *ngIf="user!==null">
+          <a type="text" *ngIf="user==null">
           <!--{{user.name}}{{user.lastName}}-->
           </a>
         </li>
 
 
-        <li *ngIf="user===null">
+        <li >
           <a  type="button" id="logoutBtn1" style="cursor:pointer;" routerLink="/login">
             <span class="glyphicon glyphicon-log-out"></span> Login
           </a>
         </li>
-        <li *ngIf="user!==null">
-          <a  type="button" id="logoutBtn" style="cursor:pointer;" routerLink="/logout">
-            <span class="glyphicon glyphicon-log-out"></span> Logout
-          </a>
-        </li>
+        <!--<li *ngIf="user!==null">-->
+          <!--<a  type="button" id="logoutBtn" (click)="logout()" style="cursor:pointer;" routerLink="/logout">-->
+            <!--<span class="glyphicon glyphicon-log-out"></span> Logout-->
+          <!--</a>-->
+        <!--</li>-->
 
       </ul>
     </div>

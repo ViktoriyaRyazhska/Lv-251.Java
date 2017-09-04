@@ -157,16 +157,36 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<Appointment> listAppointmensWithUser(Long id) {
         return appointmentDAO.getAllEntities().stream().filter(p->p.getUser().getId() == id).collect(Collectors.toList());
     }
+@Override
+    public List<AppointmentsInfoDTO> getAppointmentsToUser(String email){
+    List<Appointment> appointments= new LinkedList<>();
 
-    public List<AppointmentsInfoDTO> getAppointmentsToUser(long id){
-        List<Appointment> appointments= new LinkedList<>();
-        appointments=listAppointmensWithUser(id);
-        List<AppointmentsInfoDTO> results = new LinkedList<>();
-        for (Appointment appointment : appointments) {
-            AppointmentsInfoDTO res = new AppointmentsInfoDTO();
-            mapper.map(appointment, res);
-            results.add(res);
-        }
-        return results;
+    List<AppointmentsInfoDTO> appointmentsInfoDTOS = new LinkedList<>();
+    Date date = new Date();
+    listAppointmensWithUser(userService.findByEmail(email).getId())
+                .stream()
+                .filter(p->p.getAppointmentDate().before(date))
+                .forEach(p->appointmentsInfoDTOS.add(mapper.map(p, AppointmentsInfoDTO.class)));
+
+        return appointmentsInfoDTOS;
+
     }
+
+
+@Override
+    public List<AppointmentsInfoDTO> getPendingAppointmentsToUser(String email){
+        List<Appointment> appointments= new LinkedList<>();
+
+        List<AppointmentsInfoDTO> appointmentsInfoDTOS = new LinkedList<>();
+        Date date = new Date();
+        listAppointmensWithUser(userService.findByEmail(email).getId())
+                .stream()
+                .filter(p->p.getAppointmentDate().after(date))
+                .forEach(p->appointmentsInfoDTOS.add(mapper.map(p, AppointmentsInfoDTO.class)));
+
+        return appointmentsInfoDTOS;
+
+    }
+
+
 }

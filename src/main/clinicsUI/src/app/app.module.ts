@@ -24,9 +24,6 @@ import {AuthenticationService} from "./auth/authentication.service";
 import {AlertService} from "./auth/alert.service";
 
 
-// import { RegistrationComponent } from './auth/registration/registration.component';
-// import { ClinicsEditComponent } from './clinics/clinics-edit/clinics-edit.component';
-// import { ClinicsListComponent } from './clinics/clinics-list/clinics-list.component';
 import {ContactService} from "./contacts/contact.service";
 import {ClinicsEditComponent} from "./clinics/clinics-edit/clinics-edit.component";
 import {ClinicsListComponent} from "./clinics/clinics-list/clinics-list.component";
@@ -36,6 +33,7 @@ import {RegistrationService} from "./auth/registration/registration.service";
 import { AgmCoreModule } from '@agm/core';
 import { DoctorEditComponent } from './doctors/doctor-edit/doctor-edit.component';
 import { DoctorListComponent } from './doctors/doctor-list/doctor-list.component';
+import { PendingAppointmentsComponent } from './user-cabinet/user-cabinet-medical/pending-appointments/pending-appointments.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +56,8 @@ import { DoctorListComponent } from './doctors/doctor-list/doctor-list.component
     LoginComponent,
     RegistrationComponent,
     DoctorEditComponent,
-    DoctorListComponent
+    DoctorListComponent,
+    PendingAppointmentsComponent
 
   ],
   imports: [
