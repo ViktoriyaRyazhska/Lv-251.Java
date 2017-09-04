@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-xs-3">
                             <c:forEach begin="1" end="${respond.raiting}" varStatus="loop">
-                                <span style="font-size:200%;color:yellow;">&starf;</span>
+                                <span style="font-size:200%;color:darkcyan;">&starf;</span>
                             </c:forEach>
                         </div>
                     </div>
