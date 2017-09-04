@@ -11,16 +11,14 @@ import {User} from "../../models/user";
 
 })
 export class UserCabinetDoctorsComponent implements OnInit {
-  private doctors: Doctor[] = [];
+   doctors: Doctor[] = [];
   user:User=JSON.parse(localStorage.getItem("currentUser"));
   constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.userService.getDoctorsByUser()
       .subscribe((data)=> {
-        console.log(data.length);
         this.doctors = data;
-        console.log(this.doctors)
       }, (error)=>
         console.log(error));
 

@@ -45,7 +45,7 @@ public class UserCabinetRestController {
     @RequestMapping(value = "/api/editUser/", method = RequestMethod.POST)
     public void saveUser(@RequestBody UserUpdate updateUser) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
-        User user = userService.getUserByID(userService.findByEmail(userDetails.getUsername()).getId());
+        User user = userService.findByEmail(userDetails.getUsername());
         mapper.map(updateUser, user);
         userService.updateUser(user);
 
