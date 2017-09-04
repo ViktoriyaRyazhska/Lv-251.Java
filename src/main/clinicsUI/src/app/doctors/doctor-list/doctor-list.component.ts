@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {DoctorSearch} from "../../models/doctorSearch";
 
 @Component({
   selector: 'app-doctor-list',
@@ -6,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./doctor-list.component.css']
 })
 export class DoctorListComponent implements OnInit {
-  @Input() doctor;
+  @Input() doctor : DoctorSearch;
   constructor() { }
 
   ngOnInit() {
