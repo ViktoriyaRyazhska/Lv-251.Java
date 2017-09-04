@@ -9,6 +9,6 @@ public interface PagingSizeService<T> {
 
     int numberOfPaging(Integer size);
 
-    List<T> getEntity(Integer chainIndex, Integer size);
+    List<T> getEntities(Integer chainIndex, Integer size);
 
 }
