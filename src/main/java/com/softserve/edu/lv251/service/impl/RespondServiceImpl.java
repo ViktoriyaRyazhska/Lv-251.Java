@@ -71,7 +71,7 @@ public class RespondServiceImpl implements RespondService {
     @Override
     public List<DoctorRespondDTO> setResponded(long userId, List<DoctorRespondDTO> doctorRespondDTOS) {
         Date date = new Date();
-
+        date.setHours(date.getHours()+3);
         doctorRespondDTOS.forEach(doctorRespondDTO -> {
             if (appointmentService.listAppointmensWithUser(userId)
                     .stream()
