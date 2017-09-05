@@ -305,7 +305,9 @@ public class Mapper extends ConfigurableMapper {
                     contacts.setLatitude(doctor.getContact().getLatitude());
                     contacts.setLongitude(doctor.getContact().getLongitude());
                     contacts.setCity(doctor.getContact().getCity());
-                    contacts.setDistrict(doctor.getContact().getDistrict().getName());
+                    if(doctor.getContact().getDistrict()!=null){
+                        contacts.setDistrict(doctor.getContact().getDistrict().getName());
+                    }
                     contacts.setEmail(doctor.getContact().getEmail());
                     List<String> phones = new ArrayList<>();
                     phones.add(doctor.getContact().getFirstPhone());
