@@ -172,7 +172,6 @@
                                                             <c:forEach items="${docApps}" var="apointments">
                                                                 <c:if test="${apointments.doctor == doctor.id}">
                                                                     appDate = new Date("${apointments.appointmentDate}");
-                                                                    appDate.setHours(appDate.getHours()+3);
                                                                     dates.push(appDate);
                                                                 </c:if>
                                                             </c:forEach>

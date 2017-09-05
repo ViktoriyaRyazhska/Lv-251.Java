@@ -310,7 +310,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     public List<DoctorRespondDTO> getDoctorsByUser(long userId) {
         List<DoctorRespondDTO> doctorRespondDTOS = new LinkedList<>();
         Date date = new Date();
-        date.setHours(date.getHours()+3);
         doctorDAO.getAllEntities().forEach(doctor -> {
             doctor.getDocAppointments().forEach(appointment -> {
                 if (appointment.getUser().getId() == userId
