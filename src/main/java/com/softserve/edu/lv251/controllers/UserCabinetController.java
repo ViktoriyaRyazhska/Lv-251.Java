@@ -124,10 +124,8 @@ public class UserCabinetController {
      * Author: Pavlo Kuchereshko
      */
     @GetMapping("/user/medicalcard")
-    public String medicalCardGET(ModelMap model, Principal principal, HttpServletRequest request) {
+    public String medicalCardGET(ModelMap model, Principal principal) {
 
-        User user = userService.findByEmail(principal.getName());
-        //model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
         model.addAttribute("listAppointments", appointmentService.getAppointmentByUserEmail(principal.getName()));
         model.addAttribute("date", new Date().getTime());
 
