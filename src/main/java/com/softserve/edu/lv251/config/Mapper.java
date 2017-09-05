@@ -223,9 +223,9 @@ public class Mapper extends ConfigurableMapper {
                     public void mapAtoB(Appointment appointment, AppointmentsDTO appointmentsDTO, MappingContext context) {
                         super.mapAtoB(appointment, appointmentsDTO, context);
                         appointmentsDTO.setId(appointment.getId());
-                        appointment.getAppointmentDate().setTime(
-                                appointment.getAppointmentDate().getTime()
-                                        - Calendar.getInstance().getTimeZone().getRawOffset());
+//                        appointment.getAppointmentDate().setTime(
+//                                appointment.getAppointmentDate().getTime()
+//                                        - Calendar.getInstance().getTimeZone().getRawOffset());
                         appointmentsDTO.setTitle(appointment.getUser().getFirstname() + " " + appointment.getUser().getLastname());
                         if (appointment.getIsApproved() != null) {
                             if (Calendar.getInstance().getTime().compareTo(appointment.getAppointmentDate()) < 0) {
