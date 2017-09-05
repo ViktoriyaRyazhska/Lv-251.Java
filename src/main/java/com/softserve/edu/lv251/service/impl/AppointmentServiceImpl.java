@@ -117,16 +117,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public List<Appointment> getAppointmentByUserEmail(String email) {
-        List<Appointment> a = appointmentDAO.getAppointmentByUserEmail(email);
-
-        return a;
+        return appointmentDAO.getAppointmentByUserEmail(email);
     }
 
     public boolean createAppointment (String localdate, String userEmail, long doctorId){
         Date date;
-
         SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm", Locale.ENGLISH);
-//        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         try {
             date = isoFormat.parse(localdate);
             if (date.before(new Date())) {
