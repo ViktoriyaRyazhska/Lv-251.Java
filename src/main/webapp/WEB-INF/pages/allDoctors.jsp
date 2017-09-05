@@ -8,6 +8,10 @@
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap-datetimepicker.js"/>" charset="UTF-8"
         type="text/javascript"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/moment.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/moment-timezone.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/moment-timezone-with-data-2012-2022.min.js"/>"></script>
+
 <div class="container">
     <p id="clinic" style="display: none"><spring:message code="messages.searchClinics"/></p>
     <p id="doctor" style="display: none"><spring:message code="messages.searchDoctors"/></p>
@@ -153,26 +157,23 @@
                                             <span class="add-on"><i class="icon-calendar fa fa-calendar"></i></span>
                                         </div>
 
-
                                         <script type="text/javascript" charset="UTF-8">
 
                                             $("#date-div-${doctor.id}").datetimepicker({
                                                 language: '${pageContext.response.locale}',
                                                 format: "dd/mm/yyyy - hh:ii",
                                                 autoclose: true,
+                                                timezone: 'Europe/Kiev',
                                                 minuteStep: 15,
-                                                startDate: new Date(),
                                                 daysOfWeekDisabled: [0, 6],
                                                 hoursDisabled: [1, 2, 3, 4, 5, 6, 22, 23, 0],
                                                 onRenderMinute: function (date) {
-
                                                     var dates = [];
                                                     <c:choose>
                                                         <c:when test="${docApps.size()>0}">
                                                             <c:forEach items="${docApps}" var="apointments">
                                                                 <c:if test="${apointments.doctor == doctor.id}">
                                                                     appDate = new Date("${apointments.appointmentDate}");
-                                                                    appDate.setHours(appDate.getHours()+3);
                                                                     dates.push(appDate);
                                                                 </c:if>
                                                             </c:forEach>
@@ -180,7 +181,12 @@
                                                     </c:choose>
 
                                                     for (var i = 0; i < dates.length; i++) {
-                                                        if (date.getTime() === dates[i].getTime()) {
+                                                        if (date.getUTCMinutes() === moment(dates[i]).tz('Europe/Kiev').minute()
+                                                            && date.getUTCHours() === moment(dates[i]).tz('Europe/Kiev').hour()
+                                                            && date.getUTCDay() === moment(dates[i]).tz('Europe/Kiev').day()
+                                                            && date.getUTCMonth() === moment(dates[i]).tz('Europe/Kiev').month()
+                                                            && date.getUTCFullYear() === moment(dates[i]).tz('Europe/Kiev').year()) {
+
                                                             return ['disabled'];
                                                         }
                                                     }

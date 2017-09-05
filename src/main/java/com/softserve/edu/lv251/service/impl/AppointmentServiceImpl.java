@@ -122,9 +122,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     public boolean createAppointment (String localdate, String userEmail, long doctorId){
         Date date;
-
-        SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
-        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm", Locale.ENGLISH);
         try {
             date = isoFormat.parse(localdate);
             if (date.before(new Date())) {
@@ -157,10 +155,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<Appointment> listAppointmensWithUser(Long id) {
         return appointmentDAO.getAllEntities().stream().filter(p->p.getUser().getId() == id).collect(Collectors.toList());
     }
-@Override
-    public List<AppointmentsInfoDTO> getAppointmentsToUser(String email){
-    List<Appointment> appointments= new LinkedList<>();
 
+    @Override
+    public List<AppointmentsInfoDTO> getAppointmentsToUser(String email){
     List<AppointmentsInfoDTO> appointmentsInfoDTOS = new LinkedList<>();
     Date date = new Date();
     listAppointmensWithUser(userService.findByEmail(email).getId())
@@ -175,8 +172,6 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 @Override
     public List<AppointmentsInfoDTO> getPendingAppointmentsToUser(String email){
-        List<Appointment> appointments= new LinkedList<>();
-
         List<AppointmentsInfoDTO> appointmentsInfoDTOS = new LinkedList<>();
         Date date = new Date();
         listAppointmensWithUser(userService.findByEmail(email).getId())

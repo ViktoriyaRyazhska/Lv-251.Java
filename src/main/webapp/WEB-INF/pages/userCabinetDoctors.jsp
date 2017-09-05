@@ -40,7 +40,7 @@
                                     <c:set var="appointmentSatatus" value="${appointmentIsNotApproved}"/>
                                     <div>
                                         <div class="col-sm-6 appointmentWrapper">
-                                            <c:if test="${doctor.responded}">
+                                            <c:if test="${!doctor.responded}">
                                                 <div class="appointmentFloatContainer">
                                                    <button class="btn btn-info" style="margin-top: 15px"
                                                            data-toggle="modal" data-target="#modal_${doctor.id}">
@@ -56,7 +56,9 @@
                                                     <div class="media-body">
                                                         <div>
                                                             <div >
-                                                                <h3 class="media-heading"><c:out value="${doctor.firstname} ${doctor.lastname}"/></h3>
+                                                                <h3 class="media-heading">
+                                                                    <c:out value="${doctor.firstname} ${doctor.lastname}"/>
+                                                                </h3>
                                                             </div>
                                                         </div>
 
@@ -85,7 +87,6 @@
 
                                             <form action="${pageContext.request.contextPath}/user/addRespond" method="post">
                                                 <div class="form-group ${error != null ? 'has-error' : ''}">
-                                                        <%--<span>${message}</span>--%>
                                                     <div class="modal-body">
                                                         <div class="form-group">
                                                             <label class="control-label" for="email">
