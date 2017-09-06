@@ -90,9 +90,10 @@ public class RegistrationController {
             model.addFlashAttribute(CLASS_CSS, "alert alert-warning");
             model.addFlashAttribute(MESSAGE, emailSendingError);
             userService.deleteUser(userService.getUserByID(registered.getId()));
+            return REDIRECT + REGISTRATION;
         }
 
-        return REDIRECT + REGISTRATION;
+        return REDIRECT + AFTER_REGISTRATION;
     }
 
     /**
