@@ -53,7 +53,7 @@ public class RespondServiceImpl implements RespondService {
     }
 
     @Override
-    public boolean AddRespond(short raiting, String description, long userId, long doctorId) {
+    public boolean addRespond(short raiting, String description, long userId, long doctorId) {
         Respond respond = new Respond();
         respond.setDate(new Date());
         respond.setDescription(description);
@@ -65,6 +65,25 @@ public class RespondServiceImpl implements RespondService {
         }
         respond.setRaiting(raiting);
         respondDAO.addEntity(respond);
+        return true;
+    }
+
+    @Override
+    public boolean editRespond(short raiting, String description, long userId, long doctorId) {
+        Respond respond = respondDAO.getAllEntities()
+                .stream()
+                .filter(p->p.getUser()
+                        .getId() == userId && p.getDoctor().getId() == doctorId)
+                .findFirst()
+                .get();
+        respond.setDate(new Date());
+        respond.setDescription(description);
+
+        if (raiting > 5 || raiting < 0 || raiting % 1 != 0) {
+            return false;
+        }
+        respond.setRaiting(raiting);
+        respondDAO.updateEntity(respond);
         return true;
     }
 
