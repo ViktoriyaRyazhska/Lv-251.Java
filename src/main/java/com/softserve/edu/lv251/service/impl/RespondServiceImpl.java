@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.config.Mapper;
+import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dao.RespondDAO;
 import com.softserve.edu.lv251.dto.pojos.DoctorRespondDTO;
 import com.softserve.edu.lv251.dto.pojos.RespondDTO;
@@ -60,7 +61,7 @@ public class RespondServiceImpl implements RespondService {
         respond.setDoctor(doctorService.getById(doctorId));
         respond.setUser(usersService.getUserByID(userId));
 
-        if (raiting > 5 || raiting < 0 || raiting % 1 != 0) {
+        if (raiting > Constants.Respond.MAX_RAITING || raiting < Constants.Respond.MIN_RAITING || raiting % 1 != 0) {
             return false;
         }
         respond.setRaiting(raiting);
@@ -79,7 +80,7 @@ public class RespondServiceImpl implements RespondService {
         respond.setDate(new Date());
         respond.setDescription(description);
 
-        if (raiting > 5 || raiting < 0 || raiting % 1 != 0) {
+        if (raiting > Constants.Respond.MAX_RAITING || raiting < Constants.Respond.MIN_RAITING || raiting % 1 != 0) {
             return false;
         }
         respond.setRaiting(raiting);

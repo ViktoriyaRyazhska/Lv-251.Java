@@ -50,8 +50,11 @@ public interface Constants {
         String MODERATOR_ADD_DOCTOR = "moderatorAddDoctor";
         String MODERATOR_MAKE_DOCTOR= "moderatorMakeDoctor";
         String MESSAGES="messages";
+    }
 
-
+    interface Respond {
+        int MAX_RAITING = 5;
+        int MIN_RAITING = 0;
     }
 
 
