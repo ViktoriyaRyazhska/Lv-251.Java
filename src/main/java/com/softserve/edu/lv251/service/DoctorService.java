@@ -16,7 +16,7 @@ public interface DoctorService {
 
     List<Doctor> getAll();
 
-    List<DoctorsSearchDTO> getAllDoctors();
+    List<DoctorSearchAngularDTO> getAllDoctors();
 
     void update(Doctor doctor);
 
