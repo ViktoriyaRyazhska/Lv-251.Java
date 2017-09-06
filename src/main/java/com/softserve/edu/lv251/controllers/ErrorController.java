@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import static com.softserve.edu.lv251.constants.Constants.View.ERROR_PAGE;
+
 /**
  * Added by Pavlo Kuchereshko.
  */
@@ -18,6 +20,6 @@ public class ErrorController {
     @ExceptionHandler(value = {NoHandlerFoundException.class})
     public String handleError(Exception e){
         logger.error(e);
-        return "errorPage";
+        return ERROR_PAGE;
     }
 }
