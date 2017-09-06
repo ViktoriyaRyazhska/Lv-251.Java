@@ -17,7 +17,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
@@ -156,7 +155,21 @@ public class UserCabinetController {
                                 @RequestParam("raiting") String raiting,
                                 Principal principal) {
 
-        respondService.AddRespond(Short.parseShort(raiting), description, userService.findByEmail(principal.getName()).getId(), doctorId);
+        respondService.addRespond(Short.parseShort(raiting), description, userService.findByEmail(principal.getName()).getId(), doctorId);
+        return doctorsGET(modelMap, principal);
+    }
+
+    /**
+     * Created by Marian Brynetskyi
+     */
+    @RequestMapping(value = "/user/editRespond", method = RequestMethod.POST)
+    public String editAppointment(ModelMap modelMap,
+                                 @RequestParam(Constants.Controller.DOCTOR_ID) long doctorId,
+                                 @RequestParam("description") String description,
+                                 @RequestParam("raiting") String raiting,
+                                 Principal principal) {
+
+        respondService.editRespond(Short.parseShort(raiting), description, userService.findByEmail(principal.getName()).getId(), doctorId);
         return doctorsGET(modelMap, principal);
     }
 

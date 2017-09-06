@@ -40,14 +40,26 @@
                                     <c:set var="appointmentSatatus" value="${appointmentIsNotApproved}"/>
                                     <div>
                                         <div class="col-sm-6 appointmentWrapper">
-                                            <c:if test="${!doctor.responded}">
-                                                <div class="appointmentFloatContainer">
-                                                   <button class="btn btn-info" style="margin-top: 15px"
-                                                           data-toggle="modal" data-target="#modal_${doctor.id}">
-                                                       <spring:message code="messages.respond"/>
-                                                   </button>
-                                                </div>
-                                            </c:if>
+                                            
+                                            <c:choose>
+                                                <c:when test="${!doctor.responded}">
+                                                    <div class="appointmentFloatContainer">
+                                                        <button class="btn btn-info" style="margin-top: 15px"
+                                                                data-toggle="modal" data-target="#modal_${doctor.id}">
+                                                            <spring:message code="messages.respond"/>
+                                                        </button>
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="appointmentFloatContainer">
+                                                        <button class="btn btn-info" style="margin-top: 15px"
+                                                                data-toggle="modal" data-target="#modal_${doctor.id}">
+                                                            <spring:message code="messages.editRespond"/>
+                                                        </button>
+                                                    </div>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            
                                             <div class="medical-card">
                                                 <div class="media">
                                                     <div class="media-left">
@@ -85,7 +97,19 @@
                                                 </div>
                                             </div>
 
-                                            <form action="${pageContext.request.contextPath}/user/addRespond" method="post">
+
+                                            <c:choose>
+                                                <c:when test="${!doctor.responded}">
+                                                    <c:set var="respondURL" value="${pageContext.request.contextPath}/user/addRespond"/>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:set var="respondURL" value="${pageContext.request.contextPath}/user/editRespond"/>
+                                                </c:otherwise>
+                                            </c:choose>
+
+                                            <form action="${respondURL}"  method="post">
+
+
                                                 <div class="form-group ${error != null ? 'has-error' : ''}">
                                                     <div class="modal-body">
                                                         <div class="form-group">
