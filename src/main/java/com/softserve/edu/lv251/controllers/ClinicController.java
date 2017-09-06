@@ -48,7 +48,7 @@ public class ClinicController {
         }
         model.addAttribute("clinic", clinic);
         model.addAttribute("mappoint", clinic.getContact().getAddress() + " " + clinic.getContact().getCity());
-        return CLINIC_DETAIL;
+        return CLINIC_DETAILS;
     }
 
     @RequestMapping(value = "/map")

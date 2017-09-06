@@ -68,7 +68,7 @@ public interface Constants {
         String USER_CABINET_MEDICAL_CARD = "userCabinetMedicalCard";
         String USER_CABINET_DOCTORS = "userCabinetDoctors";
         String MAP = "map";
-        String CLINIC_DETAIL = "clinic_details";
+        String CLINIC_DETAILS = "clinic_details";
         String CONTACT = "contact";
         String DOCTOR_SCHEDULE = "doctor_schedule";
         String DOCTOR_CABINET_PATIENTS2 = "doctor_cabinet_patients2";
