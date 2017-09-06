@@ -6,5 +6,5 @@ export class DoctorSearch{
   specialisation: string;
   photo: string;
   description: string;
-
+  district : string;
 }
