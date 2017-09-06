@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import static com.softserve.edu.lv251.constants.Constants.View.*;
+
 /**
  *
  */
@@ -46,11 +48,11 @@ public class ClinicController {
         }
         model.addAttribute("clinic", clinic);
         model.addAttribute("mappoint", clinic.getContact().getAddress() + " " + clinic.getContact().getCity());
-        return "clinic_details";
+        return CLINIC_DETAIL;
     }
 
     @RequestMapping(value = "/map")
     public String map() {
-        return "map";
+        return MAP;
     }
 }

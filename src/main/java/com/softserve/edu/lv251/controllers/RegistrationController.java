@@ -1,6 +1,5 @@
 package com.softserve.edu.lv251.controllers;
 
-import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Doctor;
@@ -26,8 +25,8 @@ import javax.validation.Valid;
 import java.util.Calendar;
 import java.util.Locale;
 
-import static com.softserve.edu.lv251.constants.Constants.View.*;
 import static com.softserve.edu.lv251.constants.Constants.Controller.*;
+import static com.softserve.edu.lv251.constants.Constants.View.*;
 
 /**
  * Added by Pavlo Kuchereshko.

@@ -42,22 +42,43 @@ public interface Constants {
         String GET_DOCTORS = "getDoctors";
         String PHOTO_FORM = "photoForm";
         String CLINIC_DTO = "clinicDTO";
-        String ALL_DOCTORS = "allDoctors";
-        String MODERATOR_CABINET = "moderatorCabinet";
-        String MODERATOR_CABINET_DOCTORS = "moderatorCabinetDoctors";
-        String MODERATOR_ADD_DOCTOR = "moderatorAddDoctor";
-        String MODERATOR_MAKE_DOCTOR= "moderatorMakeDoctor";
+
         String MESSAGES="messages";
+    }
+
+    interface Respond {
+        int MAX_RAITING = 5;
+        int MIN_RAITING = 0;
     }
 
     interface View {
         String REGISTRATION = "registration";
         String REGISTRATION_DOCTOR = "registrationDoctor";
         String ERROR_403 = "403";
+        String ERROR_PAGE = "errorPage";
         String REDIRECT = "redirect:/";
+        String REDIRECT_USER_CABINET = "redirect:/user/cabinet";
+        String REDIRECT_ADMIN_CABINET = "redirect:/admin/cabinet";
+        String REDIRECT_MODERATOR_CABINET = "redirect:/moderator/cabinet";
+        String REDIRECT_MODERATOR_CABINET_DOCTOR = "redirect:/moderator/cabinet/doctors";
         String HOME = "home";
         String SUCCESS_REGISTRATION = "successRegistration";
         String AFTER_REGISTRATION = "afterRegistration";
         String USER_CABINET = "userCabinet";
+        String USER_CABINET_MEDICAL_CARD = "userCabinetMedicalCard";
+        String USER_CABINET_DOCTORS = "userCabinetDoctors";
+        String MAP = "map";
+        String CLINIC_DETAIL = "clinic_details";
+        String CONTACT = "contact";
+        String DOCTOR_SCHEDULE = "doctor_schedule";
+        String DOCTOR_CABINET_PATIENTS2 = "doctor_cabinet_patients2";
+        String MODERATOR_CABINET = "moderatorCabinet";
+        String MODERATOR_CABINET_DOCTORS = "moderatorCabinetDoctors";
+        String MODERATOR_ADD_DOCTOR = "moderatorAddDoctor";
+        String MODERATOR_MAKE_DOCTOR= "moderatorMakeDoctor";
+        String ALL_DOCTORS = "allDoctors";
+        String DOCTOR_DETAILS = "doctor_details";
+        String ADMIN_CABINET = "adminCabinet";
+
     }
 }
