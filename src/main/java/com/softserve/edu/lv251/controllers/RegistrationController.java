@@ -26,6 +26,9 @@ import javax.validation.Valid;
 import java.util.Calendar;
 import java.util.Locale;
 
+import static com.softserve.edu.lv251.constants.Constants.View.*;
+import static com.softserve.edu.lv251.constants.Constants.Controller.*;
+
 /**
  * Added by Pavlo Kuchereshko.
  * Updated: Brynetskyi Marian
@@ -49,9 +52,6 @@ public class RegistrationController {
     @Autowired
     private MessageSource messageSource;
 
-    /**
-     * The publisher constructs the event object and publishes it to anyone who’s listening.
-     */
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
 
@@ -59,7 +59,7 @@ public class RegistrationController {
     public String registration(Model model) {
         model.addAttribute("userForm", new UserDTO());
 
-        return "registration";
+        return REGISTRATION;
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
@@ -71,14 +71,14 @@ public class RegistrationController {
 
         if (result.hasErrors()) {
             logger.warn(result.getAllErrors());
-            return "registration";
+            return REGISTRATION;
         }
 
         User registered = userService.registerNewUserAccount(accountDto);
 
         if (registered == null) {
-            result.rejectValue(Constants.Controller.EMAIL, "messages.regError");
-            return "registration";
+            result.rejectValue(EMAIL, "messages.regError");
+            return REGISTRATION;
         }
 
         try {
@@ -88,13 +88,12 @@ public class RegistrationController {
             logger.error(e);
             Locale currentLocale = LocaleContextHolder.getLocale();
             String emailSendingError = messageSource.getMessage("messages.emailSendingError", null, currentLocale);
-            model.addFlashAttribute(Constants.Controller.CLASS_CSS, "alert alert-warning");
-            model.addFlashAttribute(Constants.Controller.MESSAGE, emailSendingError);
+            model.addFlashAttribute(CLASS_CSS, "alert alert-warning");
+            model.addFlashAttribute(MESSAGE, emailSendingError);
             userService.deleteUser(userService.getUserByID(registered.getId()));
-            return "redirect:/registration";
         }
 
-        return "redirect:/afterRegistration";
+        return REDIRECT + REGISTRATION;
     }
 
     /**
@@ -102,18 +101,18 @@ public class RegistrationController {
      */
     @GetMapping("/afterRegistration")
     public String afterRegistrationGET() {
-        return "afterRegistration";
+        return AFTER_REGISTRATION;
     }
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.GET)
     public String registrationDoctor(Model model) {
-        model.addAttribute(Constants.Controller.DOCTOR_FORM, new DoctorDTO());
-        return "registrationDoctor";
+        model.addAttribute(DOCTOR_FORM, new DoctorDTO());
+        return REGISTRATION_DOCTOR;
     }
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.POST)
     public String registerDoctorAccount(
-            @ModelAttribute(Constants.Controller.DOCTOR_FORM) @Valid DoctorDTO accountDto,
+            @ModelAttribute(DOCTOR_FORM) @Valid DoctorDTO accountDto,
             BindingResult result) {
 
         Doctor registered = new Doctor();
@@ -121,12 +120,12 @@ public class RegistrationController {
             registered = doctorService.registerNewDoctorAccount(accountDto);
         }
         if (registered == null) {
-            result.rejectValue(Constants.Controller.EMAIL, "messages.regError");
+            result.rejectValue(EMAIL, "messages.regError");
         }
         if (result.hasErrors()) {
-            return "registrationDoctor";
+            return REGISTRATION_DOCTOR;
         } else {
-            return "redirect:/";
+            return REDIRECT;
         }
     }
 
@@ -140,32 +139,32 @@ public class RegistrationController {
         VerificationToken verificationToken = userService.getVerificationToken(token);
         if (verificationToken == null) {
             String message = messageSource.getMessage("messages.invalidToken", null, locale);
-            model.addAttribute(Constants.Controller.MESSAGE, message);
+            model.addAttribute(MESSAGE, message);
 
-            return "redirect:/403";
+            return REDIRECT + ERROR_403;
         }
 
         User user = verificationToken.getUser();
         Calendar calendar = Calendar.getInstance();
         if ((verificationToken.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
             String message = messageSource.getMessage("messages.invalidToken", null, locale);
-            model.addAttribute(Constants.Controller.MESSAGE, message);
+            model.addAttribute(MESSAGE, message);
 
-            return "redirect:/403";
+            return REDIRECT + ERROR_403;
         }
 
         user.setEnabled(true);
         this.userService.updateUser(user);
         this.verificationTokenService.deleteVerificationToken(verificationToken);
 
-        return "successRegistration";
+        return SUCCESS_REGISTRATION;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null) {
-            model.addAttribute(Constants.Controller.LOGIN_FLAG, true);
-            return "home";
+            model.addAttribute(LOGIN_FLAG, true);
+            return HOME;
         }
 
         if (logout != null) {
@@ -174,6 +173,6 @@ public class RegistrationController {
 
         model.addAttribute("login", true);
 
-        return "home";
+        return HOME;
     }
 }

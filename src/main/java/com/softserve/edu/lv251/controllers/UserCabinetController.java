@@ -6,7 +6,6 @@ import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
 import com.softserve.edu.lv251.entity.Contact;
-
 import com.softserve.edu.lv251.entity.Message;
 import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
@@ -17,12 +16,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
+import static com.softserve.edu.lv251.constants.Constants.View.*;
 
 /**
  * Author: Brynetskyi Marian
@@ -33,6 +32,7 @@ public class UserCabinetController {
 
     @Autowired
     private DoctorService doctorService;
+
     @Autowired
     private UserService userService;
 
@@ -43,10 +43,11 @@ public class UserCabinetController {
     private AppointmentService appointmentService;
 
     @Autowired
-    RespondService respondService;
+    private RespondService respondService;
 
     @Autowired
     private Mapper mapper;
+
     @Autowired
     private MessageService messageService;
 
@@ -56,7 +57,6 @@ public class UserCabinetController {
      */
     @GetMapping("/user/cabinet")
     public String userProfileGET(ModelMap model, Principal principal) {
-
         User user = userService.findByEmail(principal.getName());
         Contact contact = user.getContact();
         PersonalInfoDTO personalInfoDTO = new PersonalInfoDTO();
@@ -69,7 +69,7 @@ public class UserCabinetController {
         model.addAttribute(Constants.Controller.PERSONAL_INFO_DTO, personalInfoDTO);
         model.addAttribute(Constants.Controller.PASSWORD_DTO, passwordDTO);
         model.addAttribute("messages",messages);
-        return "userCabinet";
+        return USER_CABINET;
     }
 
     /**
@@ -82,7 +82,7 @@ public class UserCabinetController {
         if (bindingResult.hasErrors()) {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
             model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
-            return "userCabinet";
+            return USER_CABINET;
         }
 
         Contact contact = user.getContact();
@@ -113,7 +113,7 @@ public class UserCabinetController {
             model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
             model.addAttribute(Constants.Controller.PERSONAL_INFO_DTO, personalInfoDTO);
 
-            return "userCabinet";
+            return USER_CABINET;
         }
 
         userService.changePassword(user, passwordDTO);
@@ -125,7 +125,6 @@ public class UserCabinetController {
      */
     @GetMapping("/user/medicalcard")
     public String medicalCardGET(ModelMap model, Principal principal) {
-
         model.addAttribute("listAppointments", appointmentService.getAppointmentByUserEmail(principal.getName()));
         model.addAttribute("date", new Date().getTime());
 
@@ -137,7 +136,6 @@ public class UserCabinetController {
      */
     @GetMapping("/user/doctors")
     public String doctorsGET(ModelMap model, Principal principal) {
-
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("listAppointments", appointmentService.getAppointmentByUserEmail(principal.getName()));
         model.addAttribute("date", new Date().getTime());

@@ -21,9 +21,7 @@ public interface Constants {
         int PORT = 587;
     }
 
-
     interface Controller {
-
         String DATE_FLAG = "flag";
         String LOGIN_FLAG = "flag";
         String DOCTOR_ID = "doctorId";
@@ -50,9 +48,16 @@ public interface Constants {
         String MODERATOR_ADD_DOCTOR = "moderatorAddDoctor";
         String MODERATOR_MAKE_DOCTOR= "moderatorMakeDoctor";
         String MESSAGES="messages";
-
-
     }
 
-
+    interface View {
+        String REGISTRATION = "registration";
+        String REGISTRATION_DOCTOR = "registrationDoctor";
+        String ERROR_403 = "403";
+        String REDIRECT = "redirect:/";
+        String HOME = "home";
+        String SUCCESS_REGISTRATION = "successRegistration";
+        String AFTER_REGISTRATION = "afterRegistration";
+        String USER_CABINET = "userCabinet";
+    }
 }
