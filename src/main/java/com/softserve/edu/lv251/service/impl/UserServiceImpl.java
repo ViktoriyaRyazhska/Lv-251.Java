@@ -22,6 +22,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -116,7 +117,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         user.setEnabled(false);
         user.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
-        user.setRoles(Arrays.asList(rolesService.findByName(WebRoles.ROLE_USER.name())));
+        user.setRoles(Collections.singletonList(rolesService.findByName(WebRoles.ROLE_USER.name())));
         Contact contact = new Contact();
         contact.setUser(user);
         contact.setEmail(accountDto.getEmail());
@@ -135,8 +136,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<DoctorCabinetUser> searchByLetters(String search) {
         List<DoctorCabinetUser> userList = new LinkedList<>();
-        userDAO.searchByLetters(search).forEach((i)-> userList.add(mapper.map(i,DoctorCabinetUser.class)));
-        return  userList;
+        userDAO.searchByLetters(search).forEach((i) -> userList.add(mapper.map(i, DoctorCabinetUser.class)));
+        return userList;
     }
 
     @Override
@@ -165,25 +166,30 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
-        @Override
-    public UserUpdate getByEmail(String email){
-       User user= findByEmail(email);
-      UserUpdate userUpdate= new UserUpdate();
-      if(user!=null){
-      mapper.map(user,userUpdate);}
-      if(user.getContact()!=null){
-      mapper.map(user.getContact(),userUpdate);}
-        return  userUpdate;
+
+    @Override
+    public UserUpdate getByEmail(String email) {
+        User user = findByEmail(email);
+        UserUpdate userUpdate = new UserUpdate();
+        if (user != null) {
+            mapper.map(user, userUpdate);
+        }
+        if (user.getContact() != null) {
+            mapper.map(user.getContact(), userUpdate);
+        }
+        return userUpdate;
     }
 
     @Override
     public UserUpdate getById(long id) {
-        User user= userDAO.getEntityByID(id);
-        UserUpdate userUpdate= new UserUpdate();
-        if(user!=null){
-            mapper.map(user,userUpdate);}
-        if(user.getContact()!=null){
-            mapper.map(user.getContact(),userUpdate);}
-        return  userUpdate;
+        User user = userDAO.getEntityByID(id);
+        UserUpdate userUpdate = new UserUpdate();
+        if (user != null) {
+            mapper.map(user, userUpdate);
+        }
+        if (user.getContact() != null) {
+            mapper.map(user.getContact(), userUpdate);
+        }
+        return userUpdate;
     }
 }

@@ -65,7 +65,6 @@ $( document ).ready(function() {
 $( document ).ready(function() {
     $('#passwordConfirmReg').on('propertychange change keyup paste input', function() {
 
-
         var updateMatch = function(text) {
             $('#matchPsw').text(text).css('color', "#ff383f");
         };
@@ -119,5 +118,5 @@ $('#registration').submit(function() {
         isReturn(true);
     }
 
-    if (mustReturn) return false;
+    return !mustReturn;
 });
