@@ -37,7 +37,7 @@
     color: #666666;
     font-size: 17px;
 }
-.diagnosis {
+.diagnosis, .test-description {
     font-size: 16px;
 }
 
@@ -52,21 +52,17 @@
     padding: 10px 13px;
 }
 
-.appointmentsHistory {
+.appointmentsHistory,
+.pendingAppointments,
+.activeTests,
+.pastTests,
+#appointmentsHistoryListIsEmpty,
+#pendingAppointmentsListIsEmpty,
+#pastTestsListIsEmpty,
+#activeTestsListIsEmpty {
     display: none;
 }
 
-.pendingAppointments {
-    display: none;
-}
-
-#appointmentsHistoryListIsEmpty {
-    display: none;
-}
-
-#pendingAppointmentsListIsEmpty {
-    display: none;
-}
 
 .appointmentWrapper, .doctorWrapper, .testWrapper {
     width: 100%;

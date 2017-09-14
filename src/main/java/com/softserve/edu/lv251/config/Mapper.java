@@ -429,7 +429,7 @@ public class Mapper extends ConfigurableMapper {
                     @Override
                     public void mapAtoB(TestsResult testsResult, TestResultDTO testResultDTO, MappingContext context) {
                         super.mapAtoB(testsResult, testResultDTO, context);
-                        testResultDTO.setTest(testResultDTO.getTest());
+                        testResultDTO.setTest(testsResult.getTest().getName());
                     }
                 }).register();
     }

@@ -6,6 +6,7 @@ import java.util.Date;
  * Created by Marian Brynetskyi on 14.09.2017.
  */
 public class TestResultDTO {
+
     private long id;
     private Date startDdate;
     private Date endDdate;
