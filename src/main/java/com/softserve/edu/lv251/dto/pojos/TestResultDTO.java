@@ -6,12 +6,21 @@ import java.util.Date;
  * Created by Marian Brynetskyi on 14.09.2017.
  */
 public class TestResultDTO {
+    private long id;
     private Date startDdate;
     private Date endDdate;
     private String description;
     private String test;
 
     public TestResultDTO() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Date getStartDdate() {

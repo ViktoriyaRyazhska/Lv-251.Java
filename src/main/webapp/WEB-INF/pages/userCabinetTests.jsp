@@ -42,64 +42,37 @@
                             <div id="shown_if_not_empty" class="well mcard_content">
                                 <c:set var="listPastAppointmentsLength" value="0"/>
                                 <c:set var="listPendingAppointmentsLength" value="0"/>
-                                <c:forEach items="${listAppointments}" var="appointment" varStatus="loop">
-                                    <fmt:formatDate var="aDate" pattern = 'dd-MM-yyyy HH:mm' value='${appointment.appointmentDate}'/>
+                                <c:forEach items="${tests}" var="test" varStatus="loop">
+                                    <fmt:formatDate var="aDate" pattern = 'dd-MM-yyyy HH:mm' value='${test.startDdate}'/>
                                     <c:choose>
-                                        <c:when test="${appointment.appointmentDate.time lt date}">
+                                        <c:when test="${test.endDdate.time lt date}">
                                             <c:set var="showAppointmentClass" value="appointmentsHistory"/>
                                             <c:set var="listPastAppointmentsLength" value="${listPastAppointmentsLength + 1}"/>
                                         </c:when>
-                                        <c:when test="${appointment.appointmentDate.time ge date}">
+                                        <c:when test="${test.endDdate.time ge date}">
                                             <c:set var="showAppointmentClass" value="pendingAppointments"/>
                                             <c:set var="listPendingAppointmentsLength" value="${listPendingAppointmentsLength + 1}"/>
                                         </c:when>
                                     </c:choose>
 
-                                    <c:choose>
-                                        <c:when test="${appointment.appointmentDate.time ge date && !appointment.isApproved}">
-                                            <c:set var="cssClass" value="label label-warning"/>
-                                            <spring:message code="messages.appointmentIsNotApproved" var="appointmentIsNotApproved"/>
-                                            <c:set var="appointmentSatatus" value="${appointmentIsNotApproved}"/>
-                                        </c:when>
-                                        <c:when test="${appointment.appointmentDate.time ge date && appointment.isApproved}">
-                                            <c:set var="cssClass" value="label label-success"/>
-                                            <spring:message code="messages.appointmentIsDone" var="appointmentIsDone"/>
-                                            <c:set var="appointmentSatatus" value="${appointmentIsDone}"/>
-                                        </c:when>
-                                        <c:when test="${appointment.appointmentDate.time lt date && appointment.isApproved}">
-                                            <c:set var="cssClass" value="label label-info"/>
-                                            <spring:message code="messages.appointmentIsApproved" var="appointmentIsApproved"/>
-                                            <c:set var="appointmentSatatus" value="${appointmentIsApproved}"/>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <c:set var="cssClass" value="label label-danger"/>
-                                            <spring:message code="messages.appointmentIsRejected" var="appointmentIsRejected"/>
-                                            <c:set var="appointmentSatatus" value="${appointmentIsRejected}"/>
-                                        </c:otherwise>
-                                    </c:choose>
+
 
                                     <div class="${showAppointmentClass}">
                                         <div class="col-sm-6 appointmentWrapper">
                                             <div class="appointmentFloatContainer">
-                                                <div class="appointmentInner ${cssClass}">
-                                                    <c:out value="${appointmentSatatus}"/>
-                                                </div>
                                             </div>
 
                                             <div class="medical-card">
                                                 <div class="media">
-                                                    <div class="media-left">
-                                                        <img class="media-object img-circle profile-img" src="<c:url value="/resources/img/User_Default.png"/>">
-                                                    </div>
                                                     <div class="media-body">
                                                         <div>
                                                             <div >
-                                                                <h3 class="media-heading"><c:out value="${appointment.doctor.firstname} ${appointment.doctor.lastname}"/></h3>
+                                                                <h3 class="media-heading"><c:out value="${test.test}"/></h3>
                                                             </div>
                                                         </div>
 
-                                                        <div class="specialization"><c:out value="${appointment.doctor.specialization.name}"/></div>
-                                                        <div class="diagnosis"><c:out value="${appointment.description}"/></div>
+                                                        <div class="specialization"><c:out value="${test.description}"/></div>
+                                                        <div class="diagnosis"><c:out value="${test.description}"/></div>
                                                         <div class="diagnosis"><c:out value="${aDate}"/></div>
                                                     </div>
                                                 </div>

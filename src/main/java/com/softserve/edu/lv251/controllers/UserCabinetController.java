@@ -173,7 +173,9 @@ public class UserCabinetController {
                                  @RequestParam("raiting") String raiting,
                                  Principal principal) {
 
-        respondService.editRespond(Short.parseShort(raiting), description, userService.findByEmail(principal.getName()).getId(), doctorId);
+        respondService.editRespond(Short.parseShort(raiting),
+                description,
+                userService.findByEmail(principal.getName()).getId(), doctorId);
         return doctorsGET(modelMap, principal);
     }
 
@@ -186,7 +188,7 @@ public class UserCabinetController {
         model.addAttribute("tests", testResultService.getUserTestResults(principal.getName()));
         model.addAttribute("date", new Date().getTime());
 
-        return USER_CABINET_MEDICAL_CARD;
+        return USER_CABINET_TESTS;
     }
 
 
