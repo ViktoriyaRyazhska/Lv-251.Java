@@ -48,6 +48,7 @@
                                 <c:set var="listPastTestsLength" value="0"/>
                                 <c:forEach items="${tests}" var="test" varStatus="loop">
                                     <fmt:formatDate var="startDate" pattern = 'dd-MM-yyyy HH:mm' value='${test.startDdate}'/>
+                                    <fmt:formatDate var="endDate" pattern = 'dd-MM-yyyy HH:mm' value='${test.endDdate}'/>
                                     <c:choose>
                                         <c:when test="${test.endDdate.time lt date}">
                                             <c:set var="showTestsClass" value="pastTests"/>
@@ -77,8 +78,15 @@
                                                                     </h3>
                                                                 </div>
                                                                 <div class="col-xs-3">
-                                                                    <div class="test-description">
-                                                                        <c:out value="${startDate}"/>
+                                                                    <div class="row">
+                                                                        <div class="test-description">
+                                                                            <c:out value="${startDate}"/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="test-description">
+                                                                            <c:out value="${endDate}"/>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
