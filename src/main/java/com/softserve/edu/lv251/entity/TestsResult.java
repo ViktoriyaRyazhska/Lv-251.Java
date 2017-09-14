@@ -10,6 +10,7 @@ import java.util.Date;
 @Entity
 public class TestsResult extends BaseEntity {
 
+    private long id;
     private Date startDdate;
     private Date endDdate;
     private String description;
@@ -21,6 +22,16 @@ public class TestsResult extends BaseEntity {
     private User user;
 
     public TestsResult() {
+    }
+
+    @Override
+    public long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(long id) {
+        this.id = id;
     }
 
     public User getUser() {

@@ -16,10 +16,10 @@
                     <a href="<c:url value="/user/doctors"/>" class="list-group-item">
                         <spring:message code="messages.doctors"/>
                     </a>
-                    <a href="<c:url value="/user/medicalcard"/>" class="navbar-inverse list-group-item">
+                    <a href="<c:url value="/user/medicalcard"/>" class="list-group-item">
                         <spring:message code="messages.medicalCard"/>
                     </a>
-                    <a href="<c:url value="/user/tests"/>" class="list-group-item">
+                    <a href="<c:url value="/user/tests"/>" class="navbar-inverse list-group-item">
                         <spring:message code="messages.tests"/>
                     </a>
                 </div>
@@ -32,12 +32,12 @@
                 <div class="container-fluid">
                     <div class="row content">
                         <br>
-                            <div id="menu_mcard" style="cursor: pointer">
-                                <ul>
-                                    <li><a id="appointmentsHistoryLink" class="navbar-inverse list-group-item"><spring:message code="messages.appointmentsHistory"/></a></li>
-                                    <li><a id="pendingAppointmentsLink" class="list-group-item"><spring:message code="messages.pendingAppointments"/></a></li>
-                                </ul>
-                            </div>
+                        <div id="menu_mcard" style="cursor: pointer">
+                            <ul>
+                                <li><a id="appointmentsHistoryLink" class="navbar-inverse list-group-item"><spring:message code="messages.appointmentsHistory"/></a></li>
+                                <li><a id="pendingAppointmentsLink" class="list-group-item"><spring:message code="messages.pendingAppointments"/></a></li>
+                            </ul>
+                        </div>
                         <div class="col-sm-9" style="width: 100%">
                             <div id="shown_if_not_empty" class="well mcard_content">
                                 <c:set var="listPastAppointmentsLength" value="0"/>
@@ -108,35 +108,35 @@
                                     </div>
                                 </c:forEach>
                             </div>
-                                <div id="appointmentsHistoryListIsEmpty">
-                                    <div class="well mcard_content">
-                                        <div class="col-sm-6" style="width: 100%; padding-left: 0; padding-right: 0;">
-                                            <div class="medical-card alert alert-info">
-                                                <div class="media">
-                                                    <div class="media-body">
-                                                        <h3 class="media-heading" style="text-align: center"><spring:message code="messages.noPastAppointments"/></h3>
-                                                    </div>
+                            <div id="appointmentsHistoryListIsEmpty">
+                                <div class="well mcard_content">
+                                    <div class="col-sm-6" style="width: 100%; padding-left: 0; padding-right: 0;">
+                                        <div class="medical-card alert alert-info">
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h3 class="media-heading" style="text-align: center"><spring:message code="messages.noPastAppointments"/></h3>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="pendingAppointmentsListIsEmpty">
-                                    <div class="well mcard_content">
-                                        <div class="col-sm-6" style="width: 100%; padding-left: 0; padding-right: 0;">
-                                            <div class="medical-card alert alert-info">
-                                                <div class="media">
-                                                    <div class="media-body">
-                                                        <h3 class="media-heading" style="text-align: center"><spring:message code="messages.noPendingAppointments"/></h3>
-                                                    </div>
+                            </div>
+                            <div id="pendingAppointmentsListIsEmpty">
+                                <div class="well mcard_content">
+                                    <div class="col-sm-6" style="width: 100%; padding-left: 0; padding-right: 0;">
+                                        <div class="medical-card alert alert-info">
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h3 class="media-heading" style="text-align: center"><spring:message code="messages.noPendingAppointments"/></h3>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             <script>
                                 $(function () {
-                                   showAppointmentHistory();
+                                    showAppointmentHistory();
                                 });
 
                                 var listPastAppointmentsLength = "${listPastAppointmentsLength}";

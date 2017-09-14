@@ -53,6 +53,9 @@ public class UserCabinetController {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private TestResultService testResultService;
+
     /**
      * Author: Brynetskyi Marian
      * Updated: Kovalevskyy Vitaliy
@@ -172,6 +175,18 @@ public class UserCabinetController {
 
         respondService.editRespond(Short.parseShort(raiting), description, userService.findByEmail(principal.getName()).getId(), doctorId);
         return doctorsGET(modelMap, principal);
+    }
+
+
+    /**
+     * Created by Marian Brynetskyi
+     */
+    @RequestMapping(value = "/tests", method = RequestMethod.GET)
+    public String testsGET(ModelMap model, Principal principal) {
+        model.addAttribute("tests", testResultService.getUserTestResults(principal.getName()));
+        model.addAttribute("date", new Date().getTime());
+
+        return USER_CABINET_MEDICAL_CARD;
     }
 
 
