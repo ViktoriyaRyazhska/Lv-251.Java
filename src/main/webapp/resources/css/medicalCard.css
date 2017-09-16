@@ -37,7 +37,7 @@
     color: #666666;
     font-size: 17px;
 }
-.diagnosis {
+.diagnosis, .test-description {
     font-size: 16px;
 }
 
@@ -52,23 +52,19 @@
     padding: 10px 13px;
 }
 
-.appointmentsHistory {
+.appointmentsHistory,
+.pendingAppointments,
+.activeTests,
+.pastTests,
+#appointmentsHistoryListIsEmpty,
+#pendingAppointmentsListIsEmpty,
+#pastTestsListIsEmpty,
+#activeTestsListIsEmpty {
     display: none;
 }
 
-.pendingAppointments {
-    display: none;
-}
 
-#appointmentsHistoryListIsEmpty {
-    display: none;
-}
-
-#pendingAppointmentsListIsEmpty {
-    display: none;
-}
-
-.appointmentWrapper {
+.appointmentWrapper, .doctorWrapper, .testWrapper {
     width: 100%;
     background-color: rgb(248, 255, 255);
     border-radius: 5px;
@@ -78,7 +74,7 @@
     margin-top: 3px;
 }
 
-.appointmentFloatContainer {
+.appointmentFloatContainer, .doctorFloatContainer, .testFloatContainer {
     float: right;
     position: relative;
 }

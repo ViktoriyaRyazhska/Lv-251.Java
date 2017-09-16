@@ -9,8 +9,12 @@
     <agm-map style="width: 30%; float: right; position: relative" #map style="height: 300px;"
              [latitude]='49.8327216'
              [longitude]='23.995499'>
-      <agm-marker [latitude]='49.8327216' [longitude]='23.995499'></agm-marker>
-      <agm-marker *ngFor="let item of activeClinics"  [latitude]='item.latitude' [longitude]='item.longitude' [label]='item.name'></agm-marker>
+      <agm-marker [latitude]='49.8327216' [longitude]='23.995499'>
+        <agm-info-window>SoftServe</agm-info-window>
+      </agm-marker>
+      <agm-marker *ngFor="let item of activeClinics"  [latitude]='item.latitude' [longitude]='item.longitude' >
+       <agm-info-window>{{item.name}}</agm-info-window>
+      </agm-marker>
     </agm-map>
   </div>
 </div>

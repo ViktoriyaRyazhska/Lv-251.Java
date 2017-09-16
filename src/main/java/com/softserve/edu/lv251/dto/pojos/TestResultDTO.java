@@ -1,43 +1,27 @@
-package com.softserve.edu.lv251.entity;
+package com.softserve.edu.lv251.dto.pojos;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
- * Created by Taras on 11.07.2017.
+ * Created by Marian Brynetskyi on 14.09.2017.
  */
-@Entity
-public class TestsResult extends BaseEntity {
+public class TestResultDTO {
 
+    private long id;
     private Date startDdate;
     private Date endDdate;
     private String description;
+    private String test;
 
-    @ManyToOne
-    private Test test;
-
-    @ManyToOne
-    private User user;
-
-    public TestsResult() {
+    public TestResultDTO() {
     }
 
-    public User getUser() {
-        return user;
+    public long getId() {
+        return id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Test getTest() {
-        return test;
-    }
-
-    public void setTest(Test test) {
-        this.test = test;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Date getStartDdate() {
@@ -62,5 +46,13 @@ public class TestsResult extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
     }
 }

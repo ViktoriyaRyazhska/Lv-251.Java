@@ -40,6 +40,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         registry.addResourceHandler("/WEB-INF/pages/**").addResourceLocations("/pages/");
+        registry.addResourceHandler("/favicon.ico").addResourceLocations("/favicon.ico");
     }
 
     @Bean

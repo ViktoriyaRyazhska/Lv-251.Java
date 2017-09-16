@@ -3,10 +3,13 @@
  */
 
 var patients;
+var tests;
 
 
 function init() {
+
     loadData();
+    loadTestsNames();
 
     $('#search').on('input', function() {
         clearAll()
@@ -20,8 +23,6 @@ function init() {
         }
     });
 }
-
-
 
 function loadData() {
     // var searchValue = document.getElementById("search").value;
@@ -42,11 +43,38 @@ function loadData() {
                 addItem2(item.id, item.fullName);
 
             }
+            addTests();
         },
         error: function (response) {
 
         }
     });
+}
+
+function loadTestsNames() {
+
+    var searchValue = "";
+
+    $.ajax({
+        type: "GET",
+        data: searchValue,
+        url: window.location.protocol + "//" + window.location.host + "/rest/doctor/tests/",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            tests = result;
+            for (var i = 0; i < tests.length; i++) {
+
+                var item = tests[i];
+                addTests(i, item);
+
+            }
+        },
+        error: function (response) {
+
+        }
+    });
+
 }
 
 function addItem(id, text){
@@ -59,6 +87,14 @@ function addItem(id, text){
     tbody.appendChild(tr);
 }
 
+function addTests() {
+    for(var i = 0; i < tests.length; i++){
+        var dataItems = {
+            "Name" : tests[i],
+            "id" : i};
+        $('#option-template').tmpl(dataItems).appendTo('.select');
+    }
+}
 
 function addItem2(id, text){
     if(text==null){
@@ -68,7 +104,9 @@ function addItem2(id, text){
         "Name" : text,
         "id" : id};
 
+
     $('#template').tmpl(dataItems).appendTo('#dynamic-list');
+
 }
 
 function clearAll(){

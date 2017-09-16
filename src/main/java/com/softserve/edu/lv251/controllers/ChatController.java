@@ -17,22 +17,24 @@ import java.util.Date;
  */
 @Controller
 public class ChatController {
+
     @Autowired
     private MessageService messageService;
+
     @Autowired
     private UserService userService;
 
+    @MessageMapping("/chat")
+    @SendTo("/topic/messages")
+    public MessagesDTO send(MessagesDTO message, Principal principal) throws Exception {
+        User user=userService.findByEmail(principal.getName());
+        String time = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(new Date());
+        message.setEmail(user.getEmail());
+        message.setName(user.getFirstname());
+        message.setLastname(user.getLastname());
+        messageService.addMessage(message);
+        message.setDate(time);
 
-@MessageMapping("/chat")
-@SendTo("/topic/messages")
-public MessagesDTO send(MessagesDTO message, Principal principal) throws Exception {
-    User user=userService.findByEmail(principal.getName());
-    String time = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(new Date());
-    message.setEmail(user.getEmail());
-    message.setName(user.getFirstname());
-    message.setLastname(user.getLastname());
-    messageService.addMessage(message);
-    message.setDate(time);
-    return message;
-}
+        return message;
+    }
 }

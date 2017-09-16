@@ -62,9 +62,9 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     }
 
     @Override
-    public List<DoctorsSearchDTO> getAllDoctors() {
-        List<DoctorsSearchDTO> list = new LinkedList<>();
-        doctorDAO.getAllEntities().forEach((doctor)-> list.add(mapper.map(doctor,DoctorsSearchDTO.class)));
+    public List<DoctorSearchAngularDTO> getAllDoctors() {
+        List<DoctorSearchAngularDTO> list = new LinkedList<>();
+        doctorDAO.getAllEntities().forEach((doctor)-> list.add(mapper.map(doctor,DoctorSearchAngularDTO.class)));
         return list;
     }
 
@@ -173,9 +173,11 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
         for (Appointment a : appointments) {
             PatientDTO patient = new PatientDTO();
             mapper.map(a.getUser(), patient);
-            patients.add(patient);
-        }
 
+            if(!patients.stream().anyMatch(p->p.getId() == patient.getId())){
+                patients.add(patient);
+            }
+        }
         return patients;
     }
 
@@ -310,7 +312,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     public List<DoctorRespondDTO> getDoctorsByUser(long userId) {
         List<DoctorRespondDTO> doctorRespondDTOS = new LinkedList<>();
         Date date = new Date();
-
         doctorDAO.getAllEntities().forEach(doctor -> {
             doctor.getDocAppointments().forEach(appointment -> {
                 if (appointment.getUser().getId() == userId

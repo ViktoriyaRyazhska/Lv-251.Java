@@ -44,6 +44,9 @@
             type="text/javascript"></script>
     <script src="<c:url value="/resources/calendarResourses/bootstrap-dialog.js"/>" ></script>
     <script src="<c:url value="/resources/calendarResourses/locale-all.js"/>" ></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/moment.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/moment-timezone.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/moment-timezone-with-data-2012-2022.min.js"/>"></script>
 
     <script>
 
@@ -116,15 +119,19 @@
                     <c:choose>
                     <c:when test="${docApps.size()>0}">
                     <c:forEach items="${docApps}" var="apointments">
-                    dd = new Date("${apointments.appointmentDate}");
-                    dd.setHours(dd.getHours());
-                    dates.push(dd);
+                    appDate = new Date("${apointments.appointmentDate}");
+                    dates.push(appDate);
                     </c:forEach>
                     </c:when>
                     </c:choose>
 
                     for (var i = 0; i < dates.length; i++) {
-                        if (date.getTime() === dates[i].getTime()) {
+                        if (date.getUTCMinutes() === moment(dates[i]).tz('Europe/Kiev').minute()
+                            && date.getUTCHours() === moment(dates[i]).tz('Europe/Kiev').hour()
+                            && date.getUTCDay() === moment(dates[i]).tz('Europe/Kiev').day()
+                            && date.getUTCMonth() === moment(dates[i]).tz('Europe/Kiev').month()
+                            && date.getUTCFullYear() === moment(dates[i]).tz('Europe/Kiev').year()) {
+
                             return ['disabled'];
                         }
                     }

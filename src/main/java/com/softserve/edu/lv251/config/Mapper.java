@@ -29,6 +29,7 @@ public class Mapper extends ConfigurableMapper {
         clinicConfigure(factory);
         appointmentsConfigure(factory);
         respondConfigure(factory);
+        testResultConfigure(factory);
     }
 
     private void districtConfig(MapperFactory factory){
@@ -223,9 +224,9 @@ public class Mapper extends ConfigurableMapper {
                     public void mapAtoB(Appointment appointment, AppointmentsDTO appointmentsDTO, MappingContext context) {
                         super.mapAtoB(appointment, appointmentsDTO, context);
                         appointmentsDTO.setId(appointment.getId());
-                        appointment.getAppointmentDate().setTime(
-                                appointment.getAppointmentDate().getTime()
-                                        - Calendar.getInstance().getTimeZone().getRawOffset());
+//                        appointment.getAppointmentDate().setTime(
+//                                appointment.getAppointmentDate().getTime()
+//                                        - Calendar.getInstance().getTimeZone().getRawOffset());
                         appointmentsDTO.setTitle(appointment.getUser().getFirstname() + " " + appointment.getUser().getLastname());
                         if (appointment.getIsApproved() != null) {
                             if (Calendar.getInstance().getTime().compareTo(appointment.getAppointmentDate()) < 0) {
@@ -305,7 +306,9 @@ public class Mapper extends ConfigurableMapper {
                     contacts.setLatitude(doctor.getContact().getLatitude());
                     contacts.setLongitude(doctor.getContact().getLongitude());
                     contacts.setCity(doctor.getContact().getCity());
-                    contacts.setDistrict(doctor.getContact().getDistrict().getName());
+                    if(doctor.getContact().getDistrict()!=null){
+                        contacts.setDistrict(doctor.getContact().getDistrict().getName());
+                    }
                     contacts.setEmail(doctor.getContact().getEmail());
                     List<String> phones = new ArrayList<>();
                     phones.add(doctor.getContact().getFirstPhone());
@@ -382,7 +385,6 @@ public class Mapper extends ConfigurableMapper {
 
     private void respondConfigure(MapperFactory factory){
 
-
         factory.classMap(Appointment.class,AppointmentsInfoDTO.class)
                 .field("isApproved","status")
                 .field("id","id")
@@ -415,5 +417,20 @@ public class Mapper extends ConfigurableMapper {
                     }
                 }).register();
 
+    }
+
+    private void testResultConfigure(MapperFactory factory){
+        factory.classMap(TestsResult.class, TestResultDTO.class)
+                .field("id", "id")
+                .field("startDdate", "startDdate")
+                .field("endDdate", "endDdate")
+                .field("description", "description")
+                .customize(new CustomMapper<TestsResult, TestResultDTO>() {
+                    @Override
+                    public void mapAtoB(TestsResult testsResult, TestResultDTO testResultDTO, MappingContext context) {
+                        super.mapAtoB(testsResult, testResultDTO, context);
+                        testResultDTO.setTest(testsResult.getTest().getName());
+                    }
+                }).register();
     }
 }

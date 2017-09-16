@@ -20,7 +20,7 @@ public class DoctorRestAngularController {
     DoctorService doctorService;
 
     @RequestMapping(value = "api/getAllDoctors", method = RequestMethod.GET)
-    List<DoctorsSearchDTO> getAllDoctors() {
+    List<DoctorSearchAngularDTO> getAllDoctors() {
         return doctorService.getAllDoctors();
     }
 }

@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.util.Locale;
 
+import static com.softserve.edu.lv251.constants.Constants.View.*;
+
 /**
  *
  */
@@ -29,7 +31,7 @@ public class ContactController {
 
     @GetMapping("/contact")
     public String contactUs(@ModelAttribute ContactDTO contactDTO) {
-        return "contact";
+        return CONTACT;
     }
 
     @PostMapping("/contact")
@@ -41,20 +43,17 @@ public class ContactController {
         String messageError = messageSource.getMessage("messages.contactError", null, currentLocale);
 
         if (bindingResult.hasErrors()) {
-
-            return "contact";
+            return CONTACT;
         }
 
         if (mailComponent.sendMail(contactDTO)) {
-
             model.addFlashAttribute(Constants.Controller.CLASS_CSS, "alert alert-success");
             model.addFlashAttribute(Constants.Controller.MESSAGE, messageSuccess);
         } else {
             model.addFlashAttribute(Constants.Controller.CLASS_CSS, "alert alert-warning");
             model.addFlashAttribute(Constants.Controller.MESSAGE, messageError);
-
         }
-        return "redirect:/contact";
+        return REDIRECT + CONTACT;
     }
 
 

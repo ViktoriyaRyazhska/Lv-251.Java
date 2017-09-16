@@ -24,19 +24,16 @@ import java.util.UUID;
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
 
     @Autowired
-    VerificationTokenService verificationTokenService;
+    private UserService userService;
 
     @Autowired
-    UserService userService;
+    private MessageSource messageSource;
 
     @Autowired
-    MessageSource messageSource;
+    private JavaMailSender javaMailSender;
 
     @Autowired
-    JavaMailSender javaMailSender;
-
-    @Autowired
-    Logger logger;
+    private Logger logger;
 
     @Override
     @Transactional

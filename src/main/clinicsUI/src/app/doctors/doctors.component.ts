@@ -26,10 +26,11 @@ export class DoctorsComponent implements OnInit {
 
   onRecieveInfo(event: { select: number, name: string, district: string }) {
     this.activeDoctors = [];
+    console.log(event);
     if (event.select == 1) {
       for (let doctor of this.doctors) {
-        if ((doctor.firstname.toLowerCase().indexOf(event.name.toLowerCase()) >= 0)
-          || ((doctor.lastname.toLowerCase().indexOf(event.name.toLowerCase()) >= 0))) {
+        if (((doctor.firstname+ " " + doctor.lastname).toLowerCase().indexOf(event.name.toLowerCase()) >= 0)
+          || (((doctor.lastname + " " + doctor.firstname).toLowerCase().indexOf(event.name.toLowerCase()) >= 0))) {
           this.activeDoctors.push(doctor);
         }
       }

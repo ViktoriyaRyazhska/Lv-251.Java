@@ -13,7 +13,9 @@ public interface RespondService {
 
     List<RespondDTO> getAllRespondsByDoctor(long doctorId);
 
-    boolean AddRespond(short raiting, String description, long userId, long doctorId);
+    boolean addRespond(short raiting, String description, long userId, long doctorId);
+
+    boolean editRespond(short raiting, String description, long userId, long doctorId);
 
     List<DoctorRespondDTO> setResponded(long userId, List<DoctorRespondDTO> doctorRespondDTOS);
 

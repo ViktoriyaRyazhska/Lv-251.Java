@@ -4,6 +4,7 @@ export class DoctorSearch{
   lastname: string;
   clinicName: string;
   specialisation: string;
-  doctorPhoto: string;
+  photo: string;
   description: string;
+  district : string;
 }

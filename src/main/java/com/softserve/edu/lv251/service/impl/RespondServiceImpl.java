@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.config.Mapper;
+import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dao.RespondDAO;
 import com.softserve.edu.lv251.dto.pojos.DoctorRespondDTO;
 import com.softserve.edu.lv251.dto.pojos.RespondDTO;
@@ -53,14 +54,14 @@ public class RespondServiceImpl implements RespondService {
     }
 
     @Override
-    public boolean AddRespond(short raiting, String description, long userId, long doctorId) {
+    public boolean addRespond(short raiting, String description, long userId, long doctorId) {
         Respond respond = new Respond();
         respond.setDate(new Date());
         respond.setDescription(description);
         respond.setDoctor(doctorService.getById(doctorId));
         respond.setUser(usersService.getUserByID(userId));
 
-        if (raiting > 5 || raiting < 0 || raiting % 1 != 0) {
+        if (raiting > Constants.Respond.MAX_RAITING || raiting < Constants.Respond.MIN_RAITING || raiting % 1 != 0) {
             return false;
         }
         respond.setRaiting(raiting);
@@ -69,9 +70,27 @@ public class RespondServiceImpl implements RespondService {
     }
 
     @Override
+    public boolean editRespond(short raiting, String description, long userId, long doctorId) {
+        Respond respond = respondDAO.getAllEntities()
+                .stream()
+                .filter(p->p.getUser()
+                        .getId() == userId && p.getDoctor().getId() == doctorId)
+                .findFirst()
+                .get();
+        respond.setDate(new Date());
+        respond.setDescription(description);
+
+        if (raiting > Constants.Respond.MAX_RAITING || raiting < Constants.Respond.MIN_RAITING || raiting % 1 != 0) {
+            return false;
+        }
+        respond.setRaiting(raiting);
+        respondDAO.updateEntity(respond);
+        return true;
+    }
+
+    @Override
     public List<DoctorRespondDTO> setResponded(long userId, List<DoctorRespondDTO> doctorRespondDTOS) {
         Date date = new Date();
-
         doctorRespondDTOS.forEach(doctorRespondDTO -> {
             if (appointmentService.listAppointmensWithUser(userId)
                     .stream()
