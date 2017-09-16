@@ -66,16 +66,15 @@
         <div class="col-sm-6 appointmentWrapper">
             <div class="appointmentFloatContainer">
                 <div class=row>
-                    <button class="btn btn-info" style="margin-top: 15px" data-toggle="modal" data-target="#modal_\${id}">
+                    <button class="btn btn-info" style="margin-top: 15px; margin-right: 15px;" data-toggle="modal" data-target="#modal_\${id}">
                         <spring:message code="messages.addTest"/>
                     </button>
+                    <a href="/doctor/patient/\${id}" class="btn btn-info" style="margin-top: 15px; margin-right: 15px;">
+                        <spring:message code="messages.checkTests"/>
+                    </a>
                 </div>
                 <div class=row>
-                    <button class="btn btn-info" style="margin-top: 15px">
-                        <a href="/doctor/patient/\${id}" class="button">
-                            <spring:message code="messages.checkTests"/>
-                        </a>
-                    </button>
+
                 </div>
             </div>
 

@@ -103,7 +103,7 @@
                                             <div class="media">
                                                 <div class="media-body">
                                                     <h3 class="media-heading" style="text-align: center">
-                                                        <spring:message code="messages.noActiveTests"/>
+                                                        <spring:message code="messages.noActiveTestsForPatient"/>
                                                     </h3>
                                                 </div>
                                             </div>
@@ -118,7 +118,7 @@
                                             <div class="media">
                                                 <div class="media-body">
                                                     <h3 class="media-heading" style="text-align: center">
-                                                        <spring:message code="messages.noPastTests"/>
+                                                        <spring:message code="messages.noPastTestsForPatient"/>
                                                     </h3>
                                                 </div>
                                             </div>
