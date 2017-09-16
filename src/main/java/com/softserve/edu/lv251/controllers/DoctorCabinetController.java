@@ -42,7 +42,7 @@ public class DoctorCabinetController {
     }
 
     @RequestMapping(value = "/patients", method = RequestMethod.GET)
-    public String patients(ModelAndView modelAndView) {
+    public String patients() {
         return DOCTOR_CABINET_PATIENTS2;
     }
 
