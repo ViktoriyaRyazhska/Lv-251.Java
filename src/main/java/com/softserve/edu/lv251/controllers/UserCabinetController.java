@@ -162,5 +162,10 @@ public class UserCabinetController {
         return doctorsGET(modelMap, principal);
     }
 
+    @GetMapping("/user/messages")
+    public String getMessages(){
+        return "userCabinetMessages";
+    }
+
 
 }

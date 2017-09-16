@@ -18,13 +18,22 @@ public class User extends BaseEntity {
     private String email;
     private String password;
 
-
+    @ManyToMany
+    @JoinTable(
+            name = "conversation_user",
+            inverseJoinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(
+                    name = "conversation_id", referencedColumnName = "id"),
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+    private List<Conversation> conversations;
 
     @OneToMany(mappedBy = "from")
-    private List<Message> messagesfrom;
+    private List<Message> messages;
 
-    @OneToMany(mappedBy = "to")
-    private List<Message> messagesTo;
+    @OneToMany(mappedBy = "recipient")
+    private List<MessageRecipient> messageRecipients;
 
     @Column(name = "enabled", nullable = false, columnDefinition = "bit(1) default 1")
     private boolean enabled;
@@ -72,6 +81,30 @@ public class User extends BaseEntity {
 
 
     public User() {
+    }
+
+    public List<MessageRecipient> getMessageRecipients() {
+        return messageRecipients;
+    }
+
+    public void setMessageRecipients(List<MessageRecipient> messageRecipients) {
+        this.messageRecipients = messageRecipients;
+    }
+
+    public List<Conversation> getConversations() {
+        return conversations;
+    }
+
+    public void setConversations(List<Conversation> conversations) {
+        this.conversations = conversations;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
     public List<Respond> getResponds() {

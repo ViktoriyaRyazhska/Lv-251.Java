@@ -109,6 +109,12 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
         <put-attribute name="body" value="/WEB-INF/pages/userCabinetDoctors.jsp"/>
     </definition>
 
+    <!-- User messages Page -->
+    <definition name="userCabinetMessages" extends="userCabinet">
+        <put-attribute name="title" value="Messages"/>
+        <put-attribute name="body" value="/WEB-INF/pages/userCabinetMessages.jsp"/>
+    </definition>
+
     <!-- Moderator cabinet Page -->
     <definition name="moderatorCabinet" extends="base-definition">
         <put-attribute name="title" value="Moderator Cabinet"/>
