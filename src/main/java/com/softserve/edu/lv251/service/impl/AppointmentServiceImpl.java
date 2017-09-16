@@ -86,6 +86,8 @@ public class AppointmentServiceImpl implements AppointmentService {
             mapper.map(a, appointmentsForDateTimePickerInDocDTO);
             appointmentsForDateTimePickerInDocDTOS.add(appointmentsForDateTimePickerInDocDTO);
         }
+
+
         return appointmentsForDateTimePickerInDocDTOS;
     }
 
@@ -169,8 +171,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     }
 
-
-@Override
+    @Override
     public List<AppointmentsInfoDTO> getPendingAppointmentsToUser(String email){
         List<AppointmentsInfoDTO> appointmentsInfoDTOS = new LinkedList<>();
         Date date = new Date();

@@ -29,6 +29,7 @@ public class Mapper extends ConfigurableMapper {
         clinicConfigure(factory);
         appointmentsConfigure(factory);
         respondConfigure(factory);
+        testResultConfigure(factory);
     }
 
     private void districtConfig(MapperFactory factory){
@@ -384,7 +385,6 @@ public class Mapper extends ConfigurableMapper {
 
     private void respondConfigure(MapperFactory factory){
 
-
         factory.classMap(Appointment.class,AppointmentsInfoDTO.class)
                 .field("isApproved","status")
                 .field("id","id")
@@ -417,5 +417,20 @@ public class Mapper extends ConfigurableMapper {
                     }
                 }).register();
 
+    }
+
+    private void testResultConfigure(MapperFactory factory){
+        factory.classMap(TestsResult.class, TestResultDTO.class)
+                .field("id", "id")
+                .field("startDdate", "startDdate")
+                .field("endDdate", "endDdate")
+                .field("description", "description")
+                .customize(new CustomMapper<TestsResult, TestResultDTO>() {
+                    @Override
+                    public void mapAtoB(TestsResult testsResult, TestResultDTO testResultDTO, MappingContext context) {
+                        super.mapAtoB(testsResult, testResultDTO, context);
+                        testResultDTO.setTest(testsResult.getTest().getName());
+                    }
+                }).register();
     }
 }

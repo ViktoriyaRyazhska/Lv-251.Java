@@ -97,6 +97,13 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
         <put-attribute name="current" value="doctor/patients"/>
     </definition>
 
+    <!-- Doctors Patient Tests Page -->
+    <definition name="doctorPatient" extends="base-definition">
+        <put-attribute name="title" value="User Tests"/>
+        <put-attribute name="body" value="/WEB-INF/pages/doctorPatient.jsp"/>
+        <put-attribute name="current" value="doctor/patient"/>
+    </definition>
+
     <!-- Medical_Card Page -->
     <definition name="userCabinetMedicalCard" extends="userCabinet">
         <put-attribute name="title" value="Medical Card"/>
@@ -107,6 +114,12 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
     <definition name="userCabinetDoctors" extends="userCabinet">
         <put-attribute name="title" value="Doctors"/>
         <put-attribute name="body" value="/WEB-INF/pages/userCabinetDoctors.jsp"/>
+    </definition>
+
+    <!-- User Tests Page -->
+    <definition name="userCabinetTests" extends="userCabinet">
+        <put-attribute name="title" value="Tests"/>
+        <put-attribute name="body" value="/WEB-INF/pages/userCabinetTests.jsp"/>
     </definition>
 
     <!-- Moderator cabinet Page -->
