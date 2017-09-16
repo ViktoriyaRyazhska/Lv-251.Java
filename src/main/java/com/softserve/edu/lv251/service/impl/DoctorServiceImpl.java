@@ -173,9 +173,11 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
         for (Appointment a : appointments) {
             PatientDTO patient = new PatientDTO();
             mapper.map(a.getUser(), patient);
-            patients.add(patient);
-        }
 
+            if(!patients.stream().anyMatch(p->p.getId() == patient.getId())){
+                patients.add(patient);
+            }
+        }
         return patients;
     }
 

@@ -10,4 +10,6 @@ import java.util.List;
 public interface TestResultService {
 
     List<TestResultDTO> getUserTestResults(String email);
+
+    boolean addTestResult(long userId, String description, String test, String startDate, String endDate);
 }

@@ -42,8 +42,9 @@ public interface Constants {
         String GET_DOCTORS = "getDoctors";
         String PHOTO_FORM = "photoForm";
         String CLINIC_DTO = "clinicDTO";
-
-        String MESSAGES="messages";
+        String MESSAGES = "messages";
+        String SUCCESS = "success";
+        String FAILED = "failed";
     }
 
     interface Respond {
@@ -75,7 +76,7 @@ public interface Constants {
         String MODERATOR_CABINET = "moderatorCabinet";
         String MODERATOR_CABINET_DOCTORS = "moderatorCabinetDoctors";
         String MODERATOR_ADD_DOCTOR = "moderatorAddDoctor";
-        String MODERATOR_MAKE_DOCTOR= "moderatorMakeDoctor";
+        String MODERATOR_MAKE_DOCTOR = "moderatorMakeDoctor";
         String ALL_DOCTORS = "allDoctors";
         String DOCTOR_DETAILS = "doctor_details";
         String ADMIN_CABINET = "adminCabinet";
