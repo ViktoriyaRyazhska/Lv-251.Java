@@ -186,7 +186,7 @@ public class UserCabinetController {
     @RequestMapping(value = "/tests", method = RequestMethod.GET)
     public String testsGET(ModelMap model, Principal principal) {
         model.addAttribute("tests", testResultService.getUserTestResults(principal.getName()));
-        model.addAttribute("date", new Date().getTime());
+        model.addAttribute("date", new Date());
 
         return USER_CABINET_TESTS;
     }

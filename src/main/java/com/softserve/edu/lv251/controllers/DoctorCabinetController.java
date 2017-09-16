@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,11 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.util.Calendar;
+import java.util.Date;
 
 import static com.softserve.edu.lv251.constants.Constants.Controller.FAILED;
 import static com.softserve.edu.lv251.constants.Constants.Controller.SUCCESS;
 import static com.softserve.edu.lv251.constants.Constants.View.DOCTOR_CABINET_PATIENTS2;
 import static com.softserve.edu.lv251.constants.Constants.View.DOCTOR_SCHEDULE;
+import static com.softserve.edu.lv251.constants.Constants.View.USER_CABINET_TESTS;
 
 /**
  * Author: Vitaliy Kovalevskyy
@@ -63,5 +66,16 @@ public class DoctorCabinetController {
         return modelAndView;
     }
 
+    /**
+     * Created by Marian Brynetskyi
+     */
+    @RequestMapping(value = "/patient/{id}", method = RequestMethod.GET)
+    public String testsGET(ModelMap model, @PathVariable("id") long userId) {
+        model.addAttribute("tests", testResultService.getUserTestResults(userId));
+
+        model.addAttribute("date", new Date());
+
+        return "doctorPatient";
+    }
 
 }

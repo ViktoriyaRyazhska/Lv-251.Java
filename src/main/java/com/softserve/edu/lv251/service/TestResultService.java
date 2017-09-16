@@ -11,5 +11,8 @@ public interface TestResultService {
 
     List<TestResultDTO> getUserTestResults(String email);
 
+    List<TestResultDTO> getUserTestResults(long userId);
+
     boolean addTestResult(long userId, String description, String test, String startDate, String endDate);
+
 }

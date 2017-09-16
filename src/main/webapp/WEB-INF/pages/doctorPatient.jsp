@@ -10,17 +10,11 @@
         <div class="container" style="width: 30%; float: left">
             <div class="row row-content">
                 <div class="list-group doc-menu">
-                    <a href="<c:url value="/user/cabinet"/>" class="list-group-item">
-                        <spring:message code="messages.profile"/>
+                    <a href="<c:url value="/doctor/сabinet"/>" class="list-group-item">
+                        <spring:message code="messages.schedule"/>
                     </a>
-                    <a href="<c:url value="/user/doctors"/>" class="list-group-item">
-                        <spring:message code="messages.doctors"/>
-                    </a>
-                    <a href="<c:url value="/user/medicalcard"/>" class="list-group-item">
-                        <spring:message code="messages.medicalCard"/>
-                    </a>
-                    <a href="<c:url value="/user/tests"/>" class="navbar-inverse list-group-item">
-                        <spring:message code="messages.tests"/>
+                    <a href="<c:url value="/doctor/patients"/>" class="list-group-item navbar-inverse ">
+                        <spring:message code="messages.patients"/>
                     </a>
                 </div>
             </div>

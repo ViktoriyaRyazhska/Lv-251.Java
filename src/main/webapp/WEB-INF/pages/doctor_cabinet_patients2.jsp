@@ -21,7 +21,7 @@
                     <a href="<c:url value="/doctor/сabinet"/>" class="list-group-item">
                         <spring:message code="messages.schedule"/>
                     </a>
-                    <a href="#" class="list-group-item navbar-inverse ">
+                    <a href="<c:url value="/doctor/patients"/>" class="list-group-item navbar-inverse ">
                         <spring:message code="messages.patients"/>
                     </a>
                 </div>
@@ -71,8 +71,10 @@
                     </button>
                 </div>
                 <div class=row>
-                    <button class="btn btn-info" style="margin-top: 15px" data-toggle="modal" data-target="#modal_\${id}">
-                        <spring:message code="messages.checkTests"/>
+                    <button class="btn btn-info" style="margin-top: 15px">
+                        <a href="/doctor/patient/\${id}" class="button">
+                            <spring:message code="messages.checkTests"/>
+                        </a>
                     </button>
                 </div>
             </div>

@@ -47,6 +47,18 @@ public class TestResultServiceImpl implements TestResultService {
     }
 
     @Override
+    public List<TestResultDTO> getUserTestResults(long userId) {
+        List<TestResultDTO> testResultDTOS = new LinkedList<>();
+        testResultDAO.getAllEntities()
+                .stream()
+                .filter(p -> p.getUser().getId() == userId)
+                .forEach(p -> testResultDTOS.add(
+                        mapper.map(p, TestResultDTO.class)
+                ));
+        return testResultDTOS;
+    }
+
+    @Override
     public boolean addTestResult(long userId, String description, String test, String startDate, String endDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date start;
