@@ -2,7 +2,9 @@ package com.softserve.edu.lv251.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Yana Martynyak on 24.08.2017.
@@ -11,11 +13,24 @@ import java.util.Date;
 public class Message extends BaseEntity {
     @ManyToOne
     private User from;
+
     private String text;
     private Date date;
+
+    @OneToMany(mappedBy = "message")
+    private List<MessageRecipient> messageRecipients;
+
     @ManyToOne
-    private  User to;
-    public Message() {
+    private User to;
+
+    public Message(){}
+
+    public List<MessageRecipient> getMessageRecipients() {
+        return messageRecipients;
+    }
+
+    public void setMessageRecipients(List<MessageRecipient> messageRecipients) {
+        this.messageRecipients = messageRecipients;
     }
 
     public User getFrom() {

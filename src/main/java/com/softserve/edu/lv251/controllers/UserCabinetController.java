@@ -179,6 +179,11 @@ public class UserCabinetController {
         return doctorsGET(modelMap, principal);
     }
 
+    @GetMapping("/messages")
+    public String getMessages(){
+        return "userCabinetMessages";
+    }
+
 
     /**
      * Created by Marian Brynetskyi

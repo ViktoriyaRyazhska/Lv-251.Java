@@ -22,8 +22,12 @@
                     <a href="<c:url value="/user/medicalcard"/>" class="list-group-item">
                         <spring:message code="messages.medicalCard"/>
                     </a>
+                    <a href="<c:url value="/user/messages"/>" class="list-group-item">
+                        <spring:message code="messages.messages"/>
+                    </a>
                     <a href="<c:url value="/user/tests"/>" class="list-group-item">
                         <spring:message code="messages.tests"/>
+
                     </a>
                 </div>
             </div>
