@@ -81,6 +81,7 @@ public interface Constants {
         String DOCTOR_DETAILS = "doctor_details";
         String ADMIN_CABINET = "adminCabinet";
         String USER_CABINET_TESTS = "userCabinetTests";
+        String DOCTOR_PATIENT = "doctorPatient";
 
     }
 }

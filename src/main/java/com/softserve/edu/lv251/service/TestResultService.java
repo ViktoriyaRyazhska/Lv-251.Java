@@ -15,4 +15,5 @@ public interface TestResultService {
 
     boolean addTestResult(long userId, String description, String test, String startDate, String endDate);
 
+    boolean editTestResult(long testId, String description, String test, String startDate, String endDate);
 }

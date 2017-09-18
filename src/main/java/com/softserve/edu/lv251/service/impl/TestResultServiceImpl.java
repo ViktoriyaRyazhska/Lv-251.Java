@@ -60,23 +60,17 @@ public class TestResultServiceImpl implements TestResultService {
 
     @Override
     public boolean addTestResult(long userId, String description, String test, String startDate, String endDate) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date start;
-        Date finish;
-        try {
-            start = sdf.parse(startDate);
-            finish = sdf.parse(endDate);
-            if (start.after(finish)){
-                return false;
-            }
-        } catch (ParseException e) {
+        Date start = parseDate(startDate);
+        Date finish = parseDate(endDate);
+
+        if (start == null || finish == null || start.after(finish)){
             return false;
         }
 
         TestsResult testsResult = new TestsResult();
         testsResult.setDescription(description);
-        testsResult.setEndDdate(start);
-        testsResult.setStartDdate(finish);
+        testsResult.setEndDdate(finish);
+        testsResult.setStartDdate(start);
         testsResult.setTest(testService.getTestByName(test));
         testsResult.setUser(userService.getUserByID(userId));
 
@@ -91,5 +85,35 @@ public class TestResultServiceImpl implements TestResultService {
 
         testResultDAO.addEntity(testsResult);
         return true;
+    }
+
+    @Override
+    public boolean editTestResult(long testId, String description, String test, String startDate, String endDate) {
+        Date start = parseDate(startDate);
+        Date finish = parseDate(endDate);
+
+        if (start == null || finish == null || start.after(finish)){
+            return false;
+        }
+
+        TestsResult testsResult = testResultDAO.getEntityByID(testId);
+        testsResult.setDescription(description);
+        testsResult.setEndDdate(finish);
+        testsResult.setStartDdate(start);
+        testsResult.setTest(testService.getTestByName(test));
+
+        testResultDAO.updateEntity(testsResult);
+        return true;
+    }
+
+    private Date parseDate(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date resultDate = null;
+        try {
+            resultDate = sdf.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return resultDate;
     }
 }

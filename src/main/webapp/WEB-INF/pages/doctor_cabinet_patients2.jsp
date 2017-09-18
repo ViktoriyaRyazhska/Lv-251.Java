@@ -103,9 +103,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="col-lg-3">
-                        <h3 class="form-heading">
+                        <h4 class="form-heading">
                             <spring:message code="messages.addTest"/>
-                        </h3>
+                        </h4>
                     </div>
                     <div class="col-lg-9">
                         <button class="close" type="button" data-dismiss="modal">

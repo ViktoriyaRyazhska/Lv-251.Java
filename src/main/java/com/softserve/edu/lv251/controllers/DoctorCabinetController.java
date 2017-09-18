@@ -3,6 +3,7 @@ package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.TestResultService;
+import com.softserve.edu.lv251.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,7 @@ import java.util.Date;
 
 import static com.softserve.edu.lv251.constants.Constants.Controller.FAILED;
 import static com.softserve.edu.lv251.constants.Constants.Controller.SUCCESS;
-import static com.softserve.edu.lv251.constants.Constants.View.DOCTOR_CABINET_PATIENTS2;
-import static com.softserve.edu.lv251.constants.Constants.View.DOCTOR_SCHEDULE;
-import static com.softserve.edu.lv251.constants.Constants.View.USER_CABINET_TESTS;
+import static com.softserve.edu.lv251.constants.Constants.View.*;
 
 /**
  * Author: Vitaliy Kovalevskyy
@@ -36,6 +35,9 @@ public class DoctorCabinetController {
     @Autowired
     private TestResultService testResultService;
 
+    @Autowired
+    private TestService testService;
+
     @RequestMapping(value = "/сabinet", method = RequestMethod.GET)
     public String home(ModelMap model, Principal principal) {
         model.addAttribute(Constants.Controller.DOC_APPS,
@@ -45,8 +47,9 @@ public class DoctorCabinetController {
     }
 
     @RequestMapping(value = "/patients", method = RequestMethod.GET)
-    public String patients() {
-        return DOCTOR_CABINET_PATIENTS2;
+    public ModelAndView patients(ModelAndView modelAndView) {
+        modelAndView.setViewName(DOCTOR_CABINET_PATIENTS2);
+        return modelAndView;
     }
 
     @RequestMapping(value = "/patients", method = RequestMethod.POST)
@@ -66,16 +69,39 @@ public class DoctorCabinetController {
         return modelAndView;
     }
 
+
     /**
      * Created by Marian Brynetskyi
      */
     @RequestMapping(value = "/patient/{id}", method = RequestMethod.GET)
-    public String testsGET(ModelMap model, @PathVariable("id") long userId) {
-        model.addAttribute("tests", testResultService.getUserTestResults(userId));
-
-        model.addAttribute("date", new Date());
-
-        return "doctorPatient";
+    public ModelAndView testsGET(ModelAndView modelAndView, @PathVariable("id") long userId) {
+        modelAndView.addObject("tests", testResultService.getUserTestResults(userId));
+        modelAndView.addObject("date", new Date());
+        modelAndView.addObject("userId", userId);
+        modelAndView.addObject("testsNames", testService.getTestsNames());
+        modelAndView.setViewName(DOCTOR_PATIENT);
+        return modelAndView;
     }
 
+
+    /**
+     * Created by Marian Brynetskyi
+     */
+    @RequestMapping(value = "/patient/edit", method = RequestMethod.POST)
+    public ModelAndView editTest(ModelAndView modelAndView,
+                           @RequestParam("testId") long testId,
+                           @RequestParam("userId") long userId,
+                           @RequestParam("description") String description,
+                           @RequestParam("test") String test,
+                           @RequestParam("startDate") String startDate,
+                           @RequestParam("endDate") String endDate) {
+
+        if (testResultService.editTestResult(testId, description, test, startDate, endDate)) {
+            modelAndView.addObject(SUCCESS, SUCCESS);
+        } else {
+            modelAndView.addObject(SUCCESS, FAILED);
+        }
+
+        return testsGET(modelAndView, userId);
+    }
 }

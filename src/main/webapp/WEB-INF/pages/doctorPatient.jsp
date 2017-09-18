@@ -24,6 +24,18 @@
             <div class="row row-content">
 
                 <div class="container-fluid">
+                    <c:choose>
+                        <c:when test="${success == 'success'}">
+                            <div class="alert alert-success">
+                                <strong><spring:message code="messages.testEdited"/></strong>
+                            </div>
+                        </c:when>
+                        <c:when test="${success == 'failed'}">
+                            <div class="alert alert-danger">
+                                <strong><spring:message code="messages.testEditFailed"/></strong>
+                            </div>
+                        </c:when>
+                    </c:choose>
                     <div class="row content">
                         <br>
                         <div id="menu_mcard" style="cursor: pointer">
@@ -41,8 +53,8 @@
                                 <c:set var="listActiveTestsLength" value="0"/>
                                 <c:set var="listPastTestsLength" value="0"/>
                                 <c:forEach items="${tests}" var="test" varStatus="loop">
-                                    <fmt:formatDate var="startDate" pattern = 'dd-MM-yyyy HH:mm' value='${test.startDdate}'/>
-                                    <fmt:formatDate var="endDate" pattern = 'dd-MM-yyyy HH:mm' value='${test.endDdate}'/>
+                                    <fmt:formatDate var="startDate" pattern = 'dd-MM-yyyy' value='${test.startDdate}'/>
+                                    <fmt:formatDate var="endDate" pattern = 'dd-MM-yyyy' value='${test.endDdate}'/>
                                     <c:choose>
                                         <c:when test="${test.endDdate.after(date)}">
                                             <c:set var="showTestsClass" value="pastTests"/>
@@ -66,34 +78,124 @@
                                                     <div class="media-body">
                                                         <div>
                                                             <div class="row">
-                                                                <div class="col-xs-9">
+                                                                <div class="col-xs-10">
                                                                     <h3 class="media-heading">
                                                                         <c:out value="${test.test}"/>
                                                                     </h3>
+                                                                    <p>
+                                                                        <c:out value="${test.description}"/>
+                                                                    </p>
                                                                 </div>
-                                                                <div class="col-xs-3">
+                                                                <div class="col-xs-2">
                                                                     <div class="row">
-                                                                        <div class="test-description">
-                                                                            <c:out value="${startDate}"/>
-                                                                        </div>
+                                                                        <h5><c:out value="${startDate}"/></h5>
                                                                     </div>
                                                                     <div class="row">
-                                                                        <div class="test-description">
-                                                                            <c:out value="${endDate}"/>
-                                                                        </div>
+                                                                        <h5><c:out value="${endDate}"/></h5>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <button class="btn btn-primary"
+                                                                                style="margin-top: 15px;
+                                                                                margin-right: 15px;
+                                                                                float: right"
+                                                                                data-toggle="modal"
+                                                                                data-target="#modal_${test.id}">
+                                                                            <spring:message code="messages.editTest"/>
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="test-description">
-                                                            <c:out value="${test.description}"/>
-                                                        </div>
+
 
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                        <%--------------------------------------------------------------------------------%>
+
+
+                                    <div id="modal_${test.id}" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <div class="col-lg-9">
+                                                        <h3 class="form-heading">
+                                                            <spring:message code="messages.addTest"/>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <button class="close" type="button" data-dismiss="modal">
+                                                            <i class="fa fa-close"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <form action="${pageContext.request.contextPath}/doctor/patient/edit" method="post">
+                                                    <div class="form-group ${error != null ? 'has-error' : ''}">
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <label class="control-label" for="description-${test.id}">
+                                                                    <spring:message code="messages.Description"/>
+                                                                </label>
+                                                                <textarea id="description-area-${test.id}"
+                                                                          name="description"
+                                                                          class="form-control"
+                                                                          rows="5"
+                                                                          placeholder="<spring:message code="messages.Description"/>"
+                                                                >${test.description}</textarea>
+                                                                <label class="control-label" for="test-${test.id}">
+                                                                    <spring:message code="messages.testType"/>
+                                                                </label>
+                                                                <select id="test-${test.id}" name="test" class="form-control select">
+                                                                    <c:forEach items="${testsNames}" var="testName">
+                                                                        <option value="${testName}">${testName}</option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                                <label class="control-label" for="startDate-${test.id}">
+                                                                    <spring:message code="messages.startDate"/>
+                                                                </label>
+                                                                <fmt:formatDate
+                                                                        var="startEditDate"
+                                                                        pattern = 'yyyy-MM-dd'
+                                                                        value='${test.startDdate}'/>
+                                                                <input
+                                                                        id="startDate-${test.id}"
+                                                                        name="startDate"
+                                                                        type="date"
+                                                                        class="form-control"
+                                                                        value="<c:out value="${startEditDate}"/>">
+                                                                <label class="control-label" for="endDate-${test.id}">
+                                                                    <spring:message code="messages.endDate"/>
+                                                                </label>
+                                                                <fmt:formatDate
+                                                                        var="endEditDate"
+                                                                        pattern = 'yyyy-MM-dd'
+                                                                        value='${test.endDdate}'/>
+                                                                <input
+                                                                        id="endDate-${test.id}"
+                                                                        name="endDate"
+                                                                        type="date"
+                                                                        class="form-control"
+                                                                        value="<c:out value="${endEditDate}"/>">
+
+                                                                <input name="testId" value="${test.id}" style="display: none">
+                                                                <input name="userId" value="${userId}" style="display: none">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-lg btn-primary btn-block">
+                                                                <spring:message code="messages.send"/>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        <%--------------------------------------------------------------------------------%>
                                 </c:forEach>
                             </div>
                             <div id="activeTestsListIsEmpty">
@@ -126,6 +228,9 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
                             <script>
                                 $(function () {
                                     showActiveTests();
