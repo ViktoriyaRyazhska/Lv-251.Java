@@ -114,9 +114,6 @@
                                         </div>
                                     </div>
 
-                                        <%--------------------------------------------------------------------------------%>
-
-
                                     <div id="modal_${test.id}" class="modal fade" role="dialog">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -195,7 +192,6 @@
                                         </div>
                                     </div>
 
-                                        <%--------------------------------------------------------------------------------%>
                                 </c:forEach>
                             </div>
                             <div id="activeTestsListIsEmpty">
