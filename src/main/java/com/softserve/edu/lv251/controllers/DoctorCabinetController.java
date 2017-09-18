@@ -87,14 +87,14 @@ public class DoctorCabinetController {
     /**
      * Created by Marian Brynetskyi
      */
-    @RequestMapping(value = "/patient/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/patient/{id}", method = RequestMethod.POST)
     public ModelAndView editTest(ModelAndView modelAndView,
-                           @RequestParam("testId") long testId,
-                           @RequestParam("userId") long userId,
-                           @RequestParam("description") String description,
-                           @RequestParam("test") String test,
-                           @RequestParam("startDate") String startDate,
-                           @RequestParam("endDate") String endDate) {
+                                 @PathVariable("id") long userId,
+                                 @RequestParam("testId") long testId,
+                                 @RequestParam("description") String description,
+                                 @RequestParam("test") String test,
+                                 @RequestParam("startDate") String startDate,
+                                 @RequestParam("endDate") String endDate) {
 
         if (testResultService.editTestResult(testId, description, test, startDate, endDate)) {
             modelAndView.addObject(SUCCESS, SUCCESS);

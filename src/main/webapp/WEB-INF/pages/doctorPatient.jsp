@@ -132,7 +132,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <form action="${pageContext.request.contextPath}/doctor/patient/edit" method="post">
+                                                <form action="${pageContext.request.contextPath}/doctor/patient/${userId}" method="post">
                                                     <div class="form-group ${error != null ? 'has-error' : ''}">
                                                         <div class="modal-body">
                                                             <div class="form-group">
