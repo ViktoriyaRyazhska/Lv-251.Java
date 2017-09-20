@@ -1,9 +1,11 @@
 package com.softserve.edu.lv251.controllers;
 
 import com.softserve.edu.lv251.constants.Constants;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.TestResultService;
 import com.softserve.edu.lv251.service.TestService;
+import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -38,6 +40,9 @@ public class DoctorCabinetController {
     @Autowired
     private TestService testService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(value = "/сabinet", method = RequestMethod.GET)
     public String home(ModelMap model, Principal principal) {
         model.addAttribute(Constants.Controller.DOC_APPS,
@@ -52,7 +57,7 @@ public class DoctorCabinetController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/patients", method = RequestMethod.POST)
+    @RequestMapping(value = "/patients/test", method = RequestMethod.POST)
     public ModelAndView addTest(ModelAndView modelAndView,
                                 @RequestParam("userId") long userId,
                                 @RequestParam("description") String description,
@@ -73,7 +78,7 @@ public class DoctorCabinetController {
     /**
      * Created by Marian Brynetskyi
      */
-    @RequestMapping(value = "/patient/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/patient/test/{id}", method = RequestMethod.GET)
     public ModelAndView testsGET(ModelAndView modelAndView, @PathVariable("id") long userId) {
         modelAndView.addObject("tests", testResultService.getUserTestResults(userId));
         modelAndView.addObject("date", new Date());
@@ -87,7 +92,24 @@ public class DoctorCabinetController {
     /**
      * Created by Marian Brynetskyi
      */
-    @RequestMapping(value = "/patient/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/patient/appointments/{id}", method = RequestMethod.GET)
+    public ModelAndView getUserAppointments(ModelAndView modelAndView, @PathVariable("id") long userId) {
+        User user = userService.getUserByID(userId);
+        modelAndView.addObject("listAppointments", appointmentService
+                .getApprovedAppointmentByUserEmail(user.getEmail()));
+        modelAndView.addObject("userId", userId);
+        modelAndView.setViewName("doctorPatientAppointments");
+        modelAndView.addObject("date", new Date());
+        Date date = new Date();
+        date.setHours(new Date().getHours()-1);
+        modelAndView.addObject("datePlus", date);
+        return modelAndView;
+    }
+
+    /**
+     * Created by Marian Brynetskyi
+     */
+    @RequestMapping(value = "/patient/test/{id}", method = RequestMethod.POST)
     public ModelAndView editTest(ModelAndView modelAndView,
                                  @PathVariable("id") long userId,
                                  @RequestParam("testId") long testId,
@@ -103,5 +125,18 @@ public class DoctorCabinetController {
         }
 
         return testsGET(modelAndView, userId);
+    }
+
+    /**
+     * Created by Marian Brynetskyi
+     */
+    @RequestMapping(value = "/patient/appointment/{id}", method = RequestMethod.POST)
+    public ModelAndView editAppointment(ModelAndView modelAndView,
+                                        @PathVariable("id") long userId,
+                                        @RequestParam("appointmentId") long appointmentId,
+                                        @RequestParam("description") String description) {
+
+        appointmentService.updateDescription(appointmentId, description);
+        return getUserAppointments(modelAndView, userId);
     }
 }

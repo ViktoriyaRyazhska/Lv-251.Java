@@ -120,7 +120,7 @@
                                                 <div class="modal-header">
                                                     <div class="col-lg-9">
                                                         <h3 class="form-heading">
-                                                            <spring:message code="messages.addTest"/>
+                                                            <spring:message code="messages.editTest"/>
                                                         </h3>
                                                     </div>
                                                     <div class="col-lg-3">
@@ -129,7 +129,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <form action="${pageContext.request.contextPath}/doctor/patient/${userId}" method="post">
+                                                <form action="${pageContext.request.contextPath}/doctor/patient/test/${userId}" method="post">
                                                     <div class="form-group ${error != null ? 'has-error' : ''}">
                                                         <div class="modal-body">
                                                             <div class="form-group">

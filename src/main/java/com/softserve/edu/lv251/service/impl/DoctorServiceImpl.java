@@ -177,6 +177,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
             if(!patients.stream().anyMatch(p->p.getId() == patient.getId())){
                 patients.add(patient);
             }
+
         }
         return patients;
     }

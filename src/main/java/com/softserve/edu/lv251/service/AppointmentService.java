@@ -33,7 +33,13 @@ public interface AppointmentService {
 
     List<Appointment> getAppointmentByUserEmail(String email);
 
-    boolean createAppointment (String date, String userEmail, long doctorId);
-    public List<AppointmentsInfoDTO> getAppointmentsToUser(String email);
-    public List<AppointmentsInfoDTO> getPendingAppointmentsToUser(String email);
+    List<Appointment> getApprovedAppointmentByUserEmail(String email);
+
+    boolean createAppointment(String date, String userEmail, long doctorId);
+
+    void updateDescription(long appointmentId, String description);
+
+    List<AppointmentsInfoDTO> getAppointmentsToUser(String email);
+
+    List<AppointmentsInfoDTO> getPendingAppointmentsToUser(String email);
 }

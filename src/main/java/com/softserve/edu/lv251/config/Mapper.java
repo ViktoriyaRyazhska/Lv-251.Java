@@ -138,7 +138,8 @@ public class Mapper extends ConfigurableMapper {
                 .field("description", "description")
                 .byDefault().register();
 
-        factory.classMap(Clinic.class, SearchResultClinicDTO.class).customize(new CustomMapper<Clinic, SearchResultClinicDTO>() {
+        factory.classMap(Clinic.class, SearchResultClinicDTO.class)
+                .customize(new CustomMapper<Clinic, SearchResultClinicDTO>() {
             @Override
             public void mapAtoB(Clinic clinic, SearchResultClinicDTO searchResultClinicDTO, MappingContext context) {
 
@@ -224,9 +225,6 @@ public class Mapper extends ConfigurableMapper {
                     public void mapAtoB(Appointment appointment, AppointmentsDTO appointmentsDTO, MappingContext context) {
                         super.mapAtoB(appointment, appointmentsDTO, context);
                         appointmentsDTO.setId(appointment.getId());
-//                        appointment.getAppointmentDate().setTime(
-//                                appointment.getAppointmentDate().getTime()
-//                                        - Calendar.getInstance().getTimeZone().getRawOffset());
                         appointmentsDTO.setTitle(appointment.getUser().getFirstname() + " " + appointment.getUser().getLastname());
                         if (appointment.getIsApproved() != null) {
                             if (Calendar.getInstance().getTime().compareTo(appointment.getAppointmentDate()) < 0) {
@@ -287,7 +285,8 @@ public class Mapper extends ConfigurableMapper {
 
     private void doctorConfigure(MapperFactory factory){
 
-        factory.classMap(Doctor.class, SearchResultDoctorDTO.class).customize(new CustomMapper<Doctor, SearchResultDoctorDTO>() {
+        factory.classMap(Doctor.class, SearchResultDoctorDTO.class)
+                .customize(new CustomMapper<Doctor, SearchResultDoctorDTO>() {
             @Override
             public void mapAtoB(Doctor doctor, SearchResultDoctorDTO searchResultDoctorDTO, MappingContext context) {
                 searchResultDoctorDTO.setId(doctor.getId());
