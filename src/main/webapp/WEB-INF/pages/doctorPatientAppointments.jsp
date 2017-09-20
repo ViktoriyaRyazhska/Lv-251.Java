@@ -39,17 +39,6 @@
 
                                             <div>
                                                 <div class="col-sm-6 appointmentWrapper">
-                                                    <c:out value="${date.time}"/>
-                                                    <br>
-                                                    <c:out value="${datePlus.time}"/>
-                                                    <br>
-                                                    <c:out value="${appointment.appointmentDate.time}"/>
-                                                    <br>
-
-                                                    <c:out value="${appointment.appointmentDate.before(date)}"/>
-                                                    <br>
-                                                    <c:out value="${appointment.appointmentDate.after(datePlus)}"/>
-
                                                     <c:if test="${appointment.doctor.email == pageContext.request.userPrincipal.name
                                                     && appointment.appointmentDate.before(date)
                                                      && datePlus.before(appointment.appointmentDate)}">
