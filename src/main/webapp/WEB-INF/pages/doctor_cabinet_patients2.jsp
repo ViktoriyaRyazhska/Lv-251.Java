@@ -69,12 +69,12 @@
                     <button class="btn btn-info" style="margin-top: 15px; margin-right: 15px;" data-toggle="modal" data-target="#modal_\${id}">
                         <spring:message code="messages.addTest"/>
                     </button>
-                    <a href="/doctor/patient/\${id}" class="btn btn-info" style="margin-top: 15px; margin-right: 15px;">
+                    <a href="/doctor/patient/test/\${id}" class="btn btn-info" style="margin-top: 15px; margin-right: 15px;">
                         <spring:message code="messages.checkTests"/>
                     </a>
-                </div>
-                <div class=row>
-
+                    <a href="/doctor/patient/appointments/\${id}" class="btn btn-info" style="margin-top: 15px; margin-right: 15px;">
+                        <spring:message code="messages.userAppointments"/>
+                    </a>
                 </div>
             </div>
 
@@ -103,9 +103,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="col-lg-3">
-                        <h3 class="form-heading">
+                        <h4 class="form-heading">
                             <spring:message code="messages.addTest"/>
-                        </h3>
+                        </h4>
                     </div>
                     <div class="col-lg-9">
                         <button class="close" type="button" data-dismiss="modal">
@@ -113,16 +113,16 @@
                         </button>
                     </div>
                 </div>
-                <form action="${pageContext.request.contextPath}/doctor/patients" method="post">
+                <form action="${pageContext.request.contextPath}/doctor/patients/test" method="post">
                     <div class="form-group ${error != null ? 'has-error' : ''}">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="control-label" for="email">
+                                <label class="control-label" for="description">
                                     <spring:message code="messages.Description"/>
                                 </label>
                                 <textarea id="description" name="description" type="text" class="form-control" rows="5"
                                     placeholder="<spring:message code="messages.Description"/>"></textarea>
-                                <label class="control-label" for="test">
+                                <label class="control-label" for="test-\${id}">
                                     <spring:message code="messages.testType"/>
                                 </label>
                                 <select id="test-\${id}" name="test" class="form-control select">

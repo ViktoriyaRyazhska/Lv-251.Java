@@ -98,9 +98,16 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
     </definition>
 
     <!-- Doctors Patient Tests Page -->
-    <definition name="doctorPatient" extends="base-definition">
+    <definition name="doctorPatientTests" extends="base-definition">
         <put-attribute name="title" value="User Tests"/>
-        <put-attribute name="body" value="/WEB-INF/pages/doctorPatient.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/pages/doctorPatientTests.jsp"/>
+        <put-attribute name="current" value="doctor/patient"/>
+    </definition>
+
+    <!-- Doctors Patient Tests Page -->
+    <definition name="doctorPatientAppointments" extends="base-definition">
+        <put-attribute name="title" value="User Appointments"/>
+        <put-attribute name="body" value="/WEB-INF/pages/doctorPatientAppointments.jsp"/>
         <put-attribute name="current" value="doctor/patient"/>
     </definition>
 

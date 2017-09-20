@@ -50,8 +50,8 @@
                                 <c:set var="listActiveTestsLength" value="0"/>
                                 <c:set var="listPastTestsLength" value="0"/>
                                 <c:forEach items="${tests}" var="test" varStatus="loop">
-                                    <fmt:formatDate var="startDate" pattern = 'dd-MM-yyyy HH:mm' value='${test.startDdate}'/>
-                                    <fmt:formatDate var="endDate" pattern = 'dd-MM-yyyy HH:mm' value='${test.endDdate}'/>
+                                    <fmt:formatDate var="startDate" pattern = 'dd-MM-yyyy' value='${test.startDdate}'/>
+                                    <fmt:formatDate var="endDate" pattern = 'dd-MM-yyyy' value='${test.endDdate}'/>
                                     <c:choose>
                                         <c:when test="${test.endDdate.after(date)}">
                                             <c:set var="showTestsClass" value="pastTests"/>
@@ -75,28 +75,29 @@
                                                     <div class="media-body">
                                                         <div>
                                                             <div class="row">
-                                                                <div class="col-xs-9">
+                                                                <div class="col-xs-10">
                                                                     <h3 class="media-heading">
                                                                         <c:out value="${test.test}"/>
                                                                     </h3>
+                                                                    <p>
+                                                                        <c:out value="${test.description}"/>
+                                                                    </p>
                                                                 </div>
-                                                                <div class="col-xs-3">
+                                                                <div class="col-xs-2">
                                                                     <div class="row">
-                                                                        <div class="test-description">
+                                                                        <h5>
                                                                             <c:out value="${startDate}"/>
-                                                                        </div>
+                                                                        </h5>
                                                                     </div>
                                                                     <div class="row">
-                                                                        <div class="test-description">
+                                                                        <h5>
                                                                             <c:out value="${endDate}"/>
-                                                                        </div>
+                                                                        </h5>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="test-description">
-                                                            <c:out value="${test.description}"/>
-                                                        </div>
+
 
                                                     </div>
                                                 </div>
