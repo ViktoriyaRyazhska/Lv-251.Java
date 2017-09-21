@@ -169,9 +169,16 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public void updateDescription(long appointmentId, String description) {
+        Date date = new Date();
+        Date secondDate = new Date();
+        secondDate.setHours(secondDate.getHours()-1);
         Appointment appointment = appointmentDAO.getEntityByID(appointmentId);
-        appointment.setDescription(description);
-        appointmentDAO.updateEntity(appointment);
+        if(appointment.getAppointmentDate().before(date)
+                && appointment.getAppointmentDate().after(secondDate)
+                && appointment.getIsApproved()){
+            appointment.setDescription(description);
+            appointmentDAO.updateEntity(appointment);
+        }
     }
 
     @Override
