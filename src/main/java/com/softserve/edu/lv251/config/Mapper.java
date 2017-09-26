@@ -96,8 +96,7 @@ public class Mapper extends ConfigurableMapper {
                     public void mapAtoB(User user, PatientDTO patientDTO, MappingContext context) {
                         patientDTO.setId(user.getId());
                         String fullName = user.getLastname() + " "
-                                + user.getFirstname() + " "
-                                + user.getLastname();
+                                + user.getFirstname();
                         patientDTO.setFullName(fullName);
                     }
                 }).register();
