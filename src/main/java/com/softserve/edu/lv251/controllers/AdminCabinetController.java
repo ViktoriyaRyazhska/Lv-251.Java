@@ -39,7 +39,7 @@ public class AdminCabinetController {
     public String adminProfileGET(ModelMap model, Principal principal) {
 
         Admin admin = adminService.findByEmail(principal.getName());
-        List<Moderator>  list= moderatorService.getListByAdminId(admin.getId());
+        List<Moderator>  list = moderatorService.getListByAdminId(admin.getId());
         model.addAttribute("moderators", list);
         model.addAttribute("editModerator", new Moderator());
         model.addAttribute("addModerator", new ModeratorDTO());
@@ -59,8 +59,8 @@ public class AdminCabinetController {
     }
 
     @PostMapping(value = "/admin/cabinet/add")
-    public String addModerator(@ModelAttribute ModeratorDTO addModerator, Principal principal) {
-        moderatorService.addModeratorAccount(addModerator, principal.getName());
+    public String addModerator(@ModelAttribute ModeratorDTO newModerator, Principal principal) {
+        moderatorService.addModeratorAccount(newModerator, principal.getName());
         return "redirect:/admin/cabinet";
     }
 }

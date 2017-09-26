@@ -23,7 +23,6 @@ public class PersonalInfoDTO {
 
     private MultipartFile photo;
 
-
     //data from Contact
     private String address;
     private String city;

@@ -57,8 +57,8 @@ public class UserCabinetController {
         PasswordDTO passwordDTO = new PasswordDTO();
 
         mapper.map(user, personalInfoDTO);
-
         mapper.map(contact, personalInfoDTO);
+
         model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
         model.addAttribute(Constants.Controller.PERSONAL_INFO_DTO, personalInfoDTO);
         model.addAttribute(Constants.Controller.PASSWORD_DTO, passwordDTO);
@@ -68,14 +68,19 @@ public class UserCabinetController {
 
     /**
      * Author: Kovalevskyy Vitaliy
+     * @param personalInfoDTO info about user and his contacts
+     * @param bindingResult  binds eventual errors
      */
     @PostMapping("/user/cabinet")
-    public String userProfilePOST(@Valid @ModelAttribute PersonalInfoDTO personalInfoDTO, BindingResult bindingResult, Principal principal, ModelMap model) {
+    public String userProfilePOST(@Valid @ModelAttribute PersonalInfoDTO personalInfoDTO,
+                                  BindingResult bindingResult, @ModelAttribute PasswordDTO passwordDTO,
+                                  BindingResult bindingPasswordDTO, Principal principal, ModelMap model) {
         User user = userService.findByEmail(principal.getName());
 
         if (bindingResult.hasErrors()) {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
-
+            model.addAttribute(Constants.Controller.PERSONAL_INFO_DTO, personalInfoDTO);
+            model.addAttribute(Constants.Controller.PASSWORD_DTO, passwordDTO);
             model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
 
             return "userCabinet";
@@ -93,6 +98,7 @@ public class UserCabinetController {
 
     /**
      * Author: Kovalevskyy Vitaliy
+     * @param passwordDTO users password
      */
     @PostMapping("/user/changePassword")
     public String savePassword(@Valid @ModelAttribute PasswordDTO passwordDTO, BindingResult bindingPasswordDTO,
@@ -104,7 +110,6 @@ public class UserCabinetController {
         if (bindingPasswordDTO.hasErrors()){
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
             mapper.map(user, personalInfoDTO);
-
             mapper.map(contact, personalInfoDTO);
             model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
             model.addAttribute(Constants.Controller.PERSONAL_INFO_DTO, personalInfoDTO);
