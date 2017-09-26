@@ -63,7 +63,6 @@ public class User extends BaseEntity {
     private List<Role> roles;
 
     @OneToOne(cascade = {CascadeType.ALL})
-
     private Contact contact;
 
     @JsonIgnore
