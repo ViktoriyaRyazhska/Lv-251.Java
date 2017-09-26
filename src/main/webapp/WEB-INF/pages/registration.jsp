@@ -15,6 +15,7 @@
                 <h4 class="modal-title"><spring:message code="messages.createAccount"/></h4>
             </div>
             <div class="modal-header">
+        <c:if test="${message != null}"><div role="alert" class="${classCss}">${message}</div></c:if>
         <form:form method="POST" modelAttribute="userForm" id="registration">
             <spring:bind path="firstName">
                 <div class="form-group">

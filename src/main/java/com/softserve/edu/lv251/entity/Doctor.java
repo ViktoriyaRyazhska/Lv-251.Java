@@ -14,7 +14,7 @@ public class Doctor extends User {
 
     @Column(length = 10000)
     private String description;
-    @JsonIgnore
+
     @ManyToOne(cascade =
             {
                     CascadeType.DETACH,
@@ -24,7 +24,7 @@ public class Doctor extends User {
             })
     private Clinic clinic;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "doctor", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<Appointment> docAppointments;
 
@@ -32,17 +32,17 @@ public class Doctor extends User {
     private Specialization specialization;
 
     @OneToMany(mappedBy = "doctor", cascade = {CascadeType.ALL})
-    private List<Respond> responds;
+    private List<Respond> docResponds;
 
     public Doctor() {
     }
 
-    public List<Respond> getResponds() {
-        return responds;
+    public List<Respond> getDocResponds() {
+        return docResponds;
     }
 
-    public void setResponds(List<Respond> responds) {
-        this.responds = responds;
+    public void setDocResponds(List<Respond> docResponds) {
+        this.docResponds = docResponds;
     }
 
     public List<Appointment> getDocAppointments() {

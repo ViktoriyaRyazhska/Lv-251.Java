@@ -7,6 +7,7 @@ package com.softserve.edu.lv251.service.impl;
 import com.softserve.edu.lv251.dto.pojos.TokenAuthenticationDTO;
 import com.softserve.edu.lv251.idl.WebRoles;
 import com.softserve.edu.lv251.service.GetTokenService;
+import com.softserve.edu.lv251.service.UserService;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -15,6 +16,7 @@ import org.apache.log4j.Priority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -31,13 +33,19 @@ public class GetTokenServiceImpl implements GetTokenService {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+     private UserService userService;
+
     @Override
     public TokenAuthenticationDTO getToken(String username, String password) throws Exception {
         if (username == null || password == null)
             return null;
         User user = (User) userDetailsService.loadUserByUsername(username);
+        com.softserve.edu.lv251.entity.User userInfo= userService.findByEmail(username);
         Map<String, Object> tokenData = new HashMap<>();
-        if (password.equals(user.getPassword())) {
+        if (bCryptPasswordEncoder.matches(password, user.getPassword())) {
             tokenData.put("clientType", "user");
             tokenData.put("username", username);
             tokenData.put("token_create_date", new Date().getTime());
@@ -52,9 +60,15 @@ public class GetTokenServiceImpl implements GetTokenService {
             String token = jwtBuilder.signWith(SignatureAlgorithm.HS512, key).compact();
 
             TokenAuthenticationDTO authentication = new TokenAuthenticationDTO();
-
+            authentication.setId(userInfo.getId());
+//            authentication.setName(userInfo.getFirstname());
+//            authentication.setLastName(userInfo.getLastname());
+//            authentication.setAddress(userInfo.getContact().getAddress());
+//            authentication.setCity(userInfo.getContact().getCity());
+//            authentication.setDistrict(userInfo.getContact().getDistrict().getName());
             authentication.setToken(token);
-            authentication.setUsername(user.getUsername());
+            authentication.setEmail(user.getUsername());
+            
             for (GrantedAuthority authority : user.getAuthorities()) {
                 logger.log(Priority.INFO, authority.getAuthority());
                 if (authority.getAuthority().equals(WebRoles.ROLE_USER.name())) {

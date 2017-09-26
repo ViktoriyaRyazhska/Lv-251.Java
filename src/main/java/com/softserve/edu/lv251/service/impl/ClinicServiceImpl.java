@@ -4,6 +4,7 @@ import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.BaseDAO;
 import com.softserve.edu.lv251.dao.ClinicDAO;
 import com.softserve.edu.lv251.dto.pojos.ClinicSearchDTO;
+import com.softserve.edu.lv251.dto.pojos.ClinicsAngularDTO;
 import com.softserve.edu.lv251.dto.pojos.SearchResultClinicDTO;
 import com.softserve.edu.lv251.entity.Clinic;
 import com.softserve.edu.lv251.service.ClinicService;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -125,15 +127,23 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinic> implements 
 
     @Override
     public Clinic getByName(String name) {
-       List< Clinic> clinic= clinicDAO.getEntitiesByColumnNameAndValue("clinic_name", name);
-        return clinic.isEmpty()?null:clinic.get(0);
+        List<Clinic> clinic = clinicDAO.getEntitiesByColumnNameAndValue("clinic_name", name);
+        return clinic.isEmpty() ? null : clinic.get(0);
     }
 
     @Override
     public void updatePhoto(MultipartFile file, Clinic clinic) {
-        if(!file.isEmpty()){
-        String photo = StoredImagesService.getBase64encodedMultipartFile(file);
-        clinic.setPhoto(photo);
-        clinicDAO.updateEntity(clinic);}
+        if (!file.isEmpty()) {
+            String photo = StoredImagesService.getBase64encodedMultipartFile(file);
+            clinic.setPhoto(photo);
+            clinicDAO.updateEntity(clinic);
         }
+    }
+
+    @Override
+    public List<ClinicsAngularDTO> getAllClinicsDto() {
+        List<ClinicsAngularDTO> clinicsAngularDTOS = new LinkedList<>();
+        clinicDAO.getAllEntities().forEach((clinic) -> clinicsAngularDTOS.add(mapper.map(clinic, ClinicsAngularDTO.class)));
+        return clinicsAngularDTOS;
+    }
 }

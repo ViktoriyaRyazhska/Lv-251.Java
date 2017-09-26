@@ -17,7 +17,6 @@
  
 <form action="<c:url value="/logout"/>" method="post">
     <input type="submit" class="button red big" value="Sign in as different user"/>
-    <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
 </form>
   
 </body>

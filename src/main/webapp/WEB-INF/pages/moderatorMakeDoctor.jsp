@@ -35,7 +35,8 @@
                                         code="messages.contactEmail"/>:</label>
                                 <div class="col-lg-7">
                                     <form:errors path="email" cssClass="text-danger"/>
-                                    <form:input type="text" class="form-control" id="autocomplete-user" path="email"/>
+                                    <div id="errorMail" style="display: none;"> Invalid mail</div>
+                                    <form:input type="text" class="form-control" id="mail-user" onblur="validMail()" path="email"/>
                                 </div>
                             </div>
                             <div class="form-group">

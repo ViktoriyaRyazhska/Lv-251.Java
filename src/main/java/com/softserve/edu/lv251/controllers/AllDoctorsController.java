@@ -1,13 +1,8 @@
 package com.softserve.edu.lv251.controllers;
 
 import com.softserve.edu.lv251.constants.Constants;
-import com.softserve.edu.lv251.dto.pojos.DoctorsSearchDTO;
 import com.softserve.edu.lv251.entity.Doctor;
-import com.softserve.edu.lv251.service.AppointmentService;
-import com.softserve.edu.lv251.service.DoctorsService;
-import com.softserve.edu.lv251.service.PagingSizeService;
-import com.softserve.edu.lv251.service.UserService;
-import org.apache.log4j.Logger;
+import com.softserve.edu.lv251.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
@@ -15,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
-import java.util.List;
 
 /**
  * Created by Yana Martynyak on 23.07.2017.
@@ -25,19 +19,16 @@ import java.util.List;
 public class AllDoctorsController {
 
     @Autowired
-    private DoctorsService doctorsService;
+    private DoctorService doctorService;
+
+    @Autowired
+    private RespondService respondService;
     @Autowired
     @Qualifier("doctorService")
-
     private PagingSizeService<Doctor> pagingSizeService;
 
-
-    @Autowired
-    private UserService userService;
     @Autowired
     private AppointmentService appointmentService;
-    @Autowired
-    private Logger logger;
 
 
     @RequestMapping(value = "/allDoctors/{current}", method = RequestMethod.GET)
@@ -46,7 +37,7 @@ public class AllDoctorsController {
         model.addAttribute("getDoctors", pagingSizeService.getEntity(chainIndex, 10));
         model.addAttribute(Constants.Controller.NUMBER_CHAIN, pagingSizeService.numberOfPaging(10));
         model.addAttribute(Constants.Controller.DOC_APPS, appointmentService.getAllDoctorsAppointmentsAfterNow());
-        return "allDoctors";
+        return Constants.Controller.ALL_DOCTORS;
 
     }
 
@@ -83,7 +74,8 @@ public class AllDoctorsController {
 
     @RequestMapping(value = "/doctors/{id}", method = RequestMethod.GET)
     public String Doctor(@PathVariable Long id, Model model) {
-        model.addAttribute("doctor", doctorsService.find(id));
+        model.addAttribute("doctor", doctorService.find(id));
+        model.addAttribute("responds",respondService.getAllRespondsByDoctor(id));
         return "doctor_details";
     }
 

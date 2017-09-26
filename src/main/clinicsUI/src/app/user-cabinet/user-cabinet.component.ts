@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-cabinet.component.css']
 })
 export class UserCabinetComponent implements OnInit {
-
+  name='Yana';
   constructor() { }
 
   ngOnInit() {

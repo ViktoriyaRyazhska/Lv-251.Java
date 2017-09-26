@@ -28,22 +28,14 @@
     <div class="container" style="width: 30%; float: left">
         <div class="row row-content">
             <div class="list-group doc-menu">
-                <a href="/user/cabinet" class="list-group-item">
-                    <spring:message code="messages.profile"/>
+                <a href=<c:url value="/doctor/сabinet"/> class='list-group-item active'>
+                    <spring:message code="messages.schedule"/>
                 </a>
                 <a href="#" class="list-group-item">
-                    <spring:message code="messages.doctor"/>
-                </a>
-                <a href="#" class="list-group-item">
-                    <spring:message code="messages.medicalCard"/>
-                </a>
-                <a href="/user/appointment" class="list-group-item">
-                    <spring:message code="messages.appointment"/>
-                </a>
-                <a href="/doctor/patients" class="active list-group-item">
                     <spring:message code="messages.patients"/>
                 </a>
             </div>
+        </div>
         </div>
     </div>
 

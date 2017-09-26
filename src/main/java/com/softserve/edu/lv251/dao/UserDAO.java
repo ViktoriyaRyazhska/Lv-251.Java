@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface UserDAO extends BaseDAO<User>{
     List<User> searchByLetters(String letters);
+
+
 }

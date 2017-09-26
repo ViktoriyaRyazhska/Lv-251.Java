@@ -10,7 +10,8 @@ import java.util.Date;
 @Entity
 public class TestsResult extends BaseEntity {
 
-    private Date date;
+    private Date startDdate;
+    private Date endDdate;
     private String description;
 
     @ManyToOne
@@ -38,12 +39,20 @@ public class TestsResult extends BaseEntity {
         this.test = test;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getStartDdate() {
+        return startDdate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setStartDdate(Date startDdate) {
+        this.startDdate = startDdate;
+    }
+
+    public Date getEndDdate() {
+        return endDdate;
+    }
+
+    public void setEndDdate(Date endDdate) {
+        this.endDdate = endDdate;
     }
 
     public String getDescription() {

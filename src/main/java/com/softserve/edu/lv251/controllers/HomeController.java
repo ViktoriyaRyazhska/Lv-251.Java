@@ -1,9 +1,5 @@
 package com.softserve.edu.lv251.controllers;
 
-import com.softserve.edu.lv251.dto.pojos.ClinicSearchDTO;
-import com.softserve.edu.lv251.dto.pojos.DistrictsDTO;
-import com.softserve.edu.lv251.entity.Doctor;
-import com.softserve.edu.lv251.entity.Specialization;
 import com.softserve.edu.lv251.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.util.List;
 
 /**
  * Created by Admin on 23.07.2017.
@@ -24,7 +19,7 @@ public class HomeController {
     @Autowired
     private DistrictsService districtsService;
     @Autowired
-    private DoctorsService doctorsService;
+    private DoctorService doctorService;
     @Autowired
     private SpecializationService specializationService;
     @Autowired
